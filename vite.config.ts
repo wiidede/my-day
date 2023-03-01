@@ -84,8 +84,8 @@ export default defineConfig({
         // https://prismjs.com/
         md.use(Shiki, {
           theme: {
-            light: 'vitesse-light',
-            dark: 'vitesse-dark',
+            light: 'github-light',
+            dark: 'one-dark-pro',
           },
         })
         md.use(LinkAttributes, {
