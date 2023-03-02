@@ -14,6 +14,7 @@
     "strictNullChecks": true,
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
     "types": [
       "vitest",
       "vite/client",
@@ -34,5 +35,5 @@
       "@vue-macros/volar/define-slots"
     ]
   },
-  "exclude": ["dist", "node_modules", "cypress"]
+  "exclude": ["dist/**/*", "node_modules/**/*", "cypress/**/*", "cypress.config.ts"]
 }
