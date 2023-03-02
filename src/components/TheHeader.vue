@@ -9,7 +9,7 @@ const toggleLocales = () => {
 </script>
 
 <template>
-  <nav text-xl mt-6>
+  <nav text-xl py-4 flex items-center justify-center>
     <RouterLink class="icon-btn mx-2" to="/" :title="t('button.home')">
       <div i-carbon-campsite />
     </RouterLink>
@@ -22,7 +22,7 @@ const toggleLocales = () => {
       <div i-carbon-language />
     </a>
 
-    <RouterLink class="icon-btn mx-2" to="/about" :title="t('button.about')">
+    <RouterLink class="icon-btn mx-2" to="/help" :title="t('button.about')">
       <div i-carbon-dicom-overlay />
     </RouterLink>
 

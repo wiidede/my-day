@@ -14,11 +14,11 @@
 
 .shiki-light {
   /* background: #f8f8f8 !important; */
-  box-shadow: inset 1px 2px 5px 0 #00000010;
+  --at-apply: shadow shadow-inset
 }
 .shiki-dark {
   /* background: #0e0e0e !important; */
-  box-shadow: inset 1px 2px 5px 0 #00000040;
+  --at-apply: shadow shadow-inset
 }
 
 html.dark .shiki-light {
