@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import type { IMyDay } from '~/types/my-day'
 
-const now = useNow()
+const now = useNow({
+  interval: 1000,
+})
 const nowFormatted = useDateFormat(now, 'YYYY-MM-DD HH:mm:ss', {
   locales: 'en-US',
 })
@@ -16,6 +18,7 @@ const getDefaultMyDay: () => IMyDay = () => ({
     { name: '学习', start: 30, end: 60 },
     { name: '吃饭', start: 60, end: 90 },
     { name: '睡觉', start: 90, end: 120 },
+    { name: '做梦', start: 16 * 60, end: 17 * 60 },
   ],
 })
 

@@ -1,0 +1,18 @@
+.the-progress {
+  --progress-value: 50%;
+  --progress-color: #13a89e80;
+  position: relative;
+}
+
+.the-progress::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  content: "";
+  display: inline-block;
+  width: var(--progress-value);
+  height: 100%;
+  background-color: var(--progress-color);
+  --at-apply: transition-width;
+}
