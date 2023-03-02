@@ -1,51 +1,34 @@
-<script setup lang="ts">
-defineOptions({
-  name: 'IndexPage',
+<script lang="ts" setup>
+import type { IMyDay } from '~/types/my-day'
+
+const now = useNow()
+const nowFormatted = useDateFormat(now, 'YYYY-MM-DD HH:mm:ss', {
+  locales: 'en-US',
 })
-const user = useUserStore()
-const name = $ref(user.savedName)
 
-const router = useRouter()
-const go = () => {
-  if (name)
-    router.push(`/hi/${encodeURIComponent(name)}`)
-}
+const getDefaultMyDay: () => IMyDay = () => ({
+  key: (new Date()).valueOf(),
+  wakeTime: 8 * 60,
+  wakeLabel: '起床啦',
+  sleepTime: 16 * 60,
+  sleepLabel: '睡觉啦',
+  plans: [
+    { name: '学习', start: 30, end: 60 },
+    { name: '吃饭', start: 60, end: 90 },
+    { name: '睡觉', start: 90, end: 120 },
+  ],
+})
 
-const { t } = useI18n()
+const myDayList = useStorage('my-day-list', [getDefaultMyDay()])
 </script>
 
 <template>
-  <div>
-    <div text-4xl>
-      <div i-carbon-campsite inline-block />
-    </div>
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-        Vitesse
-      </a>
-    </p>
-    <p>
-      <em text-sm opacity-75>{{ t('intro.desc') }}</em>
-    </p>
-
-    <div py-4 />
-
-    <TheInput
-      v-model="name"
-      placeholder="What's your name?"
-      autocomplete="false"
-      @keydown.enter="go"
-    />
-    <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
-
-    <div>
-      <button
-        btn m-3 text-sm
-        :disabled="!name"
-        @click="go"
-      >
-        {{ t('button.go') }}
-      </button>
-    </div>
-  </div>
+  <p class="text-4xl">
+    {{ nowFormatted }}
+  </p>
+  <TheDay v-for="(myDay, index) in myDayList" :key="myDay.key" v-model="myDayList[index]" />
 </template>
+
+<style lang="scss" scoped>
+
+</style>
