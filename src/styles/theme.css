@@ -1,0 +1,12 @@
+:root {
+  --my-c-primary-hue: 255;
+  --my-c-primary-saturation: 50%;
+  --my-c-primary-lightness: 37%;
+  --my-c-primary-alpha: 100%;
+  --my-c-primary: hsl(var(--my-c-primary-hue) var(--my-c-primary-saturation) var(--my-c-primary-lightness) / var(--my-c-primary-alpha, 100%));
+  --my-c-primary-hsl: var(--my-c-primary-hue) var(--my-c-primary-saturation) var(--my-c-primary-lightness)
+}
+
+:root.dark {
+  --my-c-primary-lightness: 63%;
+}

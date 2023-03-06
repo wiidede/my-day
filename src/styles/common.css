@@ -17,7 +17,7 @@
 
 .the-progress {
   --progress-value: 50%;
-  --progress-color: #13a89e;
+  --progress-color: hsl(var(--my-c-primary-hsl) / 25%);
   position: relative;
 }
 

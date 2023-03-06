@@ -13,7 +13,7 @@ defineProps<{
       '--progress-value': `${progress || 0}%`,
     }"
     :class="{
-      'the-progress py4 text-xl bg-gray/5': progress !== undefined,
+      'the-progress py4 text-xl my-bg-primary/15': progress !== undefined,
     }"
   >
     <div class="flex-1 text-center">
