@@ -10,15 +10,15 @@ const nowFormatted = useDateFormat(now, 'YYYY-MM-DD HH:mm:ss', {
 
 const getDefaultMyDay: () => IMyDay = () => ({
   key: (new Date()).valueOf(),
-  wakeTime: 8 * 60,
-  wakeLabel: '起床啦',
+  wakeTime: 7 * 60,
+  wakeLabel: 'wake up',
   sleepTime: 16 * 60,
-  sleepLabel: '睡觉啦',
+  sleepLabel: 'sleep',
   plans: [
-    { name: '学习', start: 30, end: 60 },
-    { name: '吃饭', start: 60, end: 90 },
-    { name: '睡觉', start: 90, end: 120 },
-    { name: '做梦', start: 16 * 60, end: 17 * 60 },
+    { name: 'learning', start: 30, end: 60 },
+    { name: 'eating', start: 60, end: 90 },
+    { name: 'daze', start: 90, end: 120 },
+    { name: 'what\'s the meaning of life', start: 150, end: 15 * 60 },
   ],
 })
 
@@ -26,10 +26,12 @@ const myDayList = useStorage('my-day-list', [getDefaultMyDay()])
 </script>
 
 <template>
-  <p class="text-4xl">
-    {{ nowFormatted }}
-  </p>
-  <TheDay v-for="(myDay, index) in myDayList" :key="myDay.key" v-model="myDayList[index]" />
+  <div class="max-w-180 m-auto">
+    <p class="text-4xl mb4">
+      {{ nowFormatted }}
+    </p>
+    <TheDay v-for="(myDay, index) in myDayList" :key="myDay.key" v-model="myDayList[index]" />
+  </div>
 </template>
 
 <style lang="scss" scoped>

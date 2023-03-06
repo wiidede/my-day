@@ -8,7 +8,7 @@ const { modelValue } = defineModel<{
 const dayjs = useDayjs()
 
 const nowDate = useNow({
-  interval: 250,
+  interval: 1000,
 })
 
 const {
@@ -25,7 +25,7 @@ const now = computed(() => {
   + (nowDate.value.getSeconds() / 60)
   + (nowDate.value.getMilliseconds() / 1000 / 60)
   - wakeTime.value
-  return nowValue > wakeTime.value ? nowValue : nowValue + 24 * 60
+  return nowValue > 0 ? nowValue : nowValue + 24 * 60
 },
 
 )
@@ -36,27 +36,16 @@ const formatTime = (time: number, startTime: number) => {
 </script>
 
 <template>
-  <div class="p4 shadow">
-    <div>
-      {{ formatTime(wakeTime, 0) }} {{ wakeLabel }}
-    </div>
-    <div
+  <div class="py4 text-left shadow shadow-inset rd-2">
+    <TheDayItem :time="formatTime(wakeTime, 0)" :content="wakeLabel" />
+    <TheDayItem
       v-for="plan in plans"
       :key="JSON.stringify(plan)"
-      class="p2 shadow-inset"
-      :style="{
-        '--progress-value': `${((now - plan.start) / (plan.end - plan.start) * 100).toFixed(3)}%`,
-      }"
-      :class="{
-        'shadow the-progress py4 text-xl': now >= plan.start && now < plan.end,
-      }"
-    >
-      {{ formatTime(plan.start, wakeTime) }} - {{ formatTime(plan.end, wakeTime) }} {{ plan.name }}
-      <span v-if="now >= plan.start && now < plan.end">{{ `(${((now - plan.start) / (plan.end - plan.start) * 100).toFixed(3)}%)` }}</span>
-    </div>
-    <div>
-      {{ formatTime(sleepTime, wakeTime) }} {{ sleepLabel }}
-    </div>
+      :time="`${formatTime(plan.start, wakeTime)} - ${formatTime(plan.end, wakeTime)}`"
+      :content="plan.name"
+      :progress="now >= plan.start && now < plan.end ? (now - plan.start) / (plan.end - plan.start) * 100 : undefined"
+    />
+    <TheDayItem :time="formatTime(sleepTime, wakeTime)" :content="sleepLabel" />
   </div>
 </template>
 
