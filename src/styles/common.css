@@ -2,6 +2,7 @@
   --progress-value: 50%;
   --progress-color: #13a89e80;
   position: relative;
+  z-index: 1;
 }
 
 .the-progress::before {
