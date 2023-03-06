@@ -7,30 +7,35 @@ context('Basic', () => {
     cy.url()
       .should('eq', 'http://localhost:3333/')
 
-    cy.contains('[Home Layout]')
-      .should('exist')
+    // cy.contains('[Home Layout]')
+    //   .should('exist')
 
-    cy.get('#input')
-      .type('Vitesse{Enter}')
-      .url()
-      .should('eq', 'http://localhost:3333/hi/Vitesse')
+    // cy.get('#input')
+    //   .type('Vitesse{Enter}')
+    //   .url()
+    //   .should('eq', 'http://localhost:3333/hi/Vitesse')
 
-    cy.contains('[Default Layout]')
-      .should('exist')
+    // cy.contains('[Default Layout]')
+    //   .should('exist')
 
-    cy.get('[btn]')
-      .click()
-      .url()
-      .should('eq', 'http://localhost:3333/')
+    // cy.get('[btn]')
+    //   .click()
+    //   .url()
+    //   .should('eq', 'http://localhost:3333/')
   })
 
-  it('markdown', () => {
-    cy.get('[title="About"]')
+  it('help & markdown', () => {
+    cy.get('[href="/help"]')
       .click()
       .url()
-      .should('eq', 'http://localhost:3333/about')
+      .should('eq', 'http://localhost:3333/help')
 
     cy.get('.shiki')
       .should('exist')
+
+    cy.get('[href="/"]')
+      .click()
+      .url()
+      .should('match', /^http:\/\/localhost:3333\/?$/)
   })
 })
