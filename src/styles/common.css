@@ -1,7 +1,27 @@
+.z-inset-box-shadow {
+  position: relative;
+}
+
+.z-inset-box-shadow::before {
+  --at-apply: shadow shadow-inset;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
 .the-progress {
   --progress-value: 50%;
-  --progress-color: #13a89e80;
+  --progress-color: #13a89e;
   position: relative;
+}
+
+.the-progress>*{
   z-index: 1;
 }
 
@@ -9,7 +29,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
   content: "";
   display: inline-block;
   width: var(--progress-value);
