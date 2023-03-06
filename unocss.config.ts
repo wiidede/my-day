@@ -24,8 +24,8 @@ export default defineConfig({
     presetTypography(),
     presetWebFonts({
       fonts: {
-        sans: 'DM Sans',
-        serif: 'DM Serif Display',
+        sans: 'Mulish',
+        serif: 'Bitter',
         mono: 'DM Mono',
       },
     }),
@@ -35,4 +35,7 @@ export default defineConfig({
     transformerVariantGroup(),
   ],
   safelist: 'prose prose-sm m-auto text-left'.split(' '),
+  rules: [
+    [/^flex-(\d+)$/, ([, d]) => ({ flex: `${Number(d)}` })],
+  ],
 })

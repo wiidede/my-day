@@ -28,3 +28,8 @@ html.dark {
   width: 100%;
   height: 2px;
 }
+
+code, kbd, samp, pre, .font-mono-pro {
+  --un-prose-font-mono: "DM Mono",SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",system-ui,ui-monospace,monospace;
+  font-family: var(--un-prose-font-mono);
+}
