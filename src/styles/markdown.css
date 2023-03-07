@@ -12,12 +12,8 @@
   width: 100%;
 }
 
-.shiki-light {
-  /* background: #f8f8f8 !important; */
-  --at-apply: shadow shadow-inset
-}
-.shiki-dark {
-  /* background: #0e0e0e !important; */
+.shiki-light, .shiki-dark {
+  background: var(--my-box-bg) !important;
   --at-apply: shadow shadow-inset
 }
 

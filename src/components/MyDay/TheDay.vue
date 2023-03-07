@@ -36,7 +36,7 @@ const formatTime = (time: number, startTime: number) => {
 </script>
 
 <template>
-  <div class="py4 text-left rd-2 dark:bg-#282C34 z-inset-box-shadow">
+  <div class="py4 text-left rd-2 z-inset-box-shadow" :style="{ backgroundColor: 'var(--my-box-bg)' }">
     <TheDayItem :time="formatTime(wakeTime, 0)" :content="wakeLabel" />
     <TheDayItem
       v-for="plan in plans"
