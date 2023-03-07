@@ -15,7 +15,7 @@ onClickOutside(rangeRef, () => {
 </script>
 
 <template>
-  <input v-if="ranging" ref="rangeRef" v-model="rangeValue" type="range" class="the-theme-range mx2" :min="0" :max="360" :step="1">
+  <input v-if="ranging" ref="rangeRef" v-model="rangeValue" type="range" class="the-theme-range mx2 w40" :min="0" :max="360" :step="1">
   <button v-else class="icon-btn mx-2" :title="t('button.toggle_theme')" @click="() => (ranging = true)">
     <div i-carbon:color-palette />
   </button>
@@ -44,7 +44,6 @@ input.the-theme-range[type="range"]::-webkit-slider-runnable-track {
   background: var(--rainbow-gradient);
   border-radius: 2px;
   --at-apply: shadow;
-  /* height: 0.5rem; */
 }
 
 input.the-theme-range[type="range"]::-webkit-slider-thumb {
@@ -58,25 +57,21 @@ input.the-theme-range[type="range"]::-webkit-slider-thumb {
   transform: scale(2);
 }
 
-input.the-theme-range[type="range"]:focus::-webkit-slider-thumb {
-  --at-apply: my-shadow;
-}
-
 input.the-theme-range[type="range"]::-moz-range-track {
   background: var(--rainbow-gradient);
-  border-radius: 0.5rem;
-  height: 0.5rem;
+  border-radius: 2px;
+  height: 0.75rem;
+  --at-apply: shadow;
 }
 
 input.the-theme-range[type="range"]::-moz-range-thumb {
-  height: 1rem;
-  width: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #ffffff;
+  border: none;
+  outline: none;
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 0.25rem;
   background-color: var(--my-c-primary);
-}
-
-input.the-theme-range[type="range"]:focus::-moz-range-thumb {
-  box-shadow: 0 1px 6px 0px #ffffff;
+  box-shadow: 0 0.5px 3px 0 var(--my-c-primary), inset 0 0 0.5px 0.5px rgba(var(--my-c-black-rgb), 0.6);
+  transform: scale(2);
 }
 </style>
