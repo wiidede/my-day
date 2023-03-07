@@ -49,6 +49,6 @@ const formatTime = (time: number, startTime: number) => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>

@@ -34,6 +34,6 @@ const myDayList = useStorage('my-day-list', [getDefaultMyDay()])
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>
