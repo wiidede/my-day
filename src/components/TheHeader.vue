@@ -1,10 +1,16 @@
 <script setup lang="ts">
 const { t, availableLocales, locale } = useI18n()
+const route = useRoute()
+const router = useRouter()
 
 const toggleLocales = () => {
   // change to some real logic
   const locales = availableLocales
-  locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
+  const newLocale = locales[(locales.indexOf(locale.value) + 1) % locales.length]
+  const reg = new RegExp(`/(${locale.value})/?$`)
+  if (route.fullPath.match(reg))
+    router.push(route.fullPath.replace(reg, `/${newLocale}`))
+  locale.value = newLocale
 }
 </script>
 
@@ -24,7 +30,7 @@ const toggleLocales = () => {
       <div i-carbon-language />
     </button>
 
-    <RouterLink class="icon-btn mx-2" to="/help" :title="t('button.about')">
+    <RouterLink class="icon-btn mx-2" :to="`/help/${locale}`" :title="t('button.help')">
       <div i-carbon-dicom-overlay />
     </RouterLink>
 
