@@ -26,7 +26,7 @@ const myDayList = useStorage('my-day-list', [getDefaultMyDay()])
 </script>
 
 <template>
-  <div class="max-w-180 m-auto">
+  <div class="max-w-65ch m-auto">
     <p class="text-4xl mb4">
       {{ nowFormatted }}
     </p>

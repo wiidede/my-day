@@ -15,7 +15,7 @@ onClickOutside(rangeRef, () => {
 </script>
 
 <template>
-  <input v-if="ranging" ref="rangeRef" v-model="rangeValue" type="range" class="the-theme-range" :min="0" :max="360" :step="1">
+  <input v-if="ranging" ref="rangeRef" v-model="rangeValue" type="range" class="the-theme-range mx2" :min="0" :max="360" :step="1">
   <button v-else class="icon-btn mx-2" :title="t('button.toggle_theme')" @click="() => (ranging = true)">
     <div i-carbon:color-palette />
   </button>
@@ -28,17 +28,11 @@ input.the-theme-range[type="range"] {
   background: transparent;
   --rainbow-gradient: linear-gradient(to right,
       hsl(0 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(30 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(60 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(90 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(120 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(150 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(180 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(210 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(240 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(270 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(300 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(330 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(360 var(--my-c-primary-saturation) var(--my-c-primary-lightness)));
 }
 
@@ -48,23 +42,24 @@ input.the-theme-range[type="range"]:focus {
 
 input.the-theme-range[type="range"]::-webkit-slider-runnable-track {
   background: var(--rainbow-gradient);
-  border-radius: 4px;
-  box-shadow: inset 0 1px 6px 0px #00000080;
+  border-radius: 2px;
+  --at-apply: shadow;
   /* height: 0.5rem; */
 }
 
 input.the-theme-range[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
-  height: 1rem;
-  width: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #ffffff;
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 0.25rem;
   background-color: var(--my-c-primary);
+  box-shadow: 0 0.5px 3px 0 var(--my-c-primary), inset 0 0 0.5px 0.5px rgba(var(--my-c-black-rgb), 0.6);
+  transform: scale(2);
 }
 
 input.the-theme-range[type="range"]:focus::-webkit-slider-thumb {
-  box-shadow: 0 1px 6px 0px #ffffff;
+  --at-apply: my-shadow;
 }
 
 input.the-theme-range[type="range"]::-moz-range-track {

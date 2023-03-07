@@ -1,5 +1,6 @@
 .prose pre:not(.shiki) {
   padding: 0;
+  overflow: unset;
 }
 
 .prose .shiki {
@@ -12,9 +13,16 @@
   width: 100%;
 }
 
+.prose a {
+  color: var(--my-c-primary);
+  text-decoration: none;
+  --at-apply: transition-color;
+}
+
 .shiki-light, .shiki-dark {
+  --at-apply: shadow;
   background: var(--my-box-bg) !important;
-  --at-apply: shadow shadow-inset
+  overflow-x: auto;
 }
 
 html.dark .shiki-light {

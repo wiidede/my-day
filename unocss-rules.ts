@@ -28,6 +28,7 @@ const rules: Rule<any>[] = [
   [/^my-(c|bg)-(primary)(%(-?\d+))?(\/(\d+))?$/, resolveMyColor],
   // utility rules
   [/^flex-(\d+)$/, ([, d]) => ({ flex: `${Number(d)}` })],
+  ['my-shadow', { 'box-shadow': 'var(--my-box-shadow)' }],
 ]
 
 export default rules
