@@ -25,10 +25,10 @@ context('Basic', () => {
   })
 
   it('help & markdown', () => {
-    cy.get('[href="/help"]')
+    cy.get('[href="/help/en"]')
       .click()
       .url()
-      .should('eq', 'http://localhost:3333/help')
+      .should('eq', 'http://localhost:3333/help/en')
 
     cy.get('.shiki')
       .should('exist')
