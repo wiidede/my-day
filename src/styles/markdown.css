@@ -16,11 +16,10 @@
 .prose a {
   color: var(--my-c-primary);
   text-decoration: none;
-  --at-apply: transition-color;
 }
 
 .shiki-light, .shiki-dark {
-  --at-apply: shadow;
+  --at-apply: my-shadow;
   background: var(--my-box-bg) !important;
   overflow-x: auto;
 }

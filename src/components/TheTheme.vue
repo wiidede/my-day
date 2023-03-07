@@ -43,7 +43,7 @@ input.the-theme-range[type="range"]:focus {
 input.the-theme-range[type="range"]::-webkit-slider-runnable-track {
   background: var(--rainbow-gradient);
   border-radius: 2px;
-  --at-apply: shadow;
+  --at-apply: my-shadow;
 }
 
 input.the-theme-range[type="range"]::-webkit-slider-thumb {
@@ -61,7 +61,7 @@ input.the-theme-range[type="range"]::-moz-range-track {
   background: var(--rainbow-gradient);
   border-radius: 2px;
   height: 0.75rem;
-  --at-apply: shadow;
+  --at-apply: my-shadow;
 }
 
 input.the-theme-range[type="range"]::-moz-range-thumb {

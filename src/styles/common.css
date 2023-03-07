@@ -3,7 +3,7 @@
 }
 
 .z-inset-box-shadow::before {
-  --at-apply: shadow;
+  --at-apply: my-shadow;
   content: "";
   position: absolute;
   top: 0;
