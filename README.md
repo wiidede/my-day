@@ -5,5 +5,5 @@
 ## TODO
 
 - [ ] add my-day core
-- [ ] add color/theme change logic
-- [ ] new icon for project
+- [x] add color/theme change logic
+- [x] new icon for project
