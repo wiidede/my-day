@@ -14,10 +14,13 @@ const messages = Object.fromEntries(
     }),
 )
 
-export const install: UserModule = ({ app }) => {
+export const install: UserModule = ({ app, isClient }) => {
+  const lang = isClient ? localStorage.getItem('my-day-lang') || 'en' : 'en'
+  if (isClient)
+    document.documentElement.lang = lang
   const i18n = createI18n({
     legacy: false,
-    locale: 'en',
+    locale: lang,
     messages,
   })
 

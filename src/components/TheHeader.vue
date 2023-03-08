@@ -3,6 +3,16 @@ const { t, availableLocales, locale } = useI18n()
 const route = useRoute()
 const router = useRouter()
 
+let navLang
+if (typeof navigator !== 'undefined')
+  navLang = navigator.language
+
+const defaultLang = navLang && availableLocales.includes(navLang) ? navLang : locale.value
+const lang = useStorage('my-day-lang', defaultLang)
+locale.value = lang.value
+if (typeof document !== 'undefined')
+  document.documentElement.lang = lang.value
+
 const toggleLocales = () => {
   // change to some real logic
   const locales = availableLocales
@@ -10,7 +20,9 @@ const toggleLocales = () => {
   const reg = new RegExp(`/(${locale.value})/?$`)
   if (route.fullPath.match(reg))
     router.push(route.fullPath.replace(reg, `/${newLocale}`))
-  locale.value = newLocale
+  lang.value = locale.value = newLocale
+  if (typeof document !== 'undefined')
+    document.documentElement.lang = lang.value
 }
 </script>
 
