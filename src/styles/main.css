@@ -10,8 +10,11 @@ body,
   padding: 0;
 }
 
+html {
+  background-color: var(--my-c-white);
+}
+
 html.dark {
-  background: #121212;
   color-scheme: dark;
 }
 
@@ -20,7 +23,7 @@ html.dark {
 }
 
 #nprogress .bar {
-  background: rgb(13,148,136);
+  background: var(--my-c-primary);
   opacity: 0.75;
   position: fixed;
   z-index: 1031;

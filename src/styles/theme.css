@@ -15,7 +15,6 @@
 }
 
 :root.dark {
-  background: #252526;
   --my-c-primary-lightness: 50%;
   --my-box-bg: #151515;
   --my-c-white: #252526;
