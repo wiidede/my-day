@@ -2,7 +2,7 @@
 const { t } = useI18n()
 
 const ranging = ref(false)
-const range = useCssVar('--my-c-primary-hue')
+const range = useStorage('my-day-theme-color', useCssVar('--my-c-primary-hue'))
 const rangeValue = computed({
   get: () => Number(range.value),
   set: (v: number) => (range.value = v.toString()),
@@ -21,7 +21,29 @@ onClickOutside(rangeRef, () => {
   </button>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@mixin my-track {
+  background: var(--rainbow-gradient);
+  border-radius: 2px;
+  height: 0.75rem;
+  --at-apply: shadow;
+}
+
+@mixin my-thumb {
+
+  -webkit-appearance: none;
+  appearance: none;
+
+  border: none;
+  outline: none;
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 0.25rem;
+  background-color: var(--my-c-primary);
+  box-shadow: 0 0.5px 2px 0 var(--my-c-primary), inset 0 0 0.5px 0.5px rgba(var(--my-c-black-rgb), 0.4);
+  transform: scale(2);
+}
+
 input.the-theme-range[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -34,44 +56,25 @@ input.the-theme-range[type="range"] {
       hsl(240 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(300 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(360 var(--my-c-primary-saturation) var(--my-c-primary-lightness)));
-}
 
-input.the-theme-range[type="range"]:focus {
-  outline: none;
-}
+  &:focus {
+    outline: none;
+  }
 
-input.the-theme-range[type="range"]::-webkit-slider-runnable-track {
-  background: var(--rainbow-gradient);
-  border-radius: 2px;
-  --at-apply: my-shadow;
-}
+  &::-webkit-slider-runnable-track {
+    @include my-track;
+  }
 
-input.the-theme-range[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  height: 0.75rem;
-  width: 0.75rem;
-  border-radius: 0.25rem;
-  background-color: var(--my-c-primary);
-  box-shadow: 0 0.5px 3px 0 var(--my-c-primary), inset 0 0 0.5px 0.5px rgba(var(--my-c-black-rgb), 0.6);
-  transform: scale(2);
-}
+  &::-webkit-slider-thumb {
+    @include my-thumb;
+  }
 
-input.the-theme-range[type="range"]::-moz-range-track {
-  background: var(--rainbow-gradient);
-  border-radius: 2px;
-  height: 0.75rem;
-  --at-apply: my-shadow;
-}
+  &::-moz-range-track {
+    @include my-track;
+  }
 
-input.the-theme-range[type="range"]::-moz-range-thumb {
-  border: none;
-  outline: none;
-  height: 0.75rem;
-  width: 0.75rem;
-  border-radius: 0.25rem;
-  background-color: var(--my-c-primary);
-  box-shadow: 0 0.5px 3px 0 var(--my-c-primary), inset 0 0 0.5px 0.5px rgba(var(--my-c-black-rgb), 0.6);
-  transform: scale(2);
+  &::-moz-range-thumb {
+    @include my-thumb;
+  }
 }
 </style>
