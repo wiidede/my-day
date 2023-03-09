@@ -17,22 +17,50 @@
 
 .the-progress {
   --progress-value: 50%;
-  --progress-color: hsl(var(--my-c-primary-hsl) / 25%);
+  --progress-ripple-scale: 25;
+  --progress-ripple-duration: 5s;
+  --progress-ripple-delay: 2.5s;
   position: relative;
 }
 
-.the-progress>*{
+.the-progress>*:not(.the-progress-thumb) {
   z-index: 1;
 }
 
-.the-progress::before {
+.the-progress-thumb {
   position: absolute;
   top: 0;
   left: 0;
-  content: "";
-  display: inline-block;
   width: var(--progress-value);
   height: 100%;
-  background-color: var(--progress-color);
-  --at-apply: transition-width;
+  background-color: hsl(var(--my-c-primary-hsl) / 25%);
+  --at-apply: transition-width my-shadow;
+  overflow: hidden;
+}
+
+@keyframes ripple {
+  to {
+    transform: translateX(-10px) scale(var(--progress-ripple-scale));
+    background-color: hsl(var(--my-c-primary-hsl) / 0%);
+  }
+}
+.the-progress-thumb::before {
+  --ripple-delay: 0s;
+}
+.the-progress-thumb::after {
+  --ripple-delay: var(--progress-ripple-delay);
+}
+.the-progress-thumb::before, .the-progress-thumb::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  aspect-ratio: 0.5;
+  border-radius: 50%;
+  transform: translateX(-100%) scale(0);
+  background-color: hsl(var(--my-c-primary-hsl) / 25%);
+  animation: ripple var(--progress-ripple-duration) linear infinite var(--ripple-delay, 0);
 }
