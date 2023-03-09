@@ -11,9 +11,9 @@ defineProps<{
     class="p2 flex"
     :style="{
       '--progress-value': `${progress || 0}%`,
-      '--progress-ripple-scale': `${(progress || 0) / 2}`,
-      '--progress-ripple-duration': `${Math.max(2, (progress || 0) / 5)}s`,
-      '--progress-ripple-delay': `${Math.max(1, (progress || 0) / 10)}s`,
+      '--progress-ripple-scale': `${Math.max(5, (progress || 0) / 2)}`,
+      '--progress-ripple-duration': `${Math.max(2.5, (progress || 0) / 10)}s`,
+      '--progress-ripple-delay': `${Math.max(1.25, (progress || 0) / 20)}s`,
     }"
     :class="{
       'the-progress py4 text-xl my-bg-primary/15 my-shadow': progress !== undefined,
