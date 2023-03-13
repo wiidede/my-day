@@ -11,11 +11,13 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TheCounter: typeof import('./components/TheCounter.vue')['default']
-    TheDay: typeof import('./components/MyDay/TheDay.vue')['default']
-    TheDayItem: typeof import('./components/MyDay/TheDayItem.vue')['default']
+    TheDay: typeof import('./components/TheDay/TheDay.vue')['default']
+    TheDayItem: typeof import('./components/TheDay/TheDayItem.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']
+    TheRange: typeof import('./components/TheRange/TheRange.vue')['default']
+    TheRangeThumb: typeof import('./components/TheRange/TheRangeThumb.vue')['default']
     TheTheme: typeof import('./components/TheTheme.vue')['default']
   }
 }
