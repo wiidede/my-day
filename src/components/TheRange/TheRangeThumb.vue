@@ -56,6 +56,8 @@ const onPointerDown = (e: PointerEvent) => {
 
 <style lang="scss" scoped>
 .the-range-thumb {
-  transform: translateX(-50%);
+  transform: translateX(-50%) scale(1.5);
+  transform-origin: center;
+  border: 1px solid gray;
 }
 </style>
