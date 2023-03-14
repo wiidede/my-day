@@ -30,16 +30,25 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit)
     :class="{
       'the-progress !py4 text-xl my-bg-primary/15 my-shadow': showProgress,
       'md:flex-row md:px2': !edit,
+      'mb2': edit,
     }"
   >
     <div v-if="showProgress" class="the-progress-thumb" />
     <template v-if="edit">
-      <div class="text-center">
-        {{ Array.isArray(time) ? `${formatter(time[0])} - ${formatter(time[1])}` : formatter(time) }}
-        <div v-if="Array.isArray(time)" i-carbon-delete class="inline-block" @click="emits('delete')" />
+      <div class="flex items-start w-full flex-col md:flex-row md:items-center mb1">
+        <div class="md:flex-3">
+          {{ Array.isArray(time) ? `${formatter(time[0])} - ${formatter(time[1])}` : formatter(time) }}
+        </div>
+        <div class="md:flex-7 w-full flex items-center justify-center">
+          <TheRange v-model="time" class="the-time-range m1" :min="range[0]" :max="range[1]" :step="10" />
+        </div>
       </div>
-      <TheRange v-model="time" class="the-time-range" :min="range[0]" :max="range[1]" :step="10" />
-      <TheInput v-model="content" class="w-full" />
+      <div class="flex items-center w-full gap-4">
+        <TheInput v-model="content" class="flex-auto min-w-0" />
+        <div v-show="edit && Array.isArray(time)" class="icon-btn" @click="emits('delete')">
+          <div i-carbon-delete />
+        </div>
+      </div>
     </template>
     <template v-else>
       <div class="text-center md:flex-1">
@@ -56,27 +65,16 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit)
 <style lang="scss" scoped>
 .the-time-range {
   width: 100%;
-  --rainbow-gradient: linear-gradient(to right,
-      hsl(0 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(60 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(120 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(180 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(240 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(300 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(360 var(--my-c-primary-saturation) var(--my-c-primary-lightness)));
   --at-apply: shadow;
-  background: var(--rainbow-gradient);
-  border-radius: 2px;
-  height: 0.75rem;
+  background: hsl(var(--my-c-primary-hsl) / 50%);
+  border-radius: 4px;
+  height: 0.4rem;
 
   :deep(.the-range-thumb) {
     height: 0.75rem;
     width: 0.75rem;
-    border-radius: 0.25rem;
-    background-color: var(--my-c-primary);
-    box-shadow: 0 0.5px 2px 0 var(--my-c-primary), inset 0 0 0.5px 0.5px rgba(var(--my-c-black-rgb), 0.4);
-    border: 0;
-    transform: translateX(-50%) scale(2);
+    background-color: var(--my-c-white);
+    border: 1px solid var(--my-c-primary);
   }
 }
 </style>

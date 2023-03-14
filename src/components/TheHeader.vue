@@ -33,7 +33,7 @@ const toggleLocales = () => {
     </RouterLink>
 
     <button class="icon-btn mx-2 !outline-none" :title="t('button.toggle_dark')" @click="toggleDark()">
-      <div i="carbon-sun dark:carbon-moon" />
+      <div i="carbon-moon dark:carbon-sun" />
     </button>
 
     <TheTheme />

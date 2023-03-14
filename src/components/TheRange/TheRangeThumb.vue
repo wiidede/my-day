@@ -39,6 +39,7 @@ const onPointerUp = (e: PointerEvent) => {
 }
 
 const onPointerDown = (e: PointerEvent) => {
+  e.preventDefault()
   window.addEventListener('pointermove', onPointerMove)
   window.addEventListener('pointerup', onPointerUp)
   window.addEventListener('pointercancel', onPointerUp)
@@ -51,12 +52,14 @@ const onPointerDown = (e: PointerEvent) => {
     class="the-range-thumb absolute w4 h4 aspect-square bg-white rd-50%"
     :style="{ left: `${position}%` }"
     @pointerdown="onPointerDown"
+    @mousedown.prevent="void 0"
+    @touchstart.prevent="void 0"
   />
 </template>
 
 <style lang="scss" scoped>
 .the-range-thumb {
-  transform: translateX(-50%) scale(1.5);
+  transform: translate(-50%, -25%) scale(1.5);
   transform-origin: center;
   border: 1px solid gray;
 }

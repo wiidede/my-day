@@ -12,7 +12,8 @@ const { modelValue } = defineModel<{
     v-bind="$attrs"
     p="x-4 y-2"
     bg="transparent"
-    border="~ rounded gray-200 dark:gray-700"
+    border="rounded none"
     outline="none active:none"
+    class="my-shadow"
   >
 </template>

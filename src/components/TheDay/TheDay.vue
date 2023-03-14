@@ -44,7 +44,11 @@ const useFormatTime = (startTime: number) => {
 </script>
 
 <template>
-  <div class="py4 text-left rd-2 z-inset-box-shadow" :style="{ backgroundColor: 'var(--my-box-bg)' }">
+  <div
+    class="py4 text-left rd-2 z-inset-box-shadow"
+    :class="{ 'text-center': edit }"
+    :style="{ backgroundColor: 'var(--my-box-bg)' }"
+  >
     <TheDayItem
       v-model:time="modelValue.wakeTime"
       v-model:content="modelValue.wakeLabel"
@@ -54,9 +58,13 @@ const useFormatTime = (startTime: number) => {
     />
     <div
       v-if="edit && (modelValue.plans.length === 0 || (modelValue.plans[0].start > 0))"
-      @click="handleAddPlan(0, 0, modelValue.plans[0].start)"
+      class="w-full flex justify-center"
     >
-      <div i-carbon-add />
+      <div
+        i-carbon-add-alt
+        class="icon-btn m2"
+        @click="handleAddPlan(0, 0, modelValue.plans[0].start)"
+      />
     </div>
     <template
       v-for="(plan, index) in modelValue.plans"
@@ -74,9 +82,13 @@ const useFormatTime = (startTime: number) => {
       />
       <div
         v-if="edit && (modelValue.plans[index + 1]?.start || modelValue.sleepTime) - plan.end > 0"
-        @click="handleAddPlan(index + 1, plan.end, modelValue.plans[index + 1]?.start || modelValue.sleepTime)"
+        class="w-full flex justify-center"
       >
-        <div i-carbon-add />
+        <div
+          i-carbon-add-alt
+          class="icon-btn m2"
+          @click="handleAddPlan(index + 1, plan.end, modelValue.plans[index + 1]?.start || modelValue.sleepTime)"
+        />
       </div>
     </template>
 

@@ -36,7 +36,7 @@ const toggleEdit = useToggle(edit)
         {{ nowFormatted }}
       </div>
       <div class="cursor-pointer" @click="toggleEdit()">
-        <div i-carbon-edit class="" />
+        <div :class="edit ? 'i-carbon-checkmark' : 'i-carbon-edit'" class="icon-btn" />
       </div>
     </div>
     <TheDay
