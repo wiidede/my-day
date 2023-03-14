@@ -23,14 +23,28 @@ const getDefaultMyDay: () => IMyDay = () => ({
 })
 
 const myDayList = useStorage('my-day-list', [getDefaultMyDay()])
+
+const edit = ref(false)
+const toggleEdit = useToggle(edit)
 </script>
 
 <template>
   <div class="max-w-65ch m-auto">
-    <p class="text-4xl mb4">
-      {{ nowFormatted }}
-    </p>
-    <TheDay v-for="(myDay, index) in myDayList" :key="myDay.key" v-model="myDayList[index]" />
+    <div class="mb4 flex items-baseline justify-between px1">
+      <div class="w5" />
+      <div class="text-4xl ">
+        {{ nowFormatted }}
+      </div>
+      <div class="cursor-pointer" @click="toggleEdit()">
+        <div i-carbon-edit class="" />
+      </div>
+    </div>
+    <TheDay
+      v-for="(myDay, index) in myDayList"
+      :key="myDay.key"
+      v-model="myDayList[index]"
+      :edit="edit"
+    />
   </div>
 </template>
 
