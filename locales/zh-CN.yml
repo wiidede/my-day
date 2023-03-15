@@ -13,4 +13,11 @@ intro:
   hi: 你好，{name}
   aka: 也叫
   whats-your-name: 输入你的名字
+my_day:
+  wake: 起床
+  sleep: 睡觉
+  plan_1: 求学
+  plan_2: 吃饭
+  plan_3: 休憩
+  plan_4: 镜中花 如水而散
 not-found: 未找到页面

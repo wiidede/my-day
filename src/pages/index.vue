@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { IMyDay } from '~/types/my-day'
+const { t } = useI18n()
 
 const now = useNow({
   interval: 1000,
@@ -8,21 +9,26 @@ const nowFormatted = useDateFormat(now, 'YYYY-MM-DD HH:mm:ss', {
   locales: 'en-US',
 })
 
-const getDefaultMyDay: () => IMyDay = () => ({
-  key: (new Date()).valueOf(),
+const defaultMyDay = ref<IMyDay>({
   wakeTime: 7 * 60,
-  wakeLabel: 'wake up',
+  wakeLabel: t('my_day.wake'),
   sleepTime: 16 * 60,
-  sleepLabel: 'sleep',
+  sleepLabel: t('my_day.sleep'),
   plans: [
-    { name: 'learning', start: 30, end: 60 },
-    { name: 'eating', start: 60, end: 90 },
-    { name: 'daze', start: 90, end: 120 },
-    { name: 'what\'s the meaning of life', start: 150, end: 15 * 60 },
+    { name: t('my_day.plan_1'), start: 30, end: 60 },
+    { name: t('my_day.plan_2'), start: 60, end: 90 },
+    { name: t('my_day.plan_3'), start: 90, end: 120 },
+    { name: t('my_day.plan_4'), start: 120, end: 15 * 60 },
   ],
 })
 
-const myDayList = useStorage('my-day-list', [getDefaultMyDay()])
+const myDay = useUrlStore<IMyDay>().data
+const myDayModel = ref<IMyDay>(myDay.value || defaultMyDay.value)
+watch(myDayModel, (value) => {
+  myDay.value = value
+}, {
+  deep: true,
+})
 
 const edit = ref(false)
 const toggleEdit = useToggle(edit)
@@ -40,9 +46,7 @@ const toggleEdit = useToggle(edit)
       </div>
     </div>
     <TheDay
-      v-for="(myDay, index) in myDayList"
-      :key="myDay.key"
-      v-model="myDayList[index]"
+      v-model="myDayModel"
       :edit="edit"
     />
   </div>

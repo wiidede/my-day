@@ -1,5 +1,4 @@
 export interface IMyDay {
-  key: number
   wakeTime: number
   wakeLabel: string
   sleepTime: number

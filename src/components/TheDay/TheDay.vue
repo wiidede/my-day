@@ -1,13 +1,22 @@
 <script lang="ts" setup>
 import type { IMyDay } from '~/types/my-day'
 
-defineProps<{
+const props = defineProps<{
   edit?: boolean
-}>()
-
-const { modelValue } = defineModel<{
   modelValue: IMyDay
 }>()
+
+const emits = defineEmits<{
+  (event: 'update:modelValue', value: typeof props.modelValue): void
+  (event: 'delete'): void
+}>()
+
+const model = computed({
+  get: () => props.modelValue,
+  set: (value) => {
+    emits('update:modelValue', value)
+  },
+})
 
 const dayjs = useDayjs()
 
@@ -20,19 +29,19 @@ const now = computed(() => {
   + nowDate.value.getMinutes()
   + (nowDate.value.getSeconds() / 60)
   + (nowDate.value.getMilliseconds() / 1000 / 60)
-  - modelValue.value.wakeTime
+  - model.value.wakeTime
   return nowValue > 0 ? nowValue : nowValue + 24 * 60
 })
 
 const handleAddPlan = (index: number, start: number, end: number) => {
-  modelValue.value.plans.splice(index, 0, {
+  model.value.plans.splice(index, 0, {
     name: '',
     start,
     end,
   })
 }
 const handleDeletePlan = (index: number) => {
-  modelValue.value.plans.splice(index, 1)
+  model.value.plans.splice(index, 1)
 }
 
 const formatTime = (time: number, startTime: number) => {
@@ -50,53 +59,53 @@ const useFormatTime = (startTime: number) => {
     :style="{ backgroundColor: 'var(--my-box-bg)' }"
   >
     <TheDayItem
-      v-model:left="modelValue.wakeTime"
-      v-model:content="modelValue.wakeLabel"
+      v-model:left="model.wakeTime"
+      v-model:content="model.wakeLabel"
       :range="[0, 24 * 60]"
       :formatter="useFormatTime(0)"
       :edit="edit"
     />
     <div
-      v-if="edit && (modelValue.plans.length === 0 || (modelValue.plans[0].start > 0))"
+      v-if="edit && (model.plans.length === 0 || (model.plans[0].start > 0))"
       class="w-full flex justify-center"
     >
       <div
         i-carbon-add-alt
         class="icon-btn m2"
-        @click="handleAddPlan(0, 0, modelValue.plans[0]?.start || modelValue.sleepTime)"
+        @click="handleAddPlan(0, 0, model.plans[0]?.start || model.sleepTime)"
       />
     </div>
     <template
-      v-for="(plan, index) in modelValue.plans"
+      v-for="(plan, index) in model.plans"
       :key="index"
     >
       <TheDayItem
         v-model:content="plan.name"
         v-model:left="plan.start"
         v-model:right="plan.end"
-        :range="[modelValue.plans[index - 1]?.end || 0, modelValue.plans[index + 1]?.start || modelValue.sleepTime]"
+        :range="[model.plans[index - 1]?.end || 0, model.plans[index + 1]?.start || model.sleepTime]"
         :progress="now >= plan.start && now < plan.end ? (now - plan.start) / (plan.end - plan.start) * 100 : undefined"
-        :formatter="useFormatTime(modelValue.wakeTime)"
+        :formatter="useFormatTime(model.wakeTime)"
         :edit="edit"
         @delete="handleDeletePlan(index)"
       />
       <div
-        v-if="edit && (modelValue.plans[index + 1]?.start || modelValue.sleepTime) - plan.end > 0"
+        v-if="edit && (model.plans[index + 1]?.start || model.sleepTime) - plan.end > 0"
         class="w-full flex justify-center"
       >
         <div
           i-carbon-add-alt
           class="icon-btn m2"
-          @click="handleAddPlan(index + 1, plan.end, modelValue.plans[index + 1]?.start || modelValue.sleepTime)"
+          @click="handleAddPlan(index + 1, plan.end, model.plans[index + 1]?.start || model.sleepTime)"
         />
       </div>
     </template>
 
     <TheDayItem
-      v-model:left="modelValue.sleepTime"
-      v-model:content="modelValue.sleepLabel"
-      :range="[modelValue.plans[modelValue.plans.length - 1]?.end || modelValue.wakeTime, 24 * 60]"
-      :formatter="useFormatTime(modelValue.wakeTime)"
+      v-model:left="model.sleepTime"
+      v-model:content="model.sleepLabel"
+      :range="[model.plans[model.plans.length - 1]?.end || model.wakeTime, 24 * 60]"
+      :formatter="useFormatTime(model.wakeTime)"
       :edit="edit"
     />
   </div>

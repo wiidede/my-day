@@ -2,6 +2,7 @@
 const props = defineProps<{
   left: number
   right?: number
+  content: string
   progress?: number
   edit?: boolean
   range: [number, number]
@@ -11,6 +12,7 @@ const props = defineProps<{
 const emits = defineEmits<{
   (event: 'update:left', value: typeof props.left): void
   (event: 'update:right', value: typeof props.right): void
+  (event: 'update:content', value: typeof props.content): void
   (event: 'delete'): void
 }>()
 
@@ -27,9 +29,12 @@ const time = computed({
   },
 })
 
-const { content } = defineModel<{
-  content: string
-}>()
+const contentModel = computed({
+  get: () => props.content,
+  set: (value) => {
+    emits('update:content', value)
+  },
+})
 
 const showProgress = computed(() => props.progress !== undefined && !props.edit)
 </script>
@@ -60,7 +65,7 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit)
         </div>
       </div>
       <div class="flex items-center w-full gap-4">
-        <TheInput v-model="content" class="flex-auto min-w-0" />
+        <TheInput v-model="contentModel" class="flex-auto min-w-0" />
         <div v-show="edit && Array.isArray(time)" class="icon-btn" @click="emits('delete')">
           <div i-carbon-delete />
         </div>
@@ -71,7 +76,7 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit)
         {{ Array.isArray(time) ? `${formatter(time[0])} - ${formatter(time[1])}` : formatter(time) }}
       </div>
       <div class="md:flex-3">
-        <span>{{ content }}</span>
+        <span>{{ contentModel }}</span>
         <span v-if="showProgress">({{ progress!.toFixed(2) }}%)</span>
       </div>
     </template>

@@ -13,4 +13,11 @@ intro:
   hi: Hi, {name}!
   aka: Also known as
   whats-your-name: What's your name?
+my_day:
+  wake: wake up
+  sleep: sleep
+  plan_1: learning
+  plan_2: eating
+  plan_3: daze
+  plan_4: what's the meaning of life
 not-found: Not found
