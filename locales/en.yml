@@ -16,6 +16,7 @@ intro:
 my_day:
   wake: wake up
   sleep: sleep
+  sleep_time: time to sleep~
   plan_1: learning
   plan_2: eating
   plan_3: daze

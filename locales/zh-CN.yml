@@ -16,6 +16,7 @@ intro:
 my_day:
   wake: 起床
   sleep: 睡觉
+  sleep_time: 该睡了~
   plan_1: 求学
   plan_2: 吃饭
   plan_3: 休憩

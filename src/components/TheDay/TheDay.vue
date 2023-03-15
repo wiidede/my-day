@@ -18,6 +18,8 @@ const model = computed({
   },
 })
 
+const { t } = useI18n()
+
 const dayjs = useDayjs()
 
 const nowDate = useNow({
@@ -50,9 +52,34 @@ const formatTime = (time: number, startTime: number) => {
 const useFormatTime = (startTime: number) => {
   return (time: number) => formatTime(time, startTime)
 }
+
+const sleep = computed(() => now.value > model.value.sleepTime)
+const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => ({
+  left: Math.random() * 90 + 5,
+  top: Math.random() * 90 + 5,
+  rotate: Math.random() * 60 - 45,
+  delay: Math.random() * 3,
+}))
 </script>
 
 <template>
+  <div v-if="sleep" class="z--1 fixed top-0 right-0 bottom-0 left-0">
+    <div
+      v-for="(moon, index) in moons"
+      :key="index"
+      i-the-my-day
+      class="absolute text-10 text-#B7DCFF transition  breeze-animation"
+      :style="{
+        'left': `${moon.left}%`,
+        'top': `${moon.top}%`,
+        'transform': `rotate(${moon.rotate}deg)`,
+        '--animation-delay': `${moon.delay}s`,
+      }"
+    />
+  </div>
+  <div v-if="sleep" class="text-xl my2">
+    {{ t('my_day.sleep_time') }}
+  </div>
   <div
     class="py4 text-left rd-2 z-inset-box-shadow"
     :class="{ 'text-center': edit }"
@@ -112,5 +139,18 @@ const useFormatTime = (startTime: number) => {
 </template>
 
 <style scoped>
-
+.breeze-animation {
+  animation: breeze 3s ease-in-out infinite var(--animation-delay, 0);
+}
+@keyframes breeze {
+  to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  from {
+    opacity: 1;
+  }
+}
 </style>
