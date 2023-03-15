@@ -18,6 +18,7 @@ declare module '@vue/runtime-core' {
     TheHeader: typeof import('./components/TheHeader.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']
     TheRange: typeof import('./components/TheRange/TheRange.vue')['default']
+    TheRangeProgress: typeof import('./components/TheRange/TheRangeProgress.vue')['default']
     TheRangeThumb: typeof import('./components/TheRange/TheRangeThumb.vue')['default']
     TheStartEnd: typeof import('./components/TheSlotData.vue')['default']
     TheTheme: typeof import('./components/TheTheme.vue')['default']

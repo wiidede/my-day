@@ -55,39 +55,36 @@ const position = computed(() => {
     : getPercentage(model.value || 0)
 })
 
-const left = ref(Array.isArray(model.value) ? getPercentage(model.value[0]) : getPercentage(model.value || 0))
-const right = ref(Array.isArray(model.value) ? getPercentage(model.value[1]) : 0)
-
 let lastType: 'left' | 'right' = 'left'
-const setLastType = (type: 'left' | 'right') => {
-  lastType = type
-}
 const onUpdateRange = (percentage: number) => {
+  if (!Array.isArray(position.value))
+    return
+  let left = position.value[0]
+  let right = position.value[1]
   if (lastType === 'left') {
-    if (percentage > right.value) {
-      left.value = right.value
-      right.value = percentage
+    if (percentage > right) {
+      left = right
+      right = percentage
       lastType = 'right'
     }
     else {
-      left.value = percentage
+      left = percentage
     }
   }
   else if (lastType === 'right') {
-    if (percentage < left.value) {
-      right.value = left.value
-      left.value = percentage
+    if (percentage < left) {
+      right = left
+      left = percentage
       lastType = 'left'
     }
     else {
-      right.value = percentage
+      right = percentage
     }
   }
-  model.value = [getValue(left.value), getValue(right.value)]
+  model.value = [getValue(left), getValue(right)]
 }
 
 const onUpdateSingle = (percentage: number) => {
-  left.value = percentage
   model.value = getValue(percentage)
 }
 </script>
@@ -95,12 +92,12 @@ const onUpdateSingle = (percentage: number) => {
 <template>
   <div ref="trackRef" class="the-range-track relative w40 h4 bg-gray select-none m-auto">
     <template v-if="model !== undefined && Array.isArray(model) && Array.isArray(position)">
-      <TheRangeProgress :value="left" />
-      <TheRangeThumb :position="position[0]" :percentage="left" @update="onUpdateRange($event)" @pointerdown="setLastType('left')" />
-      <TheRangeThumb :position="position[1]" :percentage="right" @update="onUpdateRange($event)" @pointerdown="setLastType('right')" />
+      <TheRangeProgress :left="position[0]" :right="position[1]" />
+      <TheRangeThumb :position="position[0]" @update="onUpdateRange($event)" @pointerdown="() => { lastType = 'left' }" />
+      <TheRangeThumb :position="position[1]" @update="onUpdateRange($event)" @pointerdown="() => { lastType = 'right' }" />
     </template>
     <template v-if="model !== undefined && typeof model === 'number' && typeof position === 'number'">
-      <TheRangeThumb :position="position" :percentage="left" @update="onUpdateSingle" />
+      <TheRangeThumb :position="position" @update="onUpdateSingle" />
     </template>
   </div>
 </template>

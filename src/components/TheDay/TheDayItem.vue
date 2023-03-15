@@ -76,5 +76,9 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit)
     background-color: var(--my-c-white);
     border: 1px solid var(--my-c-primary);
   }
+
+  :deep(.the-range-progress) {
+    background-color: var(--my-c-primary);
+  }
 }
 </style>
