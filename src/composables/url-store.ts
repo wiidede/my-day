@@ -1,5 +1,7 @@
 export const useUrlStore = <T>() => {
-  const hash = location.hash
+  let hash: string | undefined
+  if (typeof location !== 'undefined')
+    hash = location.hash
 
   const data = computed<T | undefined>({
     get: () => hash ? JSON.parse(atou(hash.slice(1))) : undefined,
