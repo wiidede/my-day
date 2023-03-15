@@ -10,17 +10,19 @@
   --my-c-black: #252526;
   --my-c-black-rgb: 37, 37, 38;
   --my-box-bg: #f8f8f8;
+  --my-input-bg: #f0f0f0;
   --my-box-shadow: inset 0 1px 4px 0 rgba(15, 15, 15, 0.2),
     inset 0 1px 2px -1px rgba(15, 15, 15, 0.1);
 }
 
 :root.dark {
   --my-c-primary-lightness: 50%;
-  --my-box-bg: #151515;
   --my-c-white: #252526;
   --my-c-white-rgb: 37, 37, 38;
   --my-c-black: #ffffff;
   --my-c-black-rgb: 255, 255, 255;
+  --my-box-bg: #151515;
+  --my-input-bg: #050505;
   --my-box-shadow: inset 0 1px 5px 0 rgba(0, 0, 2, 0.6),
     inset 0 1px 2px -1px rgba(0, 0, 2, 0.2);
 }

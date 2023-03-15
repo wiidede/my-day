@@ -15,5 +15,6 @@ const { modelValue } = defineModel<{
     border="rounded none"
     outline="none active:none"
     class="my-shadow"
+    :style="{ background: 'var(--my-input-bg)' }"
   >
 </template>

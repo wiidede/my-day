@@ -28,7 +28,7 @@ const toggleLocales = () => {
 
 <template>
   <nav text-xl py-4 flex items-center justify-center>
-    <RouterLink class="icon-btn mx-2 my-c-primary/67" to="/" :title="t('button.home')">
+    <RouterLink class="icon-btn mx-2 my-c-primary" to="/" :title="t('button.home')">
       <div i-the-my-day />
     </RouterLink>
 
