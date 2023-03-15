@@ -5,6 +5,12 @@
   --my-c-primary-alpha: 100%;
   --my-c-primary: hsl(var(--my-c-primary-hue) var(--my-c-primary-saturation) var(--my-c-primary-lightness) / var(--my-c-primary-alpha, 100%));
   --my-c-primary-hsl: var(--my-c-primary-hue) var(--my-c-primary-saturation) var(--my-c-primary-lightness);
+  --my-c-success-hue: 111;
+  --my-c-success-saturation: var(--my-c-primary-saturation);
+  --my-c-success-lightness: var(--my-c-primary-lightness);
+  --my-c-success-alpha: var(--my-c-primary-alpha);
+  --my-c-success: hsl(var(--my-c-success-hue) var(--my-c-success-saturation) var(--my-c-success-lightness) / var(--my-c-success-alpha, 100%));
+  --my-c-success-hsl: var(--my-c-success-hue) var(--my-c-success-saturation) var(--my-c-success-lightness);
   --my-c-white: #ffffff;
   --my-c-white-rgb: 255, 255, 255;
   --my-c-black: #252526;

@@ -1,15 +1,15 @@
 <script lang="ts" setup>
+import { promiseTimeout } from '@vueuse/core'
 import type { IMyDay } from '~/types/my-day'
+
 const { t } = useI18n()
 
 const now = useNow({
   interval: 1000,
 })
-const nowFormatted = useDateFormat(now, 'YYYY-MM-DD HH:mm:ss', {
-  locales: 'en-US',
-})
+const nowFormatted = useDateFormat(now, () => t('my_day.time_formatter'))
 
-const defaultMyDay = ref<IMyDay>({
+const getDefaultMyDay: () => IMyDay = () => ({
   wakeTime: 7 * 60,
   wakeLabel: t('my_day.wake'),
   sleepTime: 16 * 60,
@@ -22,16 +22,32 @@ const defaultMyDay = ref<IMyDay>({
   ],
 })
 
-const myDay = useUrlStore<IMyDay>().data
-const myDayModel = ref<IMyDay>(myDay.value || defaultMyDay.value)
-watch(myDayModel, (value) => {
-  myDay.value = value
-}, {
-  deep: true,
-})
+const storeMyDay = useStorage<IMyDay[]>('my-day-list', [])
+const urlMyDay = useUrlStore<IMyDay[]>().data
+const initializing = computed(() => (!storeMyDay.value || !storeMyDay.value.length))
+const viewing = computed(() => !!urlMyDay.value)
+
+const shareRef = ref<HTMLElement>()
+const { floating, floatingRef } = useFloating(shareRef)
+const handleShare = async (copyOnly = false) => {
+  if (!copyOnly)
+    urlMyDay.value = storeMyDay.value
+  await promiseTimeout(0)
+  await navigator.clipboard.writeText(location.href)
+  // content.value = t('my_day.share_info')
+  // className.value = 'my-c-success/67'
+  floating.value = true
+  await promiseTimeout(3000)
+  floating.value = false
+}
 
 const edit = ref(false)
 const toggleEdit = useToggle(edit)
+const handleEdit = () => {
+  if (initializing.value)
+    storeMyDay.value = [getDefaultMyDay()]
+  toggleEdit()
+}
 </script>
 
 <template>
@@ -41,14 +57,34 @@ const toggleEdit = useToggle(edit)
       <div class="text-4xl ">
         {{ nowFormatted }}
       </div>
-      <div class="cursor-pointer" @click="toggleEdit()">
-        <div :class="edit ? 'i-carbon-checkmark' : 'i-carbon-edit'" class="icon-btn" />
+      <div class="flex gap2">
+        <div v-if="viewing" i-carbon-exit class="icon-btn cursor-pointer" @click="urlMyDay = undefined" />
+        <div v-if="!initializing" ref="shareRef" i-carbon-share class="icon-btn cursor-pointer" @click="handleShare(viewing)" />
+        <Teleport v-if="floatingRef" :to="floatingRef">
+          <div class="flex gap1 items-center my-c-success/67">
+            <div i-carbon-checkmark-outline />
+            <div>{{ t('my_day.share_info') }}</div>
+          </div>
+        </Teleport>
+        <div :class="edit ? 'i-carbon-checkmark' : 'i-carbon-edit'" class="icon-btn cursor-pointer" @click="handleEdit()" />
       </div>
     </div>
-    <TheDay
-      v-model="myDayModel"
-      :edit="edit"
-    />
+    <template v-if="viewing">
+      <TheDay
+        v-for="(day, index) in urlMyDay"
+        :key="index"
+        :model-value="day"
+      />
+    </template>
+    <TheDay v-else-if="initializing" :model-value="getDefaultMyDay()" />
+    <template v-else>
+      <TheDay
+        v-for="(day, index) in storeMyDay"
+        :key="index"
+        :model-value="day"
+        :edit="edit"
+      />
+    </template>
   </div>
 </template>
 

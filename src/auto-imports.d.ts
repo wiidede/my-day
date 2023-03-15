@@ -167,6 +167,8 @@ declare global {
   const useFetch: typeof import('@vueuse/core')['useFetch']
   const useFileDialog: typeof import('@vueuse/core')['useFileDialog']
   const useFileSystemAccess: typeof import('@vueuse/core')['useFileSystemAccess']
+  const useFloating: typeof import('./composables/floating')['useFloating']
+  const useFloatingRef: typeof import('./composables/floating')['useFloatingRef']
   const useFocus: typeof import('@vueuse/core')['useFocus']
   const useFocusWithin: typeof import('@vueuse/core')['useFocusWithin']
   const useFps: typeof import('@vueuse/core')['useFps']
@@ -255,7 +257,6 @@ declare global {
   const useUrlSearchParams: typeof import('@vueuse/core')['useUrlSearchParams']
   const useUrlStore: typeof import('./composables/url-store')['useUrlStore']
   const useUserMedia: typeof import('@vueuse/core')['useUserMedia']
-  const useUserStore: typeof import('./stores/user')['useUserStore']
   const useVModel: typeof import('@vueuse/core')['useVModel']
   const useVModels: typeof import('@vueuse/core')['useVModels']
   const useVibrate: typeof import('@vueuse/core')['useVibrate']
@@ -454,6 +455,8 @@ declare module 'vue' {
     readonly useFetch: UnwrapRef<typeof import('@vueuse/core')['useFetch']>
     readonly useFileDialog: UnwrapRef<typeof import('@vueuse/core')['useFileDialog']>
     readonly useFileSystemAccess: UnwrapRef<typeof import('@vueuse/core')['useFileSystemAccess']>
+    readonly useFloating: UnwrapRef<typeof import('./composables/floating')['useFloating']>
+    readonly useFloatingRef: UnwrapRef<typeof import('./composables/floating')['useFloatingRef']>
     readonly useFocus: UnwrapRef<typeof import('@vueuse/core')['useFocus']>
     readonly useFocusWithin: UnwrapRef<typeof import('@vueuse/core')['useFocusWithin']>
     readonly useFps: UnwrapRef<typeof import('@vueuse/core')['useFps']>
@@ -542,7 +545,6 @@ declare module 'vue' {
     readonly useUrlSearchParams: UnwrapRef<typeof import('@vueuse/core')['useUrlSearchParams']>
     readonly useUrlStore: UnwrapRef<typeof import('./composables/url-store')['useUrlStore']>
     readonly useUserMedia: UnwrapRef<typeof import('@vueuse/core')['useUserMedia']>
-    readonly useUserStore: UnwrapRef<typeof import('./stores/user')['useUserStore']>
     readonly useVModel: UnwrapRef<typeof import('@vueuse/core')['useVModel']>
     readonly useVModels: UnwrapRef<typeof import('@vueuse/core')['useVModels']>
     readonly useVibrate: UnwrapRef<typeof import('@vueuse/core')['useVibrate']>

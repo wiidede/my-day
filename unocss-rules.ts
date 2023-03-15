@@ -25,7 +25,7 @@ const resolveMyColor: DynamicMatcher = ([, colorType, type, l, op]) => {
 
 const rules: Rule<any>[] = [
   // theme rules
-  [/^my-(c|bg)-(primary)(?:%(-?\d+))?(?:\/(\d+))?$/, resolveMyColor],
+  [/^my-(c|bg)-(primary|success)(?:%(-?\d+))?(?:\/(\d+))?$/, resolveMyColor],
   // utility rules
   [/^flex-(\d+)$/, ([, d]) => ({ flex: `${Number(d)}` })],
   ['my-shadow', { 'box-shadow': 'var(--my-box-shadow)' }],

@@ -68,7 +68,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
       v-for="(moon, index) in moons"
       :key="index"
       i-the-my-day
-      class="absolute text-10 text-#B7DCFF transition  breeze-animation"
+      class="absolute text-16 text-#B7DCFF transition  breeze-animation"
       :style="{
         'left': `${moon.left}%`,
         'top': `${moon.top}%`,

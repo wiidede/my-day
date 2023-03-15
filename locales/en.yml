@@ -14,6 +14,7 @@ intro:
   aka: Also known as
   whats-your-name: What's your name?
 my_day:
+  time_formatter: HH:mm:ss MMM D, YYYY
   wake: wake up
   sleep: sleep
   sleep_time: time to sleep~
@@ -21,4 +22,5 @@ my_day:
   plan_2: eating
   plan_3: daze
   plan_4: what's the meaning of life
+  share_info: Sharable URL has been copied to clipboard.
 not-found: Not found

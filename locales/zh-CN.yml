@@ -14,6 +14,7 @@ intro:
   aka: 也叫
   whats-your-name: 输入你的名字
 my_day:
+  time_formatter: YYYY-MM-DD HH:mm:ss
   wake: 起床
   sleep: 睡觉
   sleep_time: 该睡了~
@@ -21,4 +22,5 @@ my_day:
   plan_2: 吃饭
   plan_3: 休憩
   plan_4: 镜中花 如水而散
+  share_info: 分享链接已经复制到剪贴板了
 not-found: 未找到页面

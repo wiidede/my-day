@@ -64,7 +64,7 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit)
           <TheRange v-model="time" class="the-time-range m1" :min="range[0]" :max="range[1]" :step="10" />
         </div>
       </div>
-      <div class="flex items-center w-full gap-4">
+      <div class="flex items-center w-full gap4">
         <TheInput v-model="contentModel" class="flex-auto min-w-0" />
         <div v-show="edit && Array.isArray(time)" class="icon-btn" @click="emits('delete')">
           <div i-carbon-delete />
