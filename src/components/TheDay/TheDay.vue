@@ -63,7 +63,7 @@ const useFormatTime = (startTime: number) => {
       <div
         i-carbon-add-alt
         class="icon-btn m2"
-        @click="handleAddPlan(0, 0, modelValue.plans[0].start)"
+        @click="handleAddPlan(0, 0, modelValue.plans[0]?.start || modelValue.sleepTime)"
       />
     </div>
     <template
