@@ -8,6 +8,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
 import rules from './unocss-rules'
 
 export default defineConfig({
@@ -21,6 +22,11 @@ export default defineConfig({
     presetIcons({
       scale: 1.2,
       warn: true,
+      collections: {
+        the: FileSystemIconLoader(
+          './assets/icons',
+        ),
+      },
     }),
     presetTypography(),
     presetWebFonts({

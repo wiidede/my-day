@@ -28,8 +28,8 @@ const toggleLocales = () => {
 
 <template>
   <nav text-xl py-4 flex items-center justify-center>
-    <RouterLink class="icon-btn mx-2" to="/" :title="t('button.home')">
-      <div i-carbon-campsite />
+    <RouterLink class="icon-btn mx-2 my-c-primary/67" to="/" :title="t('button.home')">
+      <div i-the-my-day />
     </RouterLink>
 
     <button class="icon-btn mx-2 !outline-none" :title="t('button.toggle_dark')" @click="toggleDark()">
@@ -43,7 +43,7 @@ const toggleLocales = () => {
     </button>
 
     <RouterLink class="icon-btn mx-2" :to="`/help/${locale}`" :title="t('button.help')">
-      <div i-carbon-dicom-overlay />
+      <div i-carbon-help />
     </RouterLink>
 
     <a class="icon-btn mx-2" rel="noreferrer" href="https://github.com/wiidede/my-day" target="_blank" title="GitHub">
