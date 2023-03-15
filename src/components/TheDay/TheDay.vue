@@ -77,7 +77,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
       }"
     />
   </div>
-  <div v-if="sleep" class="text-xl my2">
+  <div v-if="sleep" class="text-xl my2 text-#B7DCFF">
     {{ t('my_day.sleep_time') }}
   </div>
   <div

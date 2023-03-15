@@ -11,6 +11,12 @@
   --my-c-success-alpha: var(--my-c-primary-alpha);
   --my-c-success: hsl(var(--my-c-success-hue) var(--my-c-success-saturation) var(--my-c-success-lightness) / var(--my-c-success-alpha, 100%));
   --my-c-success-hsl: var(--my-c-success-hue) var(--my-c-success-saturation) var(--my-c-success-lightness);
+  --my-c-warning-hue: 30;
+  --my-c-warning-saturation: var(--my-c-primary-saturation);
+  --my-c-warning-lightness: var(--my-c-primary-lightness);
+  --my-c-warning-alpha: var(--my-c-primary-alpha);
+  --my-c-warning: hsl(var(--my-c-warning-hue) var(--my-c-warning-saturation) var(--my-c-warning-lightness) / var(--my-c-warning-alpha, 100%));
+  --my-c-warning-hsl: var(--my-c-warning-hue) var(--my-c-warning-saturation) var(--my-c-warning-lightness);
   --my-c-white: #ffffff;
   --my-c-white-rgb: 255, 255, 255;
   --my-c-black: #252526;

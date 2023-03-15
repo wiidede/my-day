@@ -1,10 +1,12 @@
 import { strFromU8, strToU8, unzlibSync, zlibSync } from 'fflate'
 
-export function debounce(fn: Function, n = 100) {
+export function debounce(fn: Function, n = 100, leading = false) {
   let handle: any
   return (...args: any[]) => {
     if (handle)
       clearTimeout(handle)
+    if (leading && !handle)
+      fn(...args)
     handle = setTimeout(() => {
       fn(...args)
     }, n)

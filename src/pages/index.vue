@@ -32,7 +32,7 @@ const { floating, floatingRef } = useFloating(shareRef)
 const handleShare = async (copyOnly = false) => {
   if (!copyOnly)
     urlMyDay.value = storeMyDay.value
-  await promiseTimeout(0)
+  await promiseTimeout(10)
   await navigator.clipboard.writeText(location.href)
   // content.value = t('my_day.share_info')
   // className.value = 'my-c-success/67'
@@ -69,11 +69,15 @@ const handleEdit = () => {
         <div :class="edit ? 'i-carbon-checkmark' : 'i-carbon-edit'" class="icon-btn cursor-pointer" @click="handleEdit()" />
       </div>
     </div>
+    <div v-if="edit && viewing" class="text-6 my-c-warning">
+      {{ t('my_day.viewing_editing') }}
+    </div>
     <template v-if="viewing">
       <TheDay
         v-for="(day, index) in urlMyDay"
         :key="index"
         :model-value="day"
+        :edit="edit"
       />
     </template>
     <TheDay v-else-if="initializing" :model-value="getDefaultMyDay()" />
