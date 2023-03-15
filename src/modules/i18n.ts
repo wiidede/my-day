@@ -15,7 +15,11 @@ const messages = Object.fromEntries(
 )
 
 export const install: UserModule = ({ app, isClient }) => {
-  const lang = isClient ? localStorage.getItem('my-day-lang') || 'en' : 'en'
+  let lang = 'en'
+  if (isClient) {
+    const defaultLang = localStorage.getItem('my-day-lang') || navigator.language
+    defaultLang && ['en', 'zh-CN'].includes(defaultLang) && (lang = defaultLang)
+  }
   if (isClient)
     document.documentElement.lang = lang
   const i18n = createI18n({
