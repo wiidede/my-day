@@ -13,7 +13,6 @@ declare module '@vue/runtime-core' {
     TheCounter: typeof import('./components/TheCounter.vue')['default']
     TheDay: typeof import('./components/TheDay/TheDay.vue')['default']
     TheDayItem: typeof import('./components/TheDay/TheDayItem.vue')['default']
-    TheDayItemStartEnd: typeof import('./components/TheDay/TheDayItemStartEnd.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']

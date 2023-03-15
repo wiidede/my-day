@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 const props = defineProps<{
+  left: number
+  right?: number
   progress?: number
   edit?: boolean
   range: [number, number]
@@ -7,12 +9,26 @@ const props = defineProps<{
 }>()
 
 const emits = defineEmits<{
+  (event: 'update:left', value: typeof props.left): void
+  (event: 'update:right', value: typeof props.right): void
   (event: 'delete'): void
 }>()
 
-const { content, time } = defineModel<{
+const time = computed({
+  get: () => props.right === undefined ? props.left : [props.left, props.right] as [number, number],
+  set: (value) => {
+    if (Array.isArray(value)) {
+      emits('update:left', value[0])
+      emits('update:right', value[1])
+    }
+    else {
+      emits('update:left', value)
+    }
+  },
+})
+
+const { content } = defineModel<{
   content: string
-  time: number | [number, number]
 }>()
 
 const showProgress = computed(() => props.progress !== undefined && !props.edit)

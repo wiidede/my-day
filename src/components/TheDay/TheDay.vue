@@ -50,7 +50,7 @@ const useFormatTime = (startTime: number) => {
     :style="{ backgroundColor: 'var(--my-box-bg)' }"
   >
     <TheDayItem
-      v-model:time="modelValue.wakeTime"
+      v-model:left="modelValue.wakeTime"
       v-model:content="modelValue.wakeLabel"
       :range="[0, 24 * 60]"
       :formatter="useFormatTime(0)"
@@ -70,10 +70,10 @@ const useFormatTime = (startTime: number) => {
       v-for="(plan, index) in modelValue.plans"
       :key="index"
     >
-      <TheDayItemStartEnd
+      <TheDayItem
         v-model:content="plan.name"
-        v-model:start="plan.start"
-        v-model:end="plan.end"
+        v-model:left="plan.start"
+        v-model:right="plan.end"
         :range="[modelValue.plans[index - 1]?.end || 0, modelValue.plans[index + 1]?.start || modelValue.sleepTime]"
         :progress="now >= plan.start && now < plan.end ? (now - plan.start) / (plan.end - plan.start) * 100 : undefined"
         :formatter="useFormatTime(modelValue.wakeTime)"
@@ -93,7 +93,7 @@ const useFormatTime = (startTime: number) => {
     </template>
 
     <TheDayItem
-      v-model:time="modelValue.sleepTime"
+      v-model:left="modelValue.sleepTime"
       v-model:content="modelValue.sleepLabel"
       :range="[modelValue.plans[modelValue.plans.length - 1]?.end || modelValue.wakeTime, 24 * 60]"
       :formatter="useFormatTime(modelValue.wakeTime)"
