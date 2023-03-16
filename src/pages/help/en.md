@@ -7,11 +7,11 @@ title: Help
   <h3>Help</h3>
 </div>
 
-<h3 class="inline mr2" >{{ $t('title') }}</h3>is a web application designed to help you plan and keep track of your day. Its main purpose is to remind you of the time that has passed so far in your day, making it easier for you to stay on track and manage your time effectively.
+<h3 class="inline">{{ $t('title') }}</h3><div i-the-my-day class="icon-btn ml1 mr2 my-c-primary inline-block"/>is a web application designed to help you plan and keep track of your day. Its main purpose is to remind you of the time that has passed so far in your day, making it easier for you to stay on track and manage your time effectively.
 
 Thanks to [@antfu](https://github.com/antfu)'s starter template [Vitesse](https://github.com/antfu/vitesse), which provides a number of helpful features such as `markdown page`, `I18n`, `PWA` and `vite-ssg` which really make it easier when developing, and it runs super fast and smooth.
 
-The app has two main mode.
+The app has two main mode:
 
 #### Normal mode
 
@@ -23,15 +23,15 @@ Preview mode is activated when the URL has a hash, and your plan will be synced 
 
 ### Other tips
 
-When editing your plan for the first time, it is advisable to ensure that you have set a wake time. This is the basis of a day.
+- When editing your plan for the first time, it is advisable to ensure that you have set a wake time. This is the basis of a day.
 
-The hash data should be as follows:
+- The hash data should be as follows:
 
 ```txt
 eNpVzUEOwiAQBdCrkNm4YYHVNIEzuHRnuhjTqSVSJAXTRMPdBUwr7uYn7/+5vGHBO531RKCOjeAlnvBKBlS52dMBB2+I3FfJNqmSV1ZCQs6g9aDSpsUswRDOVttbHgg4B1CH1CXbg2pF5JsjDH8qfyhK1qrHF/2MXM2+qdEyYth5FkZiE2F+zh4DM3qoqqmx7YvYxe4DkaNR8w==
 ```
 
-The localStorage data should be as follows:
+- The localStorage data should be as follows:
 
 ```json
 [
