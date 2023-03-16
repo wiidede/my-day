@@ -51,7 +51,7 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit)
       '--progress-ripple-delay': `${Math.round(Math.max(2, (progress || 0) / 5) / 2)}s`,
     }"
     :class="{
-      'the-progress !py4 text-xl my-bg-primary/15 my-shadow': showProgress,
+      'the-progress !py4 text-xl my-bg-primary/15': showProgress,
       'md:flex-row md:px2': !edit,
       'mb2': edit,
     }"
@@ -92,6 +92,7 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit)
   background: hsl(var(--my-c-primary-hsl) / 50%);
   border-radius: 4px;
   height: 0.4rem;
+  box-shadow: var(--my-track-box-shadow);
 
   :deep(.the-range-thumb) {
     height: 0.75rem;
@@ -102,6 +103,7 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit)
 
   :deep(.the-range-progress) {
     background-color: var(--my-c-primary);
+    box-shadow: var(--my-thumb-box-shadow);
   }
 }
 </style>

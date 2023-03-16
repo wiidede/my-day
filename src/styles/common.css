@@ -21,6 +21,8 @@
   --progress-ripple-duration: 5s;
   --progress-ripple-delay: 2.5s;
   position: relative;
+  box-shadow: var(--my-track-box-shadow);
+  border-radius: var(--my-rounded);
 }
 
 .the-progress>*:not(.the-progress-thumb) {
@@ -34,7 +36,9 @@
   width: var(--progress-value);
   height: 100%;
   background-color: hsl(var(--my-c-primary-hsl) / 25%);
-  --at-apply: transition-width my-shadow;
+  --at-apply: transition-width;
+  box-shadow: var(--my-thumb-box-shadow);
+  border-radius: var(--my-rounded);
   overflow: hidden;
 }
 
