@@ -69,26 +69,29 @@ const handleSave = () => {
       <div class="flex gap2">
         <div
           v-if="viewing"
-          i-carbon-exit
+          class="my-icon-btn"
           :title="t('button.exit_preview')"
-          class="icon-btn cursor-pointer"
           @click="urlMyDay = undefined"
-        />
+        >
+          <div i-carbon-exit />
+        </div>
         <div
           v-if="!initializing"
           ref="shareRef"
-          i-carbon-share
           :title="t('button.share_preview')"
-          class="icon-btn cursor-pointer"
+          class="my-icon-btn"
           @click="handleShare(viewing)"
-        />
+        >
+          <div i-carbon-share />
+        </div>
         <div
           v-if="viewing && !edit"
-          i-carbon-save
           :title="t('button.share_preview')"
-          class="icon-btn cursor-pointer"
+          class="my-icon-btn"
           @click="handleSave()"
-        />
+        >
+          <div i-carbon-save />
+        </div>
         <Teleport v-if="floatingRef" :to="floatingRef">
           <div class="flex gap1 items-center my-c-success/67">
             <div i-carbon-checkmark-outline />
@@ -96,11 +99,12 @@ const handleSave = () => {
           </div>
         </Teleport>
         <div
-          :class="edit ? 'i-carbon-checkmark' : 'i-carbon-edit'"
           :title="edit ? t('button.complete') : t('button.edit')"
-          class="icon-btn cursor-pointer"
+          class="my-icon-btn"
           @click="handleEdit()"
-        />
+        >
+          <div :class="edit ? 'i-carbon-checkmark' : 'i-carbon-edit'" />
+        </div>
       </div>
     </div>
     <div v-if="viewing" class="text-6 my2">

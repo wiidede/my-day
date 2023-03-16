@@ -31,6 +31,10 @@
   --my-input-border: none;
   --my-input-focus-border: none;
   --my-rounded: 8px;
+  --my-btn-rounded: 4px;
+  --my-icon-btn-padding: 0;
+  --my-icon-btn-shadow: none;
+  --my-icon-btn-shadow-active: none;
 }
 
 :root.dark {
@@ -57,6 +61,10 @@
   --my-input-border: 1px solid #6b72801a;
   --my-input-focus-border: hsl(var(--my-c-primary-hsl) / 50%);
   --my-rounded: 4px;
+  --my-icon-btn-padding: 0;
+  --my-btn-rounded: 4px;
+  --my-icon-btn-shadow: none;
+  --my-icon-btn-shadow-active: none;
 }
 
 :root.dark[theme="uno"] {
@@ -73,10 +81,14 @@
   --my-box-bg: var(--my-c-white);
   --my-box-shadow: 10px 10px 30px #bebebe, -10px -10px 30px #ffffff;
   --my-input-bg: transparent;
-  --my-input-shadow: inset 5px 5px 15px #bebebeb0, inset -5px -5px 15px #ffffffb0;
+  --my-input-shadow: inset 5px 5px 15px #bebebe, inset -5px -5px 15px #ffffff;
   --my-input-border: none;
   --my-input-focus-border: none;
-  --my-rounded: 25px;
+  --my-rounded: 50px;
+  --my-icon-btn-padding: 4px;
+  --my-btn-rounded: 50px;
+  --my-icon-btn-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  --my-icon-btn-shadow-active: inset 5px 5px 15px #bebebe, inset -5px -5px 15px #ffffff;
 }
 
 :root.dark[theme="neumorphism"] {
@@ -85,7 +97,9 @@
   --my-c-black: #e0e0e0;
   --my-c-black-rgb: 224, 224, 224;
   --my-box-shadow: 10px 10px 30px #191a1c, -10px -10px 30px #212426;
-  --my-input-shadow: inset 2px 2px 6px #191a1cb0, inset -2px -2px 6px #212426b0;
+  --my-input-shadow: inset 5px 5px 15px #191a1c, inset -5px -5px 15px #212426;
+  --my-icon-btn-shadow: 5px 5px 15px #191a1c, -5px -5px 15px #191a1c;
+  --my-icon-btn-shadow-active: inset 5px 5px 15px #191a1c, inset -5px -5px 15px #191a1c;
 }
 
 .my-input {
@@ -96,4 +110,24 @@
 
 .my-input:focus {
   border: var(--my-input-focus-border);
+}
+
+.my-icon-btn {
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0.75;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--my-btn-rounded, 2px);
+  box-shadow: var(--my-icon-btn-shadow);
+  padding: var(--my-icon-btn-padding);
+}
+
+.my-icon-btn:hover {
+  opacity: 1;
+  color: hsl(var(--my-c-primary-hsl) / 90%);
+}
+
+.my-icon-btn:active {
+  box-shadow: var(--my-icon-btn-shadow-active);
 }

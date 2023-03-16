@@ -68,7 +68,7 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit)
       </div>
       <div class="flex items-center w-full gap4">
         <TheInput v-model="contentModel" class="flex-auto min-w-0" />
-        <div v-show="edit && Array.isArray(time)" class="icon-btn" @click="emits('delete')">
+        <div v-show="edit && Array.isArray(time)" class="my-icon-btn" @click="emits('delete')">
           <div i-carbon-delete :title="t('button.delete_plan')" />
         </div>
       </div>

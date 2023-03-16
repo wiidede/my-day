@@ -33,30 +33,30 @@ const toggleThemes = () => {
 </script>
 
 <template>
-  <nav text-xl py-4 flex items-center justify-center>
-    <RouterLink class="icon-btn mx-2 my-c-primary" to="/" :title="t('button.home')">
+  <nav text-xl py-4 flex gap-4 flex-wrap items-center justify-center>
+    <RouterLink class="my-icon-btn my-c-primary" to="/" :title="t('button.home')">
       <div i-the-my-day />
     </RouterLink>
 
-    <RouterLink class="icon-btn mx-2" :to="`/help/${locale}`" :title="t('button.help')">
+    <RouterLink class="my-icon-btn" :to="`/help/${locale}`" :title="t('button.help')">
       <div i-carbon-help />
     </RouterLink>
 
-    <button class="icon-btn mx-2 !outline-none" :title="t('button.toggle_dark')" @click="toggleDark()">
+    <button class="my-icon-btn !outline-none" :title="t('button.toggle_dark')" @click="toggleDark()">
       <div i="carbon-moon dark:carbon-sun" />
     </button>
 
-    <button class="icon-btn mx-2 !outline-none" :title="t('button.toggle_theme')" @click="toggleThemes()">
+    <button class="my-icon-btn !outline-none" :title="t('button.toggle_theme')" @click="toggleThemes()">
       <div i-carbon-rain-drop />
     </button>
 
     <TheTheme />
 
-    <button class="icon-btn mx-2" :title="t('button.toggle_langs')" @click="toggleLocales()">
+    <button class="my-icon-btn" :title="t('button.toggle_langs')" @click="toggleLocales()">
       <div i-carbon-language />
     </button>
 
-    <a class="icon-btn mx-2" rel="noreferrer" href="https://github.com/wiidede/my-day" target="_blank" title="GitHub">
+    <a class="my-icon-btn" rel="noreferrer" href="https://github.com/wiidede/my-day" target="_blank" title="GitHub">
       <div i-carbon-logo-github />
     </a>
   </nav>

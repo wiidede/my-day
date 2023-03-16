@@ -43,4 +43,22 @@ export default defineConfig({
   ],
   safelist: 'prose prose-sm m-auto text-left'.split(' '),
   rules,
+  variants: [
+    (matcher) => {
+      if (!matcher.startsWith('uno:'))
+        return matcher
+      return {
+        matcher: matcher.slice(12),
+        selector: s => `[theme="uno"] ${s}`,
+      }
+    },
+    (matcher) => {
+      if (!matcher.startsWith('neumorphism:'))
+        return matcher
+      return {
+        matcher: matcher.slice(12),
+        selector: s => `[theme="neumorphism"] ${s}`,
+      }
+    },
+  ],
 })

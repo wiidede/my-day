@@ -16,7 +16,7 @@ onClickOutside(rangeRef, () => {
 
 <template>
   <TheRange v-if="ranging" ref="rangeRef" v-model="rangeValue" class="the-theme-range mx2 w40" :min="0" :max="360" :step="1" />
-  <button v-else class="icon-btn mx-2" :title="t('button.toggle_color')" @click="() => (ranging = true)">
+  <button v-else class="my-icon-btn" :title="t('button.toggle_color')" @click="() => (ranging = true)">
     <div i-carbon:color-palette />
   </button>
 </template>

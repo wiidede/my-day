@@ -82,7 +82,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
     {{ t('my_day.sleep_time') }}
   </div>
   <div
-    class="py4 text-left my-round z-inset-box-shadow"
+    class="py4 text-left my-round z-inset-box-shadow neumorphism:py10"
     :class="{ 'text-center': edit }"
     :style="{ backgroundColor: 'var(--my-box-bg)' }"
   >
@@ -100,7 +100,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
       <div
         i-carbon-add-alt
         :title="t('button.add_plan')"
-        class="icon-btn m2"
+        class="my-icon-btn m2"
         @click="handleAddPlan(0, 0, model.plans[0]?.start || model.sleepTime)"
       />
     </div>
@@ -125,7 +125,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
         <div
           i-carbon-add-alt
           :title="t('button.add_plan')"
-          class="icon-btn m2"
+          class="my-icon-btn m2"
           @click="handleAddPlan(index + 1, plan.end, model.plans[index + 1]?.start || model.sleepTime)"
         />
       </div>
