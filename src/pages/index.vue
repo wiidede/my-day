@@ -7,7 +7,7 @@ const { t } = useI18n()
 const now = useNow({
   interval: 1000,
 })
-const nowFormatted = useDateFormat(now, () => t('my_day.time_formatter'))
+const nowFormatted = useDateFormat(now, () => t('my_day.time_formatter'), { locales: 'en' })
 
 const getDefaultMyDay: () => IMyDay = () => ({
   wakeTime: 7 * 60,
