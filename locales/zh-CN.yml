@@ -35,4 +35,4 @@ my_day:
   share_info: 分享链接已经复制到剪贴板了
   viewing: 预览中
   alert_save_share: 该操作会强制覆盖本地数据，你之前的计划数据将会丢失！
-not-found: 未找到页面
+not-found: 404 未找到页面
