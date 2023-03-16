@@ -54,7 +54,7 @@ const handleEdit = () => {
   <div class="max-w-65ch m-auto">
     <div class="mb4 flex items-center md:items-baseline justify-between px1">
       <div class="w5" />
-      <div class="flex items-baseline gap2" :class="{ 'flex-row-reverse': locale === 'zh-CN' }">
+      <div class="flex items-baseline gap2 flex-col md:flex-row" :class="{ 'flex-col-reverse md:flex-row-reverse': locale === 'zh-CN' }">
         <span class="text-4xl">{{ nowFormattedTime }}</span>
         <span class="text-2xl">{{ nowFormattedDate }}</span>
       </div>
