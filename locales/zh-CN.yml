@@ -14,6 +14,7 @@ button:
   exit_preview: 退出预览模式
   add_plan: 添加一项计划
   delete_plan: 删除这个计划
+  save_preview: 保存预览的计划到本地
 intro:
   desc: 固执己见的 Vite 项目模板
   dynamic-route: 动态路由演示
@@ -33,4 +34,5 @@ my_day:
   share_info: 分享链接已经复制到剪贴板了
   viewing: 预览中
   viewing_editing: 预览模式暂时无法保存到本地，仅供分享
+  alert_save_share: 该操作会强制覆盖本地数据，你之前的计划数据将会丢失！
 not-found: 未找到页面

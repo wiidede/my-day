@@ -48,6 +48,14 @@ const handleEdit = () => {
     storeMyDay.value = [getDefaultMyDay()]
   toggleEdit()
 }
+
+const handleSave = () => {
+  // eslint-disable-next-line no-alert
+  if (window.confirm(t('my_day.alert_save_share'))) {
+    storeMyDay.value = urlMyDay.value
+    urlMyDay.value = undefined
+  }
+}
 </script>
 
 <template>
@@ -73,6 +81,13 @@ const handleEdit = () => {
           :title="t('button.share_preview')"
           class="icon-btn cursor-pointer"
           @click="handleShare(viewing)"
+        />
+        <div
+          v-if="viewing && !edit"
+          i-carbon-save
+          :title="t('button.share_preview')"
+          class="icon-btn cursor-pointer"
+          @click="handleSave()"
         />
         <Teleport v-if="floatingRef" :to="floatingRef">
           <div class="flex gap1 items-center my-c-success/67">

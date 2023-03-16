@@ -14,6 +14,7 @@ button:
   exit_preview: exit preview
   add_plan: add a plan
   delete_plan: delete the plan
+  save_preview: save preview plan to local
 intro:
   desc: Opinionated Vite Starter Template
   dynamic-route: Demo of dynamic route
@@ -33,4 +34,5 @@ my_day:
   share_info: Sharable URL has been copied to clipboard.
   viewing: Previewing
   viewing_editing: Preview mode can't be saved locally. Share only.
+  alert_save_share: This action will force update local data. Your previous plan will lost!
 not-found: Not found
