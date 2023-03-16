@@ -7,6 +7,10 @@ button:
   toggle_dark: 切换深色模式
   toggle_langs: 切换语言
   toggle_theme: 选择主题色
+  edit: 编辑
+  complete: 完成
+  share_preview: 分享并预览
+  exit_preview: 退出预览模式
 intro:
   desc: 固执己见的 Vite 项目模板
   dynamic-route: 动态路由演示

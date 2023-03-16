@@ -7,6 +7,10 @@ button:
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
   toggle_theme: Change theme color
+  edit: edit
+  complete: complete
+  share_preview: share & preview
+  exit_preview: exit preview
 intro:
   desc: Opinionated Vite Starter Template
   dynamic-route: Demo of dynamic route

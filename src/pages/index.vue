@@ -58,15 +58,33 @@ const handleEdit = () => {
         {{ nowFormatted }}
       </div>
       <div class="flex gap2">
-        <div v-if="viewing" i-carbon-exit class="icon-btn cursor-pointer" @click="urlMyDay = undefined" />
-        <div v-if="!initializing" ref="shareRef" i-carbon-share class="icon-btn cursor-pointer" @click="handleShare(viewing)" />
+        <div
+          v-if="viewing"
+          i-carbon-exit
+          :title="t('button.exit_preview')"
+          class="icon-btn cursor-pointer"
+          @click="urlMyDay = undefined"
+        />
+        <div
+          v-if="!initializing"
+          ref="shareRef"
+          i-carbon-share
+          :title="t('button.share_preview')"
+          class="icon-btn cursor-pointer"
+          @click="handleShare(viewing)"
+        />
         <Teleport v-if="floatingRef" :to="floatingRef">
           <div class="flex gap1 items-center my-c-success/67">
             <div i-carbon-checkmark-outline />
             <div>{{ t('my_day.share_info') }}</div>
           </div>
         </Teleport>
-        <div :class="edit ? 'i-carbon-checkmark' : 'i-carbon-edit'" class="icon-btn cursor-pointer" @click="handleEdit()" />
+        <div
+          :class="edit ? 'i-carbon-checkmark' : 'i-carbon-edit'"
+          :title="edit ? t('button.complete') : t('button.edit')"
+          class="icon-btn cursor-pointer"
+          @click="handleEdit()"
+        />
       </div>
     </div>
     <div v-if="edit && viewing" class="text-6 my-c-warning">
