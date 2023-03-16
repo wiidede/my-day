@@ -11,6 +11,8 @@ button:
   complete: 完成
   share_preview: 分享并预览
   exit_preview: 退出预览模式
+  add_plan: 添加一项计划
+  delete_plan: 删除这个计划
 intro:
   desc: 固执己见的 Vite 项目模板
   dynamic-route: 动态路由演示

@@ -36,6 +36,8 @@ const contentModel = computed({
   },
 })
 
+const { t } = useI18n()
+
 const showProgress = computed(() => props.progress !== undefined && !props.edit)
 </script>
 
@@ -67,7 +69,7 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit)
       <div class="flex items-center w-full gap4">
         <TheInput v-model="contentModel" class="flex-auto min-w-0" />
         <div v-show="edit && Array.isArray(time)" class="icon-btn" @click="emits('delete')">
-          <div i-carbon-delete />
+          <div i-carbon-delete :title="t('button.delete_plan')" />
         </div>
       </div>
     </template>

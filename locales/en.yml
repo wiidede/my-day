@@ -11,6 +11,8 @@ button:
   complete: complete
   share_preview: share & preview
   exit_preview: exit preview
+  add_plan: add a plan
+  delete_plan: delete the plan
 intro:
   desc: Opinionated Vite Starter Template
   dynamic-route: Demo of dynamic route
