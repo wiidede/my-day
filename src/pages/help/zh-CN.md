@@ -30,7 +30,7 @@ title: 帮助
 - Url hash格式应该如下：
 
 ```txt
-eNpVzUEOwiAQBdCrkNm4YYHVNIEzuHRnuhjTqSVSJAXTRMPdBUwr7uYn7/+5vGHBO531RKCOjeAlnvBKBlS52dMBB2+I3FfJNqmSV1ZCQs6g9aDSpsUswRDOVttbHgg4B1CH1CXbg2pF5JsjDH8qfyhK1qrHF/2MXM2+qdEyYth5FkZiE2F+zh4DM3qoqqmx7YvYxe4DkaNR8w==
+eNqLrlYqT8xODcnMTVWyMjEy0AFzfRKTUnOUrJRebN3+dFeXko5ScU5qagFEkaUZUBGYD1P1fO7CF8s7gaoKchLzipWsgGbmJYKUKj3b2PR07TKQ/pLEohIlK2Og1tS8FCUrM4NaHbiqpxOaXy5di1AFsgCsyhJZ1ZM9E5+1rUSosoSpMjRCVvZy6pwnO9a+6Nqo8HRZ07MNW1409DybuhihDagabrpBbWxtLAAYe2Dx
 ```
 
 - LocalStorage格式应该如下：
@@ -39,14 +39,14 @@ eNpVzUEOwiAQBdCrkNm4YYHVNIEzuHRnuhjTqSVSJAXTRMPdBUwr7uYn7/+5vGHBO531RKCOjeAlnvBK
 [
   {
     "wakeTime": 420,
-    "wakeLabel": "wake up",
+    "wakeLabel": "起床",
     "sleepTime": 960,
-    "sleepLabel": "sleep",
+    "sleepLabel": "睡觉",
     "plans": [
-      { "name": "learning", "start": 30, "end": 60 },
-      { "name": "eating", "start": 60, "end": 90 },
-      { "name": "daze", "start": 90, "end": 120 },
-      { "name": "what's the meaning of life", "start": 120, "end": 900 }
+      { "name": "求学", "start": 30, "end": 60 },
+      { "name": "吃饭", "start": 60, "end": 90 },
+      { "name": "休憩", "start": 90, "end": 120 },
+      { "name": "镜中花 如水而散", "start": 120, "end": 900 }
     ]
   }
 ]
