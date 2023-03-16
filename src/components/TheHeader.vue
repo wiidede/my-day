@@ -19,6 +19,17 @@ const toggleLocales = () => {
   if (isClient)
     document.documentElement.lang = newLocale
 }
+
+const themes = ['', 'uno', 'neumorphism']
+const theme = useStorage('my-day-theme', themes[0])
+watch(theme, (value) => {
+  if (isClient)
+    document.documentElement.setAttribute('theme', value)
+}, { immediate: true })
+const toggleThemes = () => {
+  const newTheme = themes[(themes.indexOf(theme.value) + 1) % themes.length]
+  theme.value = newTheme
+}
 </script>
 
 <template>
@@ -27,8 +38,16 @@ const toggleLocales = () => {
       <div i-the-my-day />
     </RouterLink>
 
+    <RouterLink class="icon-btn mx-2" :to="`/help/${locale}`" :title="t('button.help')">
+      <div i-carbon-help />
+    </RouterLink>
+
     <button class="icon-btn mx-2 !outline-none" :title="t('button.toggle_dark')" @click="toggleDark()">
       <div i="carbon-moon dark:carbon-sun" />
+    </button>
+
+    <button class="icon-btn mx-2 !outline-none" :title="t('button.toggle_theme')" @click="toggleThemes()">
+      <div i-carbon-rain-drop />
     </button>
 
     <TheTheme />
@@ -36,10 +55,6 @@ const toggleLocales = () => {
     <button class="icon-btn mx-2" :title="t('button.toggle_langs')" @click="toggleLocales()">
       <div i-carbon-language />
     </button>
-
-    <RouterLink class="icon-btn mx-2" :to="`/help/${locale}`" :title="t('button.help')">
-      <div i-carbon-help />
-    </RouterLink>
 
     <a class="icon-btn mx-2" rel="noreferrer" href="https://github.com/wiidede/my-day" target="_blank" title="GitHub">
       <div i-carbon-logo-github />

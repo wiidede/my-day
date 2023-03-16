@@ -6,8 +6,9 @@ button:
   go: GO
   home: Home
   toggle_dark: Toggle dark mode
+  toggle_theme: Toggle theme
   toggle_langs: Change languages
-  toggle_theme: Change theme color
+  toggle_color: Change theme color
   edit: edit
   complete: complete
   share_preview: share & preview

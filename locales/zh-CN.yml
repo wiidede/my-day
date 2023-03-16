@@ -6,8 +6,9 @@ button:
   go: 确定
   home: 首页
   toggle_dark: 切换深色模式
+  toggle_theme: 切换主题
   toggle_langs: 切换语言
-  toggle_theme: 选择主题色
+  toggle_color: 选择主题色
   edit: 编辑
   complete: 完成
   share_preview: 分享并预览
