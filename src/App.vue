@@ -6,7 +6,7 @@ const title = computed(() => t('title'))
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
 useHead({
-  title: title.value,
+  title,
   meta: [
     { name: 'description', content: 'A simple and delicate day planner' },
     {
