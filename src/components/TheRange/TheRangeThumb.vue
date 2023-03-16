@@ -4,21 +4,19 @@ defineProps<{
 }>()
 
 const emits = defineEmits<{
-  (e: 'update', modelValue: number): void
+  (e: 'update', percent: number): void
 }>()
-
-const clientX = ref(0)
 
 const thumbRef = ref<HTMLDivElement>()
 
-watch(clientX, (value) => {
+const onPointerMove = (e: PointerEvent) => {
   if (!thumbRef.value)
     return
   const trackEl = thumbRef.value.parentElement
   if (!trackEl)
     return
   const trackRect = trackEl.getBoundingClientRect()
-  const offset = value - trackRect.left
+  const offset = e.clientX - trackRect.left
   const percent = offset / trackRect.width * 100
   if (percent < 0)
     emits('update', 0)
@@ -26,10 +24,6 @@ watch(clientX, (value) => {
     emits('update', 100)
   else if (!isNaN(percent))
     emits('update', percent)
-})
-
-const onPointerMove = (e: PointerEvent) => {
-  clientX.value = e.clientX
 }
 
 const onPointerUp = (e: PointerEvent) => {

@@ -93,8 +93,8 @@ const onUpdateSingle = (percentage: number) => {
   <div ref="trackRef" class="the-range-track relative w40 h4 bg-gray select-none m-auto">
     <template v-if="model !== undefined && Array.isArray(model) && Array.isArray(position)">
       <TheRangeProgress :left="position[0]" :right="position[1]" />
-      <TheRangeThumb :position="position[0]" @update="onUpdateRange($event)" @pointerdown="() => { lastType = 'left' }" />
-      <TheRangeThumb :position="position[1]" @update="onUpdateRange($event)" @pointerdown="() => { lastType = 'right' }" />
+      <TheRangeThumb :position="position[0]" @update="onUpdateRange" @pointerdown="() => { lastType = 'left' }" />
+      <TheRangeThumb :position="position[1]" @update="onUpdateRange" @pointerdown="() => { lastType = 'right' }" />
     </template>
     <template v-if="model !== undefined && typeof model === 'number' && typeof position === 'number'">
       <TheRangeThumb :position="position" @update="onUpdateSingle" />
