@@ -7,7 +7,7 @@ title: Help
   <h3>Help</h3>
 </div>
 
-<h3 class="inline">{{ $t('title') }}</h3><div i-the-my-day class="icon-btn ml1 mr2 my-c-primary inline-block"/>is a web application designed to help you plan and keep track of your day. Its main purpose is to remind you of the time that has passed so far in your day, making it easier for you to stay on track and manage your time effectively.
+<h3 class="inline">{{ $t('title') }}</h3><div i-the-my-day class="ml1 mr2 my-c-primary inline-block text-7 vertical-middle"/>is a web application designed to help you plan and keep track of your day. Its main purpose is to remind you of the time that has passed so far in your day, making it easier for you to stay on track and manage your time effectively.
 
 Thanks to [@antfu](https://github.com/antfu)'s starter template [Vitesse](https://github.com/antfu/vitesse), which provides a number of helpful features such as `markdown page`, `I18n`, `PWA` and `vite-ssg` which really make it easier when developing, and it runs super fast and smooth.
 

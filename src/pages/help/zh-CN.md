@@ -7,7 +7,7 @@ title: 帮助
   <h3>帮助</h3>
 </div>
 
-<h3 class="inline mr2" >{{ $t('title') }}</h3><div i-the-my-day class="icon-btn ml1 mr2 my-c-primary inline-block"/>是一个旨在帮助你规划和跟踪一天的网络应用程序。它的主要目的是提醒你一天中已经过去的时间，让你更容易保持跟踪，有效地管理时间。
+<h3 class="inline mr2" >{{ $t('title') }}</h3><div i-the-my-day class="ml1 mr2 my-c-primary inline-block text-7 vertical-middle"/>是一个旨在帮助你规划和跟踪一天的网络应用程序。它的主要目的是提醒你一天中已经过去的时间，让你更容易保持跟踪，有效地管理时间。
 
 感谢[@antfu](https://github.com/antfu)的初始模板[Vitesse](https://github.com/antfu/vitesse)，它提供了非常多令人惊喜功能，例如`markdown page`，`I18n`，`PWA`和`vite-ssg`，这些功能让开发更加丝滑简单，并且它运行起来非常迅速流畅。
 
