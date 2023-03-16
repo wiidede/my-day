@@ -11,10 +11,8 @@ const { modelValue } = defineModel<{
     type="text"
     v-bind="$attrs"
     p="x-4 y-2"
-    bg="transparent"
-    border="rounded none"
+    border="rounded"
     outline="none active:none"
-    class="my-shadow"
-    :style="{ background: 'var(--my-input-bg)' }"
+    class="my-input"
   >
 </template>
