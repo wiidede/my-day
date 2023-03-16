@@ -20,7 +20,8 @@ intro:
   aka: Also known as
   whats-your-name: What's your name?
 my_day:
-  time_formatter: HH:mm:ss MMM D, YYYY
+  time_formatter: HH:mm:ss
+  date_formatter: MMM D, YYYY
   wake: wake up
   sleep: sleep
   sleep_time: time to sleep~

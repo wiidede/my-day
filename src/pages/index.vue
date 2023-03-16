@@ -2,12 +2,13 @@
 import { promiseTimeout } from '@vueuse/core'
 import type { IMyDay } from '~/types/my-day'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const now = useNow({
   interval: 1000,
 })
-const nowFormatted = useDateFormat(now, () => t('my_day.time_formatter'), { locales: 'en' })
+const nowFormattedTime = useDateFormat(now, () => t('my_day.time_formatter'), { locales: 'en' })
+const nowFormattedDate = useDateFormat(now, () => t('my_day.date_formatter'), { locales: 'en' })
 
 const getDefaultMyDay: () => IMyDay = () => ({
   wakeTime: 7 * 60,
@@ -52,10 +53,11 @@ const handleEdit = () => {
 
 <template>
   <div class="max-w-65ch m-auto">
-    <div class="mb4 flex items-baseline justify-between px1">
+    <div class="mb4 flex items-center md:items-baseline justify-between px1">
       <div class="w5" />
-      <div class="text-4xl ">
-        {{ nowFormatted }}
+      <div class="flex items-baseline gap2" :class="{ 'flex-row-reverse': locale === 'zh-CN' }">
+        <span class="text-4xl">{{ nowFormattedTime }}</span>
+        <span class="text-2xl">{{ nowFormattedDate }}</span>
       </div>
       <div class="flex gap2">
         <div
