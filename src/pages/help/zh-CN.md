@@ -25,6 +25,8 @@ title: 帮助
 
 - 当你第一次编辑计划时，建优先设置一个起床时间。这是一天的基础。
 
+- 您可以将预览模式的计划保存到本地，但之前的本地数据将会丢失。
+
 - Url hash格式应该如下：
 
 ```txt
@@ -50,4 +52,4 @@ eNpVzUEOwiAQBdCrkNm4YYHVNIEzuHRnuhjTqSVSJAXTRMPdBUwr7uYn7/+5vGHBO531RKCOjeAlnvBK
 ]
 ```
 
-查看 [GitHub repo](https://github.com/antfu/vitesse) 获取更多详细信息。
+查看 [GitHub repo](https://github.com/wiidede/my-day) 获取更多详细信息。

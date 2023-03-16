@@ -25,6 +25,8 @@ Preview mode is activated when the URL has a hash, and your plan will be synced 
 
 - When editing your plan for the first time, it is advisable to ensure that you have set a wake time. This is the basis of a day.
 
+- You can save the preview plan data to local, but the previous local data will lost at the same time
+
 - The hash data should be as follows:
 
 ```txt
