@@ -1,8 +1,4 @@
 export const useUrlStore = <T>() => {
-  // let hash: string | undefined
-  // if (typeof location !== 'undefined')
-  //   hash = location.hash
-
   const route = useRoute()
   const hash = computed(
     () => route.hash,

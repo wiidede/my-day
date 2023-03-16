@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { isClient } from '@vueuse/core'
 import type { IMyDay } from '~/types/my-day'
 
 const props = defineProps<{
@@ -22,9 +23,9 @@ const { t } = useI18n()
 
 const dayjs = useDayjs()
 
-const nowDate = useNow({
-  interval: 1000,
-})
+const nowDate = isClient
+  ? useNow({ interval: 1000 })
+  : ref(new Date(0))
 
 const now = computed(() => {
   const nowValue = nowDate.value.getHours() * 60
@@ -63,7 +64,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
 </script>
 
 <template>
-  <div v-if="sleep" class="z--1 fixed top-0 right-0 bottom-0 left-0">
+  <div v-if="isClient && sleep" class="z--1 fixed top-0 right-0 bottom-0 left-0">
     <div
       v-for="(moon, index) in moons"
       :key="index"

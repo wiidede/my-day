@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { isClient } from '@vueuse/core'
+
 const { t, availableLocales, locale } = useI18n()
 const route = useRoute()
 const router = useRouter()
@@ -14,7 +16,7 @@ const toggleLocales = () => {
   if (route.fullPath.match(reg))
     router.push(route.fullPath.replace(reg, `/${newLocale}`))
   lang.value = locale.value = newLocale
-  if (typeof document !== 'undefined')
+  if (isClient)
     document.documentElement.lang = newLocale
 }
 </script>

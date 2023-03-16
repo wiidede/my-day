@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import { promiseTimeout } from '@vueuse/core'
+import { isClient, promiseTimeout } from '@vueuse/core'
 import type { IMyDay } from '~/types/my-day'
-
 const { t, locale } = useI18n()
 
-const now = useNow({
-  interval: 1000,
-})
+const now = isClient
+  ? useNow({ interval: 1000 })
+  : ref(new Date(0))
 const nowFormattedTime = useDateFormat(now, () => t('my_day.time_formatter'), { locales: 'en' })
 const nowFormattedDate = useDateFormat(now, () => t('my_day.date_formatter'), { locales: 'en' })
 
