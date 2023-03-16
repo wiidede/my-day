@@ -1,9 +1,12 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
+const title = computed(() => t('title'))
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
 useHead({
-  title: 'Fly My Day',
+  title: title.value,
   meta: [
     { name: 'description', content: 'A simple and delicate day planner' },
     {
