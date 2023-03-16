@@ -29,6 +29,7 @@ const rules: Rule<any>[] = [
   // utility rules
   [/^flex-(\d+)$/, ([, d]) => ({ flex: `${Number(d)}` })],
   ['my-shadow', { 'box-shadow': 'var(--my-box-shadow)' }],
+  ['my-round', { 'border-radius': 'var(--my-rounded)' }],
 ]
 
 export default rules

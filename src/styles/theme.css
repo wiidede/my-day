@@ -30,6 +30,7 @@
   --my-input-shadow: var(--my-box-shadow);
   --my-input-border: none;
   --my-input-focus-border: none;
+  --my-rounded: 8px;
 }
 
 :root.dark {
@@ -55,6 +56,7 @@
   --my-input-shadow: none;
   --my-input-border: 1px solid #6b72801a;
   --my-input-focus-border: hsl(var(--my-c-primary-hsl) / 50%);
+  --my-rounded: 4px;
 }
 
 :root.dark[theme="uno"] {
@@ -74,6 +76,7 @@
   --my-input-shadow: inset 5px 5px 15px #bebebeb0, inset -5px -5px 15px #ffffffb0;
   --my-input-border: none;
   --my-input-focus-border: none;
+  --my-rounded: 25px;
 }
 
 :root.dark[theme="neumorphism"] {

@@ -11,8 +11,7 @@ const { modelValue } = defineModel<{
     type="text"
     v-bind="$attrs"
     p="x-4 y-2"
-    border="rounded"
     outline="none active:none"
-    class="my-input"
+    class="my-input my-round"
   >
 </template>

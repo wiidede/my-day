@@ -33,7 +33,7 @@ const { x, y, strategy, floating, content, className } = useFloatingRef(floating
     <div
       v-show="floating"
       ref="floatingRef"
-      class="floating my-shadow p2 rd"
+      class="floating my-shadow p2 my-round"
       :class="className"
       style="background-color: var(--my-box-bg);"
       :style="{ position: strategy, top: `${y ?? 0}px`, left: `${x}px` }"
