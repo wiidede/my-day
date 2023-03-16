@@ -106,9 +106,6 @@ const handleSave = () => {
     <div v-if="viewing" class="text-6 my2">
       {{ t('my_day.viewing') }}
     </div>
-    <div v-if="edit && viewing" class="text-5 my2 my-c-warning">
-      {{ t('my_day.viewing_editing') }}
-    </div>
     <template v-if="viewing">
       <TheDay
         v-for="(day, index) in urlMyDay"

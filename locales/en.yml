@@ -33,6 +33,5 @@ my_day:
   plan_4: what's the meaning of life
   share_info: Sharable URL has been copied to clipboard.
   viewing: Previewing
-  viewing_editing: Preview mode can't be saved locally. Share only.
   alert_save_share: This action will force update local data. Your previous plan will lost!
 not-found: Not found
