@@ -23,6 +23,7 @@
   position: relative;
   box-shadow: var(--my-track-box-shadow);
   border-radius: var(--my-rounded);
+  overflow: hidden;
 }
 
 .the-progress>*:not(.the-progress-thumb) {
