@@ -57,17 +57,18 @@ const position = computed(() => {
 
 let lastType: 'left' | 'right' = 'left'
 const onUpdateRange = (percentage: number) => {
-  if (!Array.isArray(position.value))
+  if (!Array.isArray(model.value))
     return
-  let left = position.value[0]
-  let right = position.value[1]
+  percentage = getValue(percentage)
+  let left = model.value[0]
+  let right = model.value[1]
   if (lastType === 'left') {
     if (percentage > right) {
       left = right
       right = percentage
       lastType = 'right'
     }
-    else {
+    else if (percentage < right) {
       left = percentage
     }
   }
@@ -77,11 +78,11 @@ const onUpdateRange = (percentage: number) => {
       left = percentage
       lastType = 'left'
     }
-    else {
+    else if (percentage > left) {
       right = percentage
     }
   }
-  model.value = [getValue(left), getValue(right)]
+  model.value = [left, right]
 }
 
 const onUpdateSingle = (percentage: number) => {
