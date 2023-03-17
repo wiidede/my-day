@@ -82,7 +82,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
     {{ t('my_day.sleep_time') }}
   </div>
   <div
-    class="py4 text-left my-round z-inset-box-shadow neumorphism:py10"
+    class="py4 text-left my-round z-inset-box-shadow neumorphism:py8"
     :class="{ 'text-center': edit }"
     :style="{ backgroundColor: 'var(--my-box-bg)' }"
   >

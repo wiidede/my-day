@@ -86,7 +86,7 @@ const handleSave = () => {
         </div>
         <div
           v-if="viewing && !edit"
-          :title="t('button.share_preview')"
+          :title="t('button.save_preview')"
           class="my-icon-btn"
           @click="handleSave()"
         >
@@ -107,9 +107,11 @@ const handleSave = () => {
         </div>
       </div>
     </div>
-    <div v-if="viewing" class="text-6 my2">
+    <div v-if="viewing" class="text-4 my4 flex items-center justify-center gap-2 op-50">
+      <div i-carbon-view />
       {{ t('my_day.viewing') }}
     </div>
+    <div class="neumorphism:h2" />
     <template v-if="viewing">
       <TheDay
         v-for="(day, index) in urlMyDay"
