@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { theRangeTrackRefKey } from './TheRange'
+
 const props = withDefaults(defineProps<{
   modelValue?: number | [number, number]
   min?: number
@@ -22,6 +24,8 @@ const model = computed({
     emits('update:modelValue', value)
   },
 })
+
+const trackRef = ref<HTMLElement>()
 
 const getValue = (percentage: number) => {
   const min = props.min
@@ -49,6 +53,7 @@ const getPercentage = (value: number) => {
   const percentage = (value - min) / (max - min) * 100
   return Math.round(percentage / step) * step
 }
+
 const position = computed(() => {
   return Array.isArray(model.value)
     ? model.value.map(getPercentage)
@@ -88,6 +93,8 @@ const onUpdateRange = (percentage: number) => {
 const onUpdateSingle = (percentage: number) => {
   model.value = getValue(percentage)
 }
+
+provide(theRangeTrackRefKey, trackRef)
 </script>
 
 <template>

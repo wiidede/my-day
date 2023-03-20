@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { theRangeTrackRefKey } from './TheRange'
+
 defineProps<{
   position: number
 }>()
@@ -7,15 +9,13 @@ const emits = defineEmits<{
   (e: 'update', percent: number): void
 }>()
 
-const thumbRef = ref<HTMLDivElement>()
+const thumbRef = ref<HTMLElement>()
+const trackRef = inject(theRangeTrackRefKey)
 
 const onPointerMove = (e: PointerEvent) => {
-  if (!thumbRef.value)
+  if (!thumbRef.value || !trackRef?.value)
     return
-  const trackEl = thumbRef.value.parentElement
-  if (!trackEl)
-    return
-  const trackRect = trackEl.getBoundingClientRect()
+  const trackRect = trackRef.value.getBoundingClientRect()
   const offset = e.clientX - trackRect.left
   const percent = offset / trackRect.width * 100
   if (percent < 0)
@@ -46,8 +46,8 @@ const onPointerDown = (e: PointerEvent) => {
     class="the-range-thumb absolute w4 h4 aspect-square bg-white rd-50%"
     :style="{ left: `${position}%` }"
     @pointerdown="onPointerDown"
-    @mousedown.prevent="void 0"
-    @touchstart.prevent="void 0"
+    @mousedown.prevent="() => {}"
+    @touchstart.prevent="() => {}"
   />
 </template>
 
