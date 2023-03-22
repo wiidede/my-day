@@ -93,8 +93,8 @@ const handleSave = () => {
           <div i-carbon-save />
         </div>
         <Teleport v-if="floatingRef" :to="floatingRef">
-          <div class="flex gap1 items-center my-c-success/67">
-            <div i-carbon-checkmark-outline />
+          <div class="flex gap2 items-center my-c-success/67">
+            <div i-carbon-checkmark-outline class="flex-shrink-0" />
             <div>{{ t('my_day.share_info') }}</div>
           </div>
         </Teleport>
@@ -111,7 +111,6 @@ const handleSave = () => {
       <div i-carbon-view />
       {{ t('my_day.viewing') }}
     </div>
-    <div class="neumorphism:h2" />
     <template v-if="viewing">
       <TheDay
         v-for="(day, index) in urlMyDay"

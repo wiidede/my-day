@@ -56,8 +56,8 @@ const useFormatTime = (startTime: number) => {
 
 const sleep = computed(() => now.value > model.value.sleepTime)
 const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => ({
-  left: Math.random() * 90 + 5,
-  top: Math.random() * 90 + 5,
+  left: Math.random() * 90,
+  top: Math.random() * 90,
   rotate: Math.random() * 60 - 45,
   delay: Math.random() * 3,
 }))
@@ -78,13 +78,14 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
       }"
     />
   </div>
-  <div v-if="sleep" class="text-xl my2 text-#B7DCFF">
+  <div v-if="sleep" class="text-xl my2 my-c-primary">
     {{ t('my_day.sleep_time') }}
   </div>
+  <div class="neumorphism:h2 transition-height" />
   <div
-    class="py4 text-left my-round z-inset-box-shadow neumorphism:py8"
+    class="py4 text-left my-round z-inset-box-shadow neumorphism:py8 transition-padding"
     :class="{ 'text-center': edit }"
-    :style="{ backgroundColor: 'var(--my-box-bg)' }"
+    :style="{ backgroundColor: 'var(--my-box-bg)', backdropFilter: 'var(--my-box-backdrop-filter)' }"
   >
     <TheDayItem
       v-model:left="model.wakeTime"

@@ -24,6 +24,7 @@
   --my-c-black: #252526;
   --my-c-black-rgb: 37, 37, 38;
   --my-box-bg: #f8f8f8;
+  --my-box-backdrop-filter: none;
   --my-box-shadow: inset 0 1px 4px 0 rgba(15, 15, 15, 0.2),
     inset 0 1px 2px -1px rgba(15, 15, 15, 0.1);
   --my-input-bg: #f0f0f0;
@@ -56,7 +57,8 @@
   --my-c-white-rgb: 255, 255, 255;
   --my-c-black: #151515;
   --my-c-black-rgb: 21, 21, 21;
-  --my-box-bg: var(--my-c-white);
+  --my-box-bg: #ffffffb0;
+  --my-box-backdrop-filter: blur(6px);
   --my-box-shadow: var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow-inset) 0 1px 3px 0 var(--un-shadow-color, rgba(0,0,0,0.1)),var(--un-shadow-inset) 0 1px 2px -1px var(--un-shadow-color, rgba(0,0,0,0.1));
   --my-input-bg: transparent;
   --my-input-shadow: none;
@@ -76,13 +78,15 @@
   --my-c-white-rgb: 21, 21, 21;
   --my-c-black: #ffffff;
   --my-c-black-rgb: 255, 255, 255;
+  --my-box-bg: #151515b0;
 }
 :root[theme="neumorphism"] {
   --my-c-white: #e0e0e0;
   --my-c-white-rgb: 224, 224, 224;
   --my-c-black: #1D1F21;
   --my-c-black-rgb: 29, 31, 33;
-  --my-box-bg: var(--my-c-white);
+  --my-box-bg: #e0e0e080;
+  --my-box-backdrop-filter: blur(50px);
   --my-box-shadow: 10px 10px 30px #bebebe, -10px -10px 30px #ffffff;
   --my-input-bg: transparent;
   --my-input-shadow: inset 5px 5px 15px #bebebe, inset -5px -5px 15px #ffffff;
@@ -102,6 +106,7 @@
   --my-c-white-rgb: 29, 31, 33;
   --my-c-black: #e0e0e0;
   --my-c-black-rgb: 224, 224, 224;
+  --my-box-bg: #1D1F2180;
   --my-box-shadow: 10px 10px 30px #191a1c, -10px -10px 30px #212426;
   --my-input-shadow: inset 5px 5px 15px #191a1c, inset -5px -5px 15px #212426;
   --my-icon-btn-shadow: 5px 5px 15px #191a1c, -5px -5px 15px #191a1c;
@@ -123,10 +128,15 @@
   cursor: pointer;
   user-select: none;
   opacity: 0.75;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: padding 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: var(--my-btn-rounded, 2px);
   box-shadow: var(--my-icon-btn-shadow);
   padding: var(--my-icon-btn-padding);
+}
+
+:root[theme="neumorphism"] .my-icon-btn {
+  background: var(--my-box-bg);
+  backdrop-filter: var(--my-box-backdrop-filter);
 }
 
 .my-icon-btn:hover {
@@ -136,4 +146,5 @@
 
 .my-icon-btn:active {
   box-shadow: var(--my-icon-btn-shadow-active);
+  color: hsl(var(--my-c-primary-hue) var(--my-c-primary-saturation) calc(var(--my-c-primary-lightness) - 10%))
 }

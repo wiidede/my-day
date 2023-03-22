@@ -12,14 +12,12 @@ body,
 
 html {
   background-color: var(--my-c-white);
+  scrollbar-color: hsl(var(--my-c-primary-hsl) / 67%) hsl(var(--my-c-primary-hsl) / 20%);
+  -webkit-tap-highlight-color: transparent;
 }
 
 html.dark {
   color-scheme: dark;
-}
-
-html {
-  scrollbar-color: hsl(var(--my-c-primary-hsl) / 67%) hsl(var(--my-c-primary-hsl) / 20%);
 }
 
 ::-webkit-scrollbar {
