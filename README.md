@@ -1,4 +1,6 @@
-<h1 align="center">My Day</h1>
+<h1 align="center">Fly My Day</h1>
+
+<p align="center"><img align="center" src="./public/safari-pinned-tab.svg" width="120px" height="120px"></div></p>
 
 <p align="center"> little page to plan my day!</p>
 
