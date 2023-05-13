@@ -16,6 +16,8 @@ button:
   add_plan: 添加一项计划
   delete_plan: 删除这个计划
   save_preview: 保存预览的计划到本地
+  open_pure: 开启纯净模式
+  close_pure: 关闭纯净模式
 intro:
   desc: 固执己见的 Vite 项目模板
   dynamic-route: 动态路由演示

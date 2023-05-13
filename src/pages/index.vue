@@ -49,6 +49,9 @@ const handleEdit = () => {
   toggleEdit()
 }
 
+const pure = ref(false)
+const togglePure = useToggle(pure)
+
 const handleSave = () => {
   // eslint-disable-next-line no-alert
   if (window.confirm(t('my_day.alert_save_share'))) {
@@ -67,6 +70,14 @@ const handleSave = () => {
         <span class="text-2xl">{{ nowFormattedDate }}</span>
       </div>
       <div class="flex gap2">
+        <div
+          v-if="!edit"
+          class="my-icon-btn"
+          :title="pure ? t('button.close_pure') : t('button.open_pure')"
+          @click="togglePure()"
+        >
+          <div :class="pure ? 'i-carbon-fade' : 'i-carbon-circle-dash'" />
+        </div>
         <div
           v-if="viewing"
           class="my-icon-btn"
@@ -99,6 +110,7 @@ const handleSave = () => {
           </div>
         </Teleport>
         <div
+          v-if="!pure"
           :title="edit ? t('button.complete') : t('button.edit')"
           class="my-icon-btn"
           @click="handleEdit()"
@@ -117,15 +129,17 @@ const handleSave = () => {
         :key="index"
         :model-value="day"
         :edit="edit"
+        :pure="pure"
       />
     </template>
-    <TheDay v-else-if="initializing" :model-value="getDefaultMyDay()" />
+    <TheDay v-else-if="initializing" :model-value="getDefaultMyDay()" :pure="pure"/>
     <template v-else>
       <TheDay
         v-for="(day, index) in storeMyDay"
         :key="index"
         :model-value="day"
         :edit="edit"
+        :pure="pure"
       />
     </template>
   </div>

@@ -16,6 +16,8 @@ button:
   add_plan: add a plan
   delete_plan: delete the plan
   save_preview: save preview plan to local
+  open_pure: open pure mode
+  close_pure: close pure mode
 intro:
   desc: Opinionated Vite Starter Template
   dynamic-route: Demo of dynamic route

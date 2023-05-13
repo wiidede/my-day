@@ -5,6 +5,7 @@ const props = defineProps<{
   content: string
   progress?: number
   edit?: boolean
+  pure?: boolean
   range: [number, number]
   formatter: (value: number) => string
 }>()
@@ -38,7 +39,7 @@ const contentModel = computed({
 
 const { t } = useI18n()
 
-const showProgress = computed(() => props.progress !== undefined && !props.edit)
+const showProgress = computed(() => props.progress !== undefined && !props.edit && !props.pure)
 </script>
 
 <template>

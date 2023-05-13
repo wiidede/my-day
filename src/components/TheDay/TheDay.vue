@@ -4,6 +4,7 @@ import type { IMyDay } from '~/types/my-day'
 
 const props = defineProps<{
   edit?: boolean
+  pure?: boolean
   modelValue: IMyDay
 }>()
 
@@ -117,6 +118,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
         :progress="now >= plan.start && now < plan.end ? (now - plan.start) / (plan.end - plan.start) * 100 : undefined"
         :formatter="useFormatTime(model.wakeTime)"
         :edit="edit"
+        :pure="pure"
         @delete="handleDeletePlan(index)"
       />
       <div
