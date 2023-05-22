@@ -37,21 +37,21 @@ const now = computed(() => {
   return nowValue > 0 ? nowValue : nowValue + 24 * 60
 })
 
-const handleAddPlan = (index: number, start: number, end: number) => {
+function handleAddPlan(index: number, start: number, end: number) {
   model.value.plans.splice(index, 0, {
     name: '',
     start,
     end,
   })
 }
-const handleDeletePlan = (index: number) => {
+function handleDeletePlan(index: number) {
   model.value.plans.splice(index, 1)
 }
 
-const formatTime = (time: number, startTime: number) => {
+function formatTime(time: number, startTime: number) {
   return dayjs.duration(time + startTime, 'minutes').format('HH:mm')
 }
-const useFormatTime = (startTime: number) => {
+function useFormatTime(startTime: number) {
   return (time: number) => formatTime(time, startTime)
 }
 

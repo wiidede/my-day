@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { isClient, promiseTimeout } from '@vueuse/core'
 import type { IMyDay } from '~/types/my-day'
+
 const { t, locale } = useI18n()
 
 const now = isClient
@@ -29,7 +30,7 @@ const viewing = computed(() => !!urlMyDay.value)
 
 const shareRef = ref<HTMLElement>()
 const { floating, floatingRef } = useFloating(shareRef)
-const handleShare = async (copyOnly = false) => {
+async function handleShare(copyOnly = false) {
   if (!copyOnly)
     urlMyDay.value = storeMyDay.value
   await promiseTimeout(10)
@@ -43,7 +44,7 @@ const handleShare = async (copyOnly = false) => {
 
 const edit = ref(false)
 const toggleEdit = useToggle(edit)
-const handleEdit = () => {
+function handleEdit() {
   if (initializing.value)
     storeMyDay.value = [getDefaultMyDay()]
   toggleEdit()
@@ -52,7 +53,7 @@ const handleEdit = () => {
 const pure = ref(false)
 const togglePure = useToggle(pure)
 
-const handleSave = () => {
+function handleSave() {
   // eslint-disable-next-line no-alert
   if (window.confirm(t('my_day.alert_save_share'))) {
     storeMyDay.value = urlMyDay.value
@@ -132,7 +133,7 @@ const handleSave = () => {
         :pure="pure"
       />
     </template>
-    <TheDay v-else-if="initializing" :model-value="getDefaultMyDay()" :pure="pure"/>
+    <TheDay v-else-if="initializing" :model-value="getDefaultMyDay()" :pure="pure" />
     <template v-else>
       <TheDay
         v-for="(day, index) in storeMyDay"

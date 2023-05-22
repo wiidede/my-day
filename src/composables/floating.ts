@@ -28,12 +28,12 @@ watch(floating, (value) => {
   }
 })
 
-export const useFloatingRef = (floatingRefer: HTMLRef) => {
+export function useFloatingRef(floatingRefer: HTMLRef) {
   cache.floatingRef = floatingRefer
   return { x, y, strategy, floating, content, className }
 }
 
-export const useFloating = (reference: HTMLRef) => {
+export function useFloating(reference: HTMLRef) {
   cache.referenceRef = reference
   return { floating, floatingRef, content, className }
 }

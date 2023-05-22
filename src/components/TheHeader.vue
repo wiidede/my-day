@@ -8,7 +8,7 @@ const router = useRouter()
 const lang = useStorage('my-day-lang', locale.value)
 locale.value = lang.value
 
-const toggleLocales = () => {
+function toggleLocales() {
   // change to some real logic
   const locales = availableLocales
   const newLocale = locales[(locales.indexOf(locale.value) + 1) % locales.length]
@@ -26,7 +26,7 @@ watch(theme, (value) => {
   if (isClient)
     document.documentElement.setAttribute('theme', value)
 }, { immediate: true })
-const toggleThemes = () => {
+function toggleThemes() {
   const newTheme = themes[(themes.indexOf(theme.value) + 1) % themes.length]
   theme.value = newTheme
 }

@@ -12,7 +12,7 @@ const emits = defineEmits<{
 const thumbRef = ref<HTMLElement>()
 const trackRef = inject(theRangeTrackRefKey)
 
-const onPointerMove = (e: PointerEvent) => {
+function onPointerMove(e: PointerEvent) {
   if (!thumbRef.value || !trackRef?.value)
     return
   const trackRect = trackRef.value.getBoundingClientRect()
@@ -26,13 +26,13 @@ const onPointerMove = (e: PointerEvent) => {
     emits('update', percent)
 }
 
-const onPointerUp = (e: PointerEvent) => {
+function onPointerUp() {
   window.removeEventListener('pointermove', onPointerMove)
   window.removeEventListener('pointerup', onPointerUp)
   window.removeEventListener('pointercancel', onPointerUp)
 }
 
-const onPointerDown = (e: PointerEvent) => {
+function onPointerDown(e: PointerEvent) {
   e.preventDefault()
   window.addEventListener('pointermove', onPointerMove)
   window.addEventListener('pointerup', onPointerUp)

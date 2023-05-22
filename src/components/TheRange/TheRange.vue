@@ -27,7 +27,7 @@ const model = computed({
 
 const trackRef = ref<HTMLElement>()
 
-const getValue = (percentage: number) => {
+function getValue(percentage: number) {
   const min = props.min
   const max = props.max
   const step = props.step
@@ -40,7 +40,7 @@ const getValue = (percentage: number) => {
   const value = min + (max - min) * percentage / 100
   return Math.round(value / step) * step
 }
-const getPercentage = (value: number) => {
+function getPercentage(value: number) {
   const min = props.min
   const max = props.max
   const step = props.step / (max - min)
@@ -61,7 +61,7 @@ const position = computed(() => {
 })
 
 let lastType: 'left' | 'right' = 'left'
-const onUpdateRange = (percentage: number) => {
+function onUpdateRange(percentage: number) {
   if (!Array.isArray(model.value))
     return
   percentage = getValue(percentage)
@@ -90,7 +90,7 @@ const onUpdateRange = (percentage: number) => {
   model.value = [left, right]
 }
 
-const onUpdateSingle = (percentage: number) => {
+function onUpdateSingle(percentage: number) {
   model.value = getValue(percentage)
 }
 

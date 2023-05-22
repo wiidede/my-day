@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
 
-export const useUrlStore = <T>() => {
+export function useUrlStore<T>() {
   const route = useRoute()
   const hash = computed(
     () => route.hash,

@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import { defineConfig } from 'vite'
 import Preview from 'vite-plugin-vue-component-preview'
 import Vue from '@vitejs/plugin-vue'
@@ -15,7 +15,7 @@ import Inspector from 'vite-plugin-vue-inspector'
 import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
-import VueMacros from 'unplugin-vue-macros/vite'
+import VueMacros from 'unplugin-vue-macros'
 
 export default defineConfig({
   resolve: {
@@ -27,7 +27,7 @@ export default defineConfig({
   plugins: [
     Preview(),
 
-    VueMacros({
+    VueMacros.vite({
       plugins: {
         vue: Vue({
           include: [/\.vue$/, /\.md$/],

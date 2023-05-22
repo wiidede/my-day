@@ -7,7 +7,6 @@ defineProps<{
 
 <template>
   <div
-    ref="progressRef"
     class="the-range-progress absolute h-full bg-white"
     :style="{ left: `${left}%`, right: `${100 - right}%` }"
   />
