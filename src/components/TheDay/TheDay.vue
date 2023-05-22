@@ -100,11 +100,12 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
       class="w-full flex justify-center"
     >
       <div
-        i-carbon-add-alt
         :title="t('button.add_plan')"
         class="my-icon-btn m2"
         @click="handleAddPlan(0, 0, model.plans[0]?.start || model.sleepTime)"
-      />
+      >
+        <div i-carbon-add-alt />
+      </div>
     </div>
     <template
       v-for="(plan, index) in model.plans"
@@ -126,11 +127,12 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
         class="w-full flex justify-center"
       >
         <div
-          i-carbon-add-alt
           :title="t('button.add_plan')"
           class="my-icon-btn m2"
           @click="handleAddPlan(index + 1, plan.end, model.plans[index + 1]?.start || model.sleepTime)"
-        />
+        >
+          <div i-carbon-add-alt />
+        </div>
       </div>
     </template>
 
