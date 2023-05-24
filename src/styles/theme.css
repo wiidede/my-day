@@ -148,3 +148,9 @@
   box-shadow: var(--my-icon-btn-shadow-active);
   color: hsl(var(--my-c-primary-hue) var(--my-c-primary-saturation) calc(var(--my-c-primary-lightness) - 10%))
 }
+
+.my-icon-btn.disabled {
+  pointer-events: none;
+  opacity: 0.2;
+  cursor: not-allowed;
+}

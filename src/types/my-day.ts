@@ -3,6 +3,7 @@ export interface IMyDay {
   wakeLabel: string
   sleepTime: number
   sleepLabel: string
+  name?: string
   plans: {
     name: string
     start: number
