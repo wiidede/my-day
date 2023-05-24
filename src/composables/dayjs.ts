@@ -1,6 +1,6 @@
-import dayjs from 'dayjs'
+import _dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 
-dayjs.extend(duration)
+_dayjs.extend(duration)
 
-export const useDayjs = () => dayjs
+export const dayjs = _dayjs

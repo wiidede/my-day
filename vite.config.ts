@@ -1,6 +1,5 @@
 import path from 'node:path'
 import { defineConfig } from 'vite'
-import Preview from 'vite-plugin-vue-component-preview'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import generateSitemap from 'vite-ssg-sitemap'
@@ -15,7 +14,6 @@ import Inspector from 'vite-plugin-vue-inspector'
 import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
-import VueMacros from 'unplugin-vue-macros'
 
 export default defineConfig({
   resolve: {
@@ -25,14 +23,10 @@ export default defineConfig({
   },
 
   plugins: [
-    Preview(),
-
-    VueMacros.vite({
-      plugins: {
-        vue: Vue({
-          include: [/\.vue$/, /\.md$/],
-          reactivityTransform: true,
-        }),
+    Vue({
+      include: [/\.vue$/, /\.md$/],
+      script: {
+        defineModel: true,
       },
     }),
 
@@ -50,7 +44,6 @@ export default defineConfig({
         'vue',
         'vue-router',
         'vue-i18n',
-        'vue/macros',
         '@vueuse/head',
         '@vueuse/core',
       ],

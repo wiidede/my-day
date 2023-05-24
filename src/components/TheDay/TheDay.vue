@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { isClient } from '@vueuse/core'
 import type { IMyDay } from '~/types/my-day'
 
 const props = defineProps<{
   edit?: boolean
   pure?: boolean
   modelValue: IMyDay
+  current?: boolean
 }>()
 
 const emits = defineEmits<{
@@ -22,11 +22,8 @@ const model = computed({
 
 const { t } = useI18n()
 
-const dayjs = useDayjs()
-
-const nowDate = isClient
-  ? useNow({ interval: 1000 })
-  : ref(new Date(0))
+const { nowDate, isSleeping } = useTheNow()
+const { width } = useTheDayWidth()
 
 const now = computed(() => {
   const nowValue = nowDate.value.getHours() * 60
@@ -35,6 +32,12 @@ const now = computed(() => {
   + (nowDate.value.getMilliseconds() / 1000 / 60)
   - model.value.wakeTime
   return nowValue > 0 ? nowValue : nowValue + 24 * 60
+})
+
+const sleep = computed(() => now.value > model.value.sleepTime)
+watchEffect(() => {
+  if (props.current)
+    isSleeping.value = sleep.value
 })
 
 function handleAddPlan(index: number, start: number, end: number) {
@@ -54,39 +57,17 @@ function formatTime(time: number, startTime: number) {
 function useFormatTime(startTime: number) {
   return (time: number) => formatTime(time, startTime)
 }
-
-const sleep = computed(() => now.value > model.value.sleepTime)
-const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => ({
-  left: Math.random() * 90,
-  top: Math.random() * 90,
-  rotate: Math.random() * 60 - 45,
-  delay: Math.random() * 3,
-}))
 </script>
 
 <template>
-  <div v-if="isClient && sleep" class="z--1 fixed top-0 right-0 bottom-0 left-0">
-    <div
-      v-for="(moon, index) in moons"
-      :key="index"
-      i-the-my-day
-      class="absolute text-16 text-#B7DCFF transition  breeze-animation"
-      :style="{
-        'left': `${moon.left}%`,
-        'top': `${moon.top}%`,
-        'transform': `rotate(${moon.rotate}deg)`,
-        '--animation-delay': `${moon.delay}s`,
-      }"
-    />
-  </div>
-  <div v-if="sleep" class="text-xl my2 my-c-primary">
-    {{ t('my_day.sleep_time') }}
-  </div>
-  <div class="neumorphism:h2 transition-height" />
   <div
     class="py4 text-left my-round z-inset-box-shadow neumorphism:py8 transition-padding"
     :class="{ 'text-center': edit }"
-    :style="{ backgroundColor: 'var(--my-box-bg)', backdropFilter: 'var(--my-box-backdrop-filter)' }"
+    :style="{
+      backgroundColor: 'var(--my-box-bg)',
+      backdropFilter: 'var(--my-box-backdrop-filter)',
+      width: `${width}px`,
+    }"
   >
     <TheDayItem
       v-model:left="model.wakeTime"
