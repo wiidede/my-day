@@ -13,6 +13,7 @@ const getDefaultMyDay: () => IMyDay = () => ({
   wakeLabel: t('my_day.wake'),
   sleepTime: 16 * 60,
   sleepLabel: t('my_day.sleep'),
+  title: t('my_day.title'),
   plans: [
     { name: t('my_day.plan_1'), start: 30, end: 60 },
     { name: t('my_day.plan_2'), start: 60, end: 90 },
@@ -84,10 +85,10 @@ const floatRef = computed(() => {
       return deleteRef.value[currentIndex.value]
   }
 })
-const { floating, floatingRef } = useFloating(floatRef)
+const { startFloating, endFloating, floatingRef } = useFloating(floatRef)
 async function handleShare() {
   floatModel.value = 'sharing'
-  floating.value = true
+  startFloating()
 }
 async function onShare(index?: number) {
   if (!viewing.value)
@@ -99,14 +100,12 @@ async function onShare(index?: number) {
   await promiseTimeout(10)
   await navigator.clipboard.writeText(location.href)
   floatModel.value = 'shared'
-  floating.value = true
-  await promiseTimeout(3000)
-  handleCancel()
+  await startFloating(3000)
 }
 
 function handleSave() {
   floatModel.value = 'saving'
-  floating.value = true
+  startFloating()
 }
 
 async function onSave(index?: number) {
@@ -116,7 +115,6 @@ async function onSave(index?: number) {
     storeMyDay.value.splice(length, 0, ...saving)
   }
   floatModel.value = 'saved'
-  floating.value = true
   if (index === undefined) {
     urlMyDay.value = undefined
     currentStoreIndex.value = length
@@ -128,13 +126,12 @@ async function onSave(index?: number) {
       currentStoreIndex.value = length
     }
   }
-  await promiseTimeout(3000)
-  handleCancel()
+  await startFloating(3000)
 }
 
 function handleCancel() {
   floatModel.value = undefined
-  floating.value = false
+  endFloating()
 }
 
 const currentStore = computed({
@@ -160,7 +157,7 @@ let deletingIndex = 0
 function handleDelete(index: number) {
   deletingIndex = index
   floatModel.value = 'deleting'
-  floating.value = true
+  startFloating()
 }
 async function onDelete() {
   if (!currentStore.value)
@@ -168,9 +165,7 @@ async function onDelete() {
   currentStore.value.splice(deletingIndex, 1)
   handleCurrentChange(Math.max(deletingIndex - 1, 0))
   floatModel.value = 'deleted'
-  floating.value = true
-  await promiseTimeout(3000)
-  handleCancel()
+  await startFloating(3000)
 }
 
 function handleMove(index: number, step: number) {
@@ -237,15 +232,15 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
         <Teleport v-if="floatingRef" :to="floatingRef">
           <template v-if="floatModel === 'sharing'">
             <div class="flex flex-col gap2 items-center p4">
-              <div>分享每日计划</div>
+              <div>{{ t('my_day.sharing_text') }}</div>
               <button class="btn w-fit" @click="onShare(currentIndex)">
-                分享此条
+                {{ t('button.sharing_one') }}
               </button>
               <button class="btn w-fit" @click="onShare()">
-                分享所有
+                {{ t('button.sharing_all') }}
               </button>
               <button class="btn w-fit" @click="handleCancel">
-                取消
+                {{ t('button.cancel') }}
               </button>
             </div>
           </template>
@@ -257,33 +252,39 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
           </template>
           <template v-if="floatModel === 'saving'">
             <div class="flex flex-col gap2 items-center p4">
-              <div>追加预览内容到本地</div>
+              <div>{{ t('my_day.saving_text') }}</div>
               <button class="btn w-fit" @click="onSave(currentIndex)">
-                保存此条
+                {{ t('button.saving_one') }}
               </button>
               <button class="btn w-fit" @click="onSave()">
-                保存所有
+                {{ t('button.saving_all') }}
               </button>
               <button class="btn w-fit" @click="handleCancel">
-                取消
+                {{ t('button.cancel') }}
               </button>
             </div>
           </template>
           <template v-if="floatModel === 'saved'">
             <div class="flex gap2 items-center my-c-success/67">
               <div i-carbon-checkmark-outline class="flex-shrink-0" />
-              <div>保存成功</div>
+              <div>{{ t('my_day.save_info') }}</div>
             </div>
           </template>
           <template v-if="floatModel === 'deleting'">
             <div class="flex flex-col gap2 items-center p4">
-              <div>确定要删除此条计划</div>
+              <div>{{ t('my_day.delete_day_text') }}</div>
               <button class="btn w-fit" @click="onDelete()">
-                删除
+                {{ t('button.delete_day') }}
               </button>
               <button class="btn w-fit" @click="handleCancel">
-                取消
+                {{ t('button.cancel') }}
               </button>
+            </div>
+          </template>
+          <template v-if="floatModel === 'deleted'">
+            <div class="flex gap2 items-center my-c-success/67">
+              <div i-carbon-checkmark-outline class="flex-shrink-0" />
+              <div>{{ t('my_day.delete_day_info') }}</div>
             </div>
           </template>
         </Teleport>

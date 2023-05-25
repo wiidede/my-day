@@ -4,6 +4,7 @@ button:
   help: Help
   back: Back
   go: GO
+  cancel: Cancel
   home: Home
   toggle_dark: Toggle dark mode
   toggle_theme: Toggle theme
@@ -18,6 +19,11 @@ button:
   save_preview: save preview plan to local
   open_pure: open pure mode
   close_pure: close pure mode
+  sharing_one: Share this one
+  sharing_all: Share all
+  saving_one: Save this one
+  saving_all: Save all
+  delete_day: Delete
 intro:
   desc: Opinionated Vite Starter Template
   dynamic-route: Demo of dynamic route
@@ -30,11 +36,16 @@ my_day:
   wake: wake up
   sleep: sleep
   sleep_time: time to sleep~
+  title: One Day Flying
   plan_1: learning
   plan_2: eating
   plan_3: daze
   plan_4: what's the meaning of life
-  share_info: Sharable URL has been copied to clipboard.
   viewing: Previewing
-  alert_save_share: This action will force update local data. Your previous plan will lost!
+  sharing_text: Share daily plan
+  share_info: Sharable URL has been copied to clipboard
+  saving_text: Save preview plan to local
+  save_info: Save successfully
+  delete_day_text: Are you sure to delete this day
+  delete_day_info: Delete successfully
 not-found: 404 Not found

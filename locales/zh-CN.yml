@@ -4,6 +4,7 @@ button:
   help: 帮助
   back: 返回
   go: 确定
+  cancel: 取消
   home: 首页
   toggle_dark: 切换深色模式
   toggle_theme: 切换主题
@@ -18,6 +19,11 @@ button:
   save_preview: 保存预览的计划到本地
   open_pure: 开启纯净模式
   close_pure: 关闭纯净模式
+  sharing_one: 分享此条
+  sharing_all: 分享全部
+  saving_one: 保存此条
+  saving_all: 保存全部
+  delete_day: 删除这一天
 intro:
   desc: 固执己见的 Vite 项目模板
   dynamic-route: 动态路由演示
@@ -30,11 +36,16 @@ my_day:
   wake: 起床
   sleep: 睡觉
   sleep_time: 该睡了~
+  title: 一日流光
   plan_1: 求学
   plan_2: 吃饭
   plan_3: 休憩
   plan_4: 镜中花 如水而散
-  share_info: 分享链接已经复制到剪贴板了
   viewing: 预览中
-  alert_save_share: 该操作会强制覆盖本地数据，你之前的计划数据将会丢失！
+  sharing_text: 分享每日计划
+  share_info: 分享链接已经复制到剪贴板了
+  saving_text: 保存预览内容到本地
+  save_info: 保存成功
+  delete_day_text: 是否要删除这一天
+  delete_day_info: 删除成功
 not-found: 404 未找到页面
