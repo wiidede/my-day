@@ -63,12 +63,13 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit 
         <div class="md:flex-3">
           {{ Array.isArray(time) ? `${formatter(time[0])} - ${formatter(time[1])}` : formatter(time) }}
         </div>
-        <div class="md:flex-7 w-full flex items-center justify-center">
+        <div v-if="!pure" class="md:flex-7 w-full flex items-center justify-center">
           <TheRange v-model="time" class="the-time-range m1" :min="range[0]" :max="range[1]" :step="10" />
         </div>
       </div>
       <div class="flex items-center w-full gap4">
-        <TheInput v-model="contentModel" class="flex-auto min-w-0" />
+        <TheInput v-if="!pure" v-model="contentModel" class="flex-auto min-w-0" />
+        <span v-else class="px4 py2 flex-auto min-w-0">{{ contentModel }}</span>
         <div v-show="edit && Array.isArray(time)" class="my-icon-btn" @click="emits('delete')">
           <div i-carbon-delete :title="t('button.delete_plan')" />
         </div>

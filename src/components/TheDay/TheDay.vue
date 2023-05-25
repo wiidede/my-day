@@ -72,6 +72,7 @@ function useFormatTime(startTime: number) {
         :range="[0, 24 * 60]"
         :formatter="useFormatTime(0)"
         :edit="edit"
+        :pure="pure"
       />
       <div
         v-if="edit && (modelValue.plans.length === 0 || (modelValue.plans[0].start > 0))"
@@ -120,6 +121,7 @@ function useFormatTime(startTime: number) {
         :range="[modelValue.plans[modelValue.plans.length - 1]?.end || modelValue.wakeTime, 24 * 60]"
         :formatter="useFormatTime(modelValue.wakeTime)"
         :edit="edit"
+        :pure="pure"
       />
     </div>
   </div>

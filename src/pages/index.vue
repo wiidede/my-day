@@ -192,8 +192,8 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
     <template v-else>
       <div
         :style="{
-          width: `${width + (edit ? 100 + 48 : 0)}px`,
-          transform: `translateX(${edit ? 0 - 50 - 24 : 0}px)`,
+          width: `${width + 100 + 48}px`,
+          transform: `translateX(${0 - 50 - 24}px)`,
         }"
         class="py2 neumorphism:py9 transition-padding overflow-hidden"
         :class="{ 'the-days-mask': edit }"
@@ -201,7 +201,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
         <div
           :style="{
             width: `${(storeMyDayLength + 2) * (width + 24) - 24}px`,
-            transform: `translateX(${currentX + (edit ? 50 + 24 : 0)}px)`,
+            transform: `translateX(${currentX + 50 + 24}px)`,
           }"
           class="flex gap-24px transition-transform transition-duration-500"
         >
@@ -220,7 +220,10 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
             :model-value="day"
             :edit="edit"
             :pure="pure || !(index === currentIndex || (index === lastIndex && currentTransforming))"
-            :class="{ 'h-0': !(index === currentIndex || (index === lastIndex && currentTransforming)) }"
+            :class="{
+              'h-0': !(index === currentIndex || (index === lastIndex && currentTransforming)),
+              'op-0': !edit && !(index === currentIndex || (index === lastIndex && currentTransforming)),
+            }"
             :current="index === currentIndex"
           >
             <template #actions>
@@ -275,8 +278,8 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
 
 <style scoped>
 .the-days-mask {
-  --mask: url("data:image/svg+xml,%3Csvg width='768' height='768' viewBox='0 0 768 768' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='768' height='768' rx='68' fill='url(%23paint0_linear_201_5)' filter='url(%23filter0_f_201_5)'/%3E%3Cdefs%3E%3Cfilter id='filter0_f_201_5' x='-20' y='-20' width='808' height='808' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='10' result='effect1_foregroundBlur_201_5'/%3E%3C/filter%3E%3ClinearGradient id='paint0_linear_201_5' x1='768' y1='384' x2='0' y2='384' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23fff' stop-opacity='0'/%3E%3Cstop offset='.109' stop-color='%23fff'/%3E%3Cstop offset='.88' stop-color='%23fff'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E");
-  mask: var(--mask);
-  -webkit-mask: var(--mask);
+  --mask: url('data:image/svg+xml,<svg width="768" height="768" viewBox="0 0 768 768" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g clip-path="url(%23clip0_201_2)"><g filter="url(%23filter0_f_201_2)"><rect width="768" height="768" rx="68" fill="url(%23paint0_linear_201_2)"/></g></g><defs><filter id="filter0_f_201_2" x="-10" y="-10" width="788" height="788" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur stdDeviation="5" result="effect1_foregroundBlur_201_2"/></filter><linearGradient id="paint0_linear_201_2" x1="768" y1="384" x2="0" y2="384" gradientUnits="userSpaceOnUse"><stop stop-color="white" stop-opacity="0"/><stop offset="0.109375" stop-color="white"/><stop offset="0.880208" stop-color="white"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient><clipPath id="clip0_201_2"><rect width="768" height="768" fill="white"/></clipPath></defs></svg>');
+  mask: var(--mask) no-repeat center / 100% 100%;
+  -webkit-mask: var(--mask) no-repeat center / 100% 100%;
 }
 </style>
