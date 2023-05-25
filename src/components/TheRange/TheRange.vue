@@ -119,8 +119,8 @@ provide(theRangeTrackRefKey, trackRef)
   <div ref="trackRef" class="the-range-track relative w40 h4 bg-gray select-none m-auto">
     <template v-if="model !== undefined && Array.isArray(model) && Array.isArray(position)">
       <TheRangeProgress :left="position[0]" :right="position[1]" />
-      <div v-if="points < 12" class="the-range-points absolute w-full h-full flex justify-between items-center">
-        <div v-for="index in points" :key="index" class="w1 h1 rd-full op50" style="background: var(--my-c-white);" />
+      <div v-if="points < 12" class="the-range-points absolute h-full rd-full left--0.5 right--0.5 rd-0.5 flex justify-between items-center overflow-hidden">
+        <div v-for="index in points" :key="index" class="w1 h1 rd-0.5 op50" style="background: var(--my-c-white);" />
       </div>
       <TheRangeThumb :position="positionThumb[0]" @update="onUpdateRange" @pointerdown="setCurrent('left')" />
       <TheRangeThumb :position="positionThumb[1]" @update="onUpdateRange" @pointerdown="setCurrent('right')" />
