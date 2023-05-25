@@ -13,4 +13,7 @@ defineProps<{
 </template>
 
 <style lang="scss" scoped>
+.the-range-progress {
+  transition: left 100ms linear, right 100ms linear;
+}
 </style>

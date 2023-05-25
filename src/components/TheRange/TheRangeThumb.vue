@@ -56,5 +56,6 @@ function onPointerDown(e: PointerEvent) {
   transform: translate(-50%, -25%) scale(1.5);
   transform-origin: center;
   border: 1px solid gray;
+  transition: left 100ms linear;
 }
 </style>

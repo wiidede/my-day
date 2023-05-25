@@ -27,6 +27,8 @@ const model = computed({
 
 const trackRef = ref<HTMLElement>()
 
+const points = computed(() => Math.floor((props.max - props.min) / props.step) + 1)
+
 function getValue(percentage: number) {
   const min = props.min
   const max = props.max
@@ -60,34 +62,50 @@ const position = computed(() => {
     : getPercentage(model.value || 0)
 })
 
-let lastType: 'left' | 'right' = 'left'
+const reversing = ref(false)
+const positionThumb = computed(() => {
+  return Array.isArray(model.value)
+    ? reversing.value
+      ? model.value.map(getPercentage).reverse()
+      : model.value.map(getPercentage)
+    : []
+})
+
+let current: 'left' | 'right' = 'left'
+function setCurrent(val: typeof current) {
+  current = val
+}
 function onUpdateRange(percentage: number) {
   if (!Array.isArray(model.value))
     return
   percentage = getValue(percentage)
   let left = model.value[0]
   let right = model.value[1]
-  if (lastType === 'left') {
-    if (percentage > right) {
-      left = right
-      right = percentage
-      lastType = 'right'
-    }
-    else if (percentage < right) {
-      left = percentage
-    }
+
+  const oldReversing = reversing.value
+  if (reversing.value) {
+    if (current === 'right' && percentage > right)
+      reversing.value = false
+    if (current === 'left' && percentage < left)
+      reversing.value = false
   }
-  else if (lastType === 'right') {
-    if (percentage < left) {
-      right = left
-      left = percentage
-      lastType = 'left'
-    }
-    else if (percentage > left) {
-      right = percentage
-    }
+  else {
+    if (current === 'right' && percentage < left)
+      reversing.value = true
+    if (current === 'left' && percentage > right)
+      reversing.value = true
   }
-  model.value = [left, right]
+  if (reversing.value !== oldReversing)
+    [left, right] = [right, left]
+
+  let result: [number, number]
+  if ((current === 'left' && !reversing.value) || (current === 'right' && reversing.value))
+    result = [percentage, right]
+  else
+    result = [left, percentage]
+  if (result[0] === result[1])
+    return
+  model.value = result
 }
 
 function onUpdateSingle(percentage: number) {
@@ -101,8 +119,11 @@ provide(theRangeTrackRefKey, trackRef)
   <div ref="trackRef" class="the-range-track relative w40 h4 bg-gray select-none m-auto">
     <template v-if="model !== undefined && Array.isArray(model) && Array.isArray(position)">
       <TheRangeProgress :left="position[0]" :right="position[1]" />
-      <TheRangeThumb :position="position[0]" @update="onUpdateRange" @pointerdown="() => { lastType = 'left' }" />
-      <TheRangeThumb :position="position[1]" @update="onUpdateRange" @pointerdown="() => { lastType = 'right' }" />
+      <div v-if="points < 12" class="the-range-points absolute w-full h-full flex justify-between items-center">
+        <div v-for="index in points" :key="index" class="w1 h1 rd-full op50" style="background: var(--my-c-white);" />
+      </div>
+      <TheRangeThumb :position="positionThumb[0]" @update="onUpdateRange" @pointerdown="setCurrent('left')" />
+      <TheRangeThumb :position="positionThumb[1]" @update="onUpdateRange" @pointerdown="setCurrent('right')" />
     </template>
     <template v-if="model !== undefined && typeof model === 'number' && typeof position === 'number'">
       <TheRangeThumb :position="position" @update="onUpdateSingle" />
