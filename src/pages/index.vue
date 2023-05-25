@@ -370,6 +370,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
                 ref="deleteRef"
                 :title="t('button.save_preview')"
                 class="my-icon-btn"
+                :class="{ disabled: currentLength === 1 }"
                 @click="handleDelete(index)"
               >
                 <div i-carbon-trash-can />
