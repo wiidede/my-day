@@ -8,19 +8,22 @@ const { nowDate, isSleeping } = useTheNow()
 const nowFormattedTime = useDateFormat(nowDate, () => t('my_day.time_formatter'), { locales: 'en' })
 const nowFormattedDate = useDateFormat(nowDate, () => t('my_day.date_formatter'), { locales: 'en' })
 
-const getDefaultMyDay: () => IMyDay = () => ({
-  wakeTime: 7 * 60,
-  wakeLabel: t('my_day.wake'),
-  sleepTime: 16 * 60,
-  sleepLabel: t('my_day.sleep'),
-  title: t('my_day.title'),
-  plans: [
-    { name: t('my_day.plan_1'), start: 30, end: 60 },
-    { name: t('my_day.plan_2'), start: 60, end: 90 },
-    { name: t('my_day.plan_3'), start: 90, end: 120 },
-    { name: t('my_day.plan_4'), start: 120, end: 15 * 60 },
-  ],
-})
+function getDefaultMyDay() {
+  const day: IMyDay = {
+    wakeTime: 7 * 60,
+    wakeLabel: t('my_day.wake'),
+    sleepTime: 16 * 60,
+    sleepLabel: t('my_day.sleep'),
+    name: t('my_day.title'),
+    plans: [
+      { name: t('my_day.plan_1'), start: 30, end: 60 },
+      { name: t('my_day.plan_2'), start: 60, end: 90 },
+      { name: t('my_day.plan_3'), start: 90, end: 120 },
+      { name: t('my_day.plan_4'), start: 120, end: 15 * 60 },
+    ],
+  }
+  return day
+}
 
 const storeMyDay = useStorage<IMyDay[]>('my-day-list', [])
 const urlMyDay = useUrlStore<IMyDay[]>().data
