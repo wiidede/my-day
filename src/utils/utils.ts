@@ -1,13 +1,25 @@
 import { strFromU8, strToU8, unzlibSync, zlibSync } from 'fflate'
 
 export function debounce(fn: Function, n = 100, leading = false) {
-  let handle: ReturnType<typeof setTimeout> | undefined
+  let handle: number | undefined
   return (...args: any[]) => {
     clearTimeout(handle)
     if (leading && !handle)
       fn(...args)
-    handle = setTimeout(() => {
+    handle = window.setTimeout(() => {
       fn(...args)
+      handle = undefined
+    }, n)
+  }
+}
+
+export function throttle(fn: Function, n = 100) {
+  let handle: number | undefined
+  return (...arg: any[]) => {
+    if (handle)
+      return
+    handle = window.setTimeout(() => {
+      fn(...arg)
       handle = undefined
     }, n)
   }

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { theRangeTrackRefKey } from './TheRange'
+import { throttle } from '~/utils/utils'
 
 defineProps<{
   position: number
@@ -26,8 +27,10 @@ function onPointerMove(e: PointerEvent) {
     emits('update', percent)
 }
 
+const onPointerMoveThrottle = throttle(onPointerMove, 100)
+
 function onPointerUp() {
-  window.removeEventListener('pointermove', onPointerMove)
+  window.removeEventListener('pointermove', onPointerMoveThrottle)
   window.removeEventListener('pointerup', onPointerUp)
   window.removeEventListener('pointercancel', onPointerUp)
 }
