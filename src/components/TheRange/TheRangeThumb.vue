@@ -27,7 +27,7 @@ function onPointerMove(e: PointerEvent) {
     emits('update', percent)
 }
 
-const onPointerMoveThrottle = throttle(onPointerMove, 100)
+const onPointerMoveThrottle = throttle(onPointerMove, 25)
 
 function onPointerUp() {
   window.removeEventListener('pointermove', onPointerMoveThrottle)
@@ -37,7 +37,7 @@ function onPointerUp() {
 
 function onPointerDown(e: PointerEvent) {
   e.preventDefault()
-  window.addEventListener('pointermove', onPointerMove)
+  window.addEventListener('pointermove', onPointerMoveThrottle)
   window.addEventListener('pointerup', onPointerUp)
   window.addEventListener('pointercancel', onPointerUp)
 }
