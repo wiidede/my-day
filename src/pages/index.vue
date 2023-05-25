@@ -61,6 +61,8 @@ const currentLength = computed(() => viewing.value ? (urlMyDay.value?.length || 
 watchEffect(() => {
   if (currentIndex.value >= currentLength.value)
     currentIndex.value = currentLength.value - 1
+  if (currentIndex.value < 0)
+    currentIndex.value = 0
 })
 const currentTransforming = ref(false)
 async function handleCurrentChange(index: number) {
@@ -331,7 +333,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
           transform: `translateX(${0 - 50 - 24}px)`,
         }"
         class="py2 neumorphism:py9 transition-padding overflow-hidden"
-        :class="{ 'the-days-mask': edit }"
+        :class="{ 'the-days-mask': edit && !isIOS, 'the-days-mask-ios': edit && isIOS }"
       >
         <div
           :style="{
@@ -416,6 +418,12 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
 <style scoped>
 .the-days-mask {
   --mask: url('data:image/svg+xml,<svg width="768" height="768" viewBox="0 0 768 768" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><g clip-path="url(%23clip0_201_2)"><g filter="url(%23filter0_f_201_2)"><rect width="768" height="768" rx="58" fill="url(%23paint0_linear_201_2)"/></g></g><defs><filter id="filter0_f_201_2" x="-25" y="-25" width="818" height="818" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur stdDeviation="12.5" result="effect1_foregroundBlur_201_2"/></filter><linearGradient id="paint0_linear_201_2" x1="768" y1="384" x2="0" y2="384" gradientUnits="userSpaceOnUse"><stop stop-color="white" stop-opacity="0"/><stop offset="0.109375" stop-color="white"/><stop offset="0.880208" stop-color="white"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient><clipPath id="clip0_201_2"><rect width="768" height="768" fill="white"/></clipPath></defs></svg>');
+  mask: var(--mask) no-repeat center / 100% 100%;
+  -webkit-mask: var(--mask) no-repeat center / 100% 100%;
+}
+
+.the-days-mask-ios {
+  --mask: linear-gradient(to right, transparent, #fff 10%, #fff 90%, transparent);
   mask: var(--mask) no-repeat center / 100% 100%;
   -webkit-mask: var(--mask) no-repeat center / 100% 100%;
 }

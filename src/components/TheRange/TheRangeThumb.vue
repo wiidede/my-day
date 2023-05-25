@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { theRangeTrackRefKey } from './TheRange'
-import { throttle } from '~/utils/utils'
 
 defineProps<{
   position: number
