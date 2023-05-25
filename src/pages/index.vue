@@ -342,7 +342,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
         >
           <div
             v-if="edit"
-            :title="t('button.add_plan')"
+            :title="t('button.add_day')"
             :style="{ width: `${width}px` }"
             class="flex flex-col justify-center items-end py4 my-round z-inset-box-shadow neumorphism:py8 transition-padding cursor-pointer"
             @click="handleAdd(0)"
@@ -363,7 +363,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
           >
             <template #actions>
               <div
-                :title="t('button.save_preview')"
+                :title="t('button.move_day_left')"
                 class="my-icon-btn"
                 :class="{ disabled: index === 0 }"
                 @click="handleMove(index, -1)"
@@ -372,7 +372,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
               </div>
               <div
                 ref="deleteRef"
-                :title="t('button.save_preview')"
+                :title="t('button.delete_day')"
                 class="my-icon-btn"
                 :class="{ disabled: currentLength === 1 }"
                 @click="handleDelete(index)"
@@ -380,7 +380,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
                 <div i-carbon-trash-can />
               </div>
               <div
-                :title="t('button.save_preview')"
+                :title="t('button.move_day_right')"
                 class="my-icon-btn"
                 :class="{ disabled: index === currentLength - 1 }"
                 @click="handleMove(index, 1)"
@@ -391,7 +391,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
           </TheDay>
           <div
             v-if="edit"
-            :title="t('button.add_plan')"
+            :title="t('button.add_day')"
             :style="{ width: `${width}px` }"
             class="flex flex-col justify-center items-start py4 my-round z-inset-box-shadow neumorphism:py8 transition-padding cursor-pointer"
             @click="handleAdd(currentLength)"

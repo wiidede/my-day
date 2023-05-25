@@ -15,6 +15,7 @@ button:
   share_preview: share & preview
   exit_preview: exit preview
   add_plan: add a plan
+  add_day: add a day
   delete_plan: delete the plan
   save_preview: save preview plan to local
   open_pure: open pure mode
@@ -24,6 +25,8 @@ button:
   saving_one: Save this one
   saving_all: Save all
   delete_day: Delete
+  move_day_left: Move left
+  move_day_right: Move right
 intro:
   desc: Opinionated Vite Starter Template
   dynamic-route: Demo of dynamic route
