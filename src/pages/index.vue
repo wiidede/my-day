@@ -333,7 +333,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
           transform: `translateX(${0 - 50 - 24}px)`,
         }"
         class="py2 neumorphism:py9 transition-padding overflow-hidden"
-        :class="{ 'the-days-mask': edit && !isIOS, 'the-days-mask-ios': edit && isIOS }"
+        :class="{ 'the-days-mask': edit && !isSafari, 'the-days-mask-ios': edit && isSafari }"
       >
         <div
           :style="{

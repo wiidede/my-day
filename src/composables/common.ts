@@ -1,3 +1,3 @@
 const userAgent = navigator.userAgent
 
-export const isIOS = userAgent.includes('iPhone') || userAgent.includes('iPad')
+export const isSafari = userAgent.includes('Safari') && !userAgent.includes('Chrome')
