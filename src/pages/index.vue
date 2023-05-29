@@ -41,7 +41,7 @@ function handleEdit() {
 const pure = ref(false)
 const togglePure = useToggle(pure)
 
-const { width } = useTheDayWidth()
+const { width, padding } = useTheDayWidth()
 const currentStoreIndex = useStorage('my-day-index', 0)
 const currentUrlIndex = ref(0)
 const currentIndex = computed({
@@ -55,7 +55,7 @@ const currentIndex = computed({
       currentStoreIndex.value = value
   },
 })
-const currentX = computed(() => -(currentIndex.value + (edit.value ? 1 : 0)) * (width.value + 24))
+const currentX = computed(() => 0 - currentIndex.value * (width.value + 24))
 const lastIndex = ref(0)
 const currentLength = computed(() => viewing.value ? (urlMyDay.value?.length || 0) : storeMyDay.value.length)
 watchEffect(() => {
@@ -192,8 +192,8 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
 </script>
 
 <template>
-  <div class="m-auto" :style="{ maxWidth: `${width}px` }">
-    <div class="mb4 flex items-center md:items-baseline justify-between px1">
+  <div class="m-auto w-full md:w-768px h-full flex flex-col items-center">
+    <div class="mb4 flex items-center md:items-baseline justify-between" :style="{ width: `${width}px` }">
       <div class="w5" />
       <div class="flex items-baseline gap2 flex-col md:flex-row" :class="{ 'flex-col-reverse md:flex-row-reverse': locale === 'zh-CN' }">
         <span class="text-4xl">{{ nowFormattedTime }}</span>
@@ -324,33 +324,21 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
     <div v-if="isSleeping" class="text-xl my2 my-c-primary">
       {{ t('my_day.sleep_time') }}
     </div>
-    <div class="neumorphism:h2 transition-height" />
-    <TheDay v-if="initializing" :model-value="getDefaultMyDay()" :pure="pure" />
+    <div v-if="initializing" class="w-full flex-auto min-h0 p-x24px flex flex-col items-center">
+      <TheDay :model-value="getDefaultMyDay()" :pure="pure" />
+    </div>
     <template v-else>
       <div
-        :style="{
-          width: `${width + 100 + 48}px`,
-          transform: `translateX(${0 - 50 - 24}px)`,
-        }"
-        class="py2 neumorphism:py9 transition-padding overflow-hidden"
-        :class="{ 'the-days-mask': edit && !isSafari, 'the-days-mask-ios': edit && isSafari }"
+        class="w-full flex-[0_1_auto] min-h0 p-x24px overflow-hidden"
+        :class="{ 'the-days-mask': isLargeScreen && edit && !isSafari, 'the-days-mask-ios': isLargeScreen && edit && isSafari }"
       >
         <div
           :style="{
-            width: `${(currentLength + 2) * (width + 24) - 24}px`,
-            transform: `translateX(${currentX + 50 + 24}px)`,
+            width: `${(currentLength) * (width + 24) - 24}px`,
+            transform: `translateX(${currentX + padding}px)`,
           }"
-          class="flex gap-24px transition-transform transition-duration-500"
+          class="max-h-full flex gap-24px transition-transform transition-duration-500"
         >
-          <div
-            v-if="edit"
-            :title="t('button.add_day')"
-            :style="{ width: `${width}px` }"
-            class="flex flex-col justify-center items-end py4 my-round z-inset-box-shadow neumorphism:py8 transition-padding cursor-pointer"
-            @click="handleAdd(0)"
-          >
-            <div i-carbon-add-alt class="mx4" />
-          </div>
           <TheDay
             v-for="(day, index) in viewing ? urlMyDay : storeMyDay"
             :key="index"
@@ -364,6 +352,23 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
             :current="index === currentIndex"
           >
             <template #actions>
+              <div
+                v-show="currentIndex === index"
+                :title="t('button.move_day_left')"
+                class="my-icon-btn mr-auto"
+                :class="{ disabled: index === 0 }"
+                @click="handleCurrentChange(index - 1)"
+              >
+                <div i-carbon-chevron-left />
+              </div>
+              <div
+                v-if="edit"
+                :title="t('button.add_day')"
+                class="my-icon-btn"
+                @click="handleAdd(0)"
+              >
+                <div i-carbon-add-alt />
+              </div>
               <div
                 :title="t('button.move_day_left')"
                 class="my-icon-btn"
@@ -389,20 +394,28 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
               >
                 <div i-carbon-arrow-right />
               </div>
+              <div
+                v-if="edit"
+                :title="t('button.add_day')"
+                class="my-icon-btn"
+                @click="handleAdd(index + 1)"
+              >
+                <div i-carbon-add-alt />
+              </div>
+              <div
+                v-show="currentIndex === index"
+                :title="t('button.move_day_left')"
+                class="my-icon-btn ml-auto"
+                :class="{ disabled: index === currentLength - 1 }"
+                @click="handleCurrentChange(index + 1)"
+              >
+                <div i-carbon-chevron-right />
+              </div>
             </template>
           </TheDay>
-          <div
-            v-if="edit"
-            :title="t('button.add_day')"
-            :style="{ width: `${width}px` }"
-            class="flex flex-col justify-center items-start py4 my-round z-inset-box-shadow neumorphism:py8 transition-padding cursor-pointer"
-            @click="handleAdd(currentLength)"
-          >
-            <div i-carbon-add-alt class="mx4" />
-          </div>
         </div>
       </div>
-      <div v-if="currentLength > 1" class="flex justify-center gap-4 my2">
+      <div v-if="currentLength > 1" class="flex justify-center gap-4 pt2 neumorphism:pt0">
         <div
           v-for="index in currentLength"
           :key="index"
@@ -428,3 +441,8 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
   -webkit-mask: var(--mask) no-repeat center / 100% 100%;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  layout: home
+</route>

@@ -13,11 +13,13 @@ export function useTheNow() {
 }
 
 export function useTheDayWidth() {
-  const { width: W } = useWindowSize()
+  const { width: w } = useWindowSize()
 
-  const width = computed(() => Math.min(W.value, 768) - 32 - 48 - 100)
+  const padding = computed(() => (isLargeScreen.value ? 50 : 0))
+  const width = computed(() => Math.min(w.value, 768) - 48 - padding.value * 2)
 
   return {
     width,
+    padding,
   }
 }

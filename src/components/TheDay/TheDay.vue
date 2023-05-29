@@ -49,80 +49,82 @@ function useFormatTime(startTime: number) {
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-4">
-    <TheInput v-if="edit" v-model="modelValue.name" class="flex-auto min-w-0 flex-0" />
-    <h1 v-else>
+  <div class="flex flex-col items-center gap-4 py1 neumorphism:pb8 max-h-full flex flex-col" :style="{ width: `${width}px` }">
+    <TheInput v-if="edit" v-model="modelValue.name" class="flex-auto min-w0 flex-0" />
+    <h1 v-else class="neumorphism:min-h-6">
       {{ modelValue.name }}
     </h1>
-    <div v-if="edit" class="shrink-0 flex justify-center gap-4">
+    <div v-if="edit" class="shrink-0 flex justify-center gap-4 w-full">
       <slot name="actions" />
     </div>
     <div
-      class="py4 text-left my-round z-inset-box-shadow neumorphism:py8 transition-padding"
+      class="flex-[0_1_auto] min-h0 text-left my-round z-inset-box-shadow transition-padding w-full"
       :class="{ 'text-center': edit }"
       :style="{
         backgroundColor: 'var(--my-box-bg)',
         backdropFilter: 'var(--my-box-backdrop-filter)',
-        width: `${width}px`,
       }"
     >
-      <TheDayItem
-        v-model:left="modelValue.wakeTime"
-        v-model:content="modelValue.wakeLabel"
-        :range="[0, 24 * 60]"
-        :formatter="useFormatTime(0)"
-        :edit="edit"
-        :pure="pure"
-      />
-      <div
-        v-if="edit && (modelValue.plans.length === 0 || (modelValue.plans[0].start > 0))"
-        class="w-full flex justify-center"
-      >
-        <div
-          :title="t('button.add_plan')"
-          class="my-icon-btn m2"
-          @click="handleAddPlan(0, 0, modelValue.plans[0]?.start || modelValue.sleepTime)"
-        >
-          <div i-carbon-add-alt />
+      <div class="h-full w-full my-round overflow-hidden">
+        <div class="h-full w-full overflow-y-auto py4 neumorphism:py8" :class="{'overflow-y-hidden': edit && pure}">
+          <TheDayItem
+            v-model:left="modelValue.wakeTime"
+            v-model:content="modelValue.wakeLabel"
+            :range="[0, 24 * 60]"
+            :formatter="useFormatTime(0)"
+            :edit="edit"
+            :pure="pure"
+          />
+          <div
+            v-if="edit && (modelValue.plans.length === 0 || (modelValue.plans[0].start > 0))"
+            class="w-full flex justify-center"
+          >
+            <div
+              :title="t('button.add_plan')"
+              class="my-icon-btn m2"
+              @click="handleAddPlan(0, 0, modelValue.plans[0]?.start || modelValue.sleepTime)"
+            >
+              <div i-carbon-add-alt />
+            </div>
+          </div>
+          <template
+            v-for="(plan, index) in modelValue.plans"
+            :key="index"
+          >
+            <TheDayItem
+              v-model:content="plan.name"
+              v-model:left="plan.start"
+              v-model:right="plan.end"
+              :range="[modelValue.plans[index - 1]?.end || 0, modelValue.plans[index + 1]?.start || modelValue.sleepTime]"
+              :progress="now >= plan.start && now < plan.end ? (now - plan.start) / (plan.end - plan.start) * 100 : undefined"
+              :formatter="useFormatTime(modelValue.wakeTime)"
+              :edit="edit"
+              :pure="pure"
+              @delete="handleDeletePlan(index)"
+            />
+            <div
+              v-if="edit && (modelValue.plans[index + 1]?.start || modelValue.sleepTime) - plan.end > 0"
+              class="w-full flex justify-center"
+            >
+              <div
+                :title="t('button.add_plan')"
+                class="my-icon-btn m2"
+                @click="handleAddPlan(index + 1, plan.end, modelValue.plans[index + 1]?.start || modelValue.sleepTime)"
+              >
+                <div i-carbon-add-alt />
+              </div>
+            </div>
+          </template>
+          <TheDayItem
+            v-model:left="modelValue.sleepTime"
+            v-model:content="modelValue.sleepLabel"
+            :range="[modelValue.plans[modelValue.plans.length - 1]?.end || modelValue.wakeTime, 24 * 60]"
+            :formatter="useFormatTime(modelValue.wakeTime)"
+            :edit="edit"
+            :pure="pure"
+          />
         </div>
       </div>
-      <template
-        v-for="(plan, index) in modelValue.plans"
-        :key="index"
-      >
-        <TheDayItem
-          v-model:content="plan.name"
-          v-model:left="plan.start"
-          v-model:right="plan.end"
-          :range="[modelValue.plans[index - 1]?.end || 0, modelValue.plans[index + 1]?.start || modelValue.sleepTime]"
-          :progress="now >= plan.start && now < plan.end ? (now - plan.start) / (plan.end - plan.start) * 100 : undefined"
-          :formatter="useFormatTime(modelValue.wakeTime)"
-          :edit="edit"
-          :pure="pure"
-          @delete="handleDeletePlan(index)"
-        />
-        <div
-          v-if="edit && (modelValue.plans[index + 1]?.start || modelValue.sleepTime) - plan.end > 0"
-          class="w-full flex justify-center"
-        >
-          <div
-            :title="t('button.add_plan')"
-            class="my-icon-btn m2"
-            @click="handleAddPlan(index + 1, plan.end, modelValue.plans[index + 1]?.start || modelValue.sleepTime)"
-          >
-            <div i-carbon-add-alt />
-          </div>
-        </div>
-      </template>
-
-      <TheDayItem
-        v-model:left="modelValue.sleepTime"
-        v-model:content="modelValue.sleepLabel"
-        :range="[modelValue.plans[modelValue.plans.length - 1]?.end || modelValue.wakeTime, 24 * 60]"
-        :formatter="useFormatTime(modelValue.wakeTime)"
-        :edit="edit"
-        :pure="pure"
-      />
     </div>
   </div>
 </template>
