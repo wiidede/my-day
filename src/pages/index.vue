@@ -38,8 +38,8 @@ function handleEdit() {
   toggleEdit()
 }
 
-const pure = ref(false)
-const togglePure = useToggle(pure)
+const { isFullscreen, toggle } = useFullscreen()
+const { isFullscreen: pure, toggle: togglePure } = inject('mainFullscreen', { isFullscreen, toggle })
 
 const { width, padding } = useTheDayWidth()
 const currentStoreIndex = useStorage('my-day-index', 0)
@@ -192,10 +192,10 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
 </script>
 
 <template>
-  <div class="m-auto w-full md:w-768px h-full flex flex-col items-center">
+  <div class="m-auto w-full md:w-768px flex-col items-center" :class="pure ? 'block h-fit' : 'flex h-full'">
     <div class="mb4 flex items-center md:items-baseline justify-between" :style="{ width: `${width}px` }">
-      <div class="w5" />
-      <div class="flex items-baseline gap2 flex-col md:flex-row" :class="{ 'flex-col-reverse md:flex-row-reverse': locale === 'zh-CN' }">
+      <div class="md:w5" />
+      <div v-show="!pure" class="flex items-baseline gap2 flex-col md:flex-row" :class="{ 'flex-col-reverse md:flex-row-reverse': locale === 'zh-CN' }">
         <span class="text-4xl">{{ nowFormattedTime }}</span>
         <span class="text-2xl">{{ nowFormattedDate }}</span>
       </div>
@@ -209,7 +209,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
           <div :class="pure ? 'i-carbon-fade' : 'i-carbon-circle-dash'" />
         </div>
         <div
-          v-if="viewing"
+          v-if="viewing && !pure"
           class="my-icon-btn"
           :title="t('button.exit_preview')"
           @click="urlMyDay = undefined"
@@ -217,7 +217,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
           <div i-carbon-exit />
         </div>
         <div
-          v-if="!initializing && !edit"
+          v-if="!initializing && !edit && !pure"
           ref="shareRef"
           :title="t('button.share_preview')"
           class="my-icon-btn"
@@ -226,7 +226,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
           <div i-carbon-share />
         </div>
         <div
-          v-if="viewing && !edit"
+          v-if="viewing && !edit && !pure"
           ref="saveRef"
           :title="t('button.save_preview')"
           class="my-icon-btn"
@@ -303,11 +303,11 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
         </div>
       </div>
     </div>
-    <div v-if="viewing" class="text-4 my4 flex items-center justify-center gap-2 op-50">
+    <div v-if="viewing" v-show="!pure" class="text-4 my4 flex items-center justify-center gap-2 op-50">
       <div i-carbon-view />
       {{ t('my_day.viewing') }}
     </div>
-    <div v-if="isClient && isSleeping" class="z--1 fixed top-0 right-0 bottom-0 left-0">
+    <div v-if="isClient && isSleeping" v-show="!pure" class="z--1 fixed top-0 right-0 bottom-0 left-0">
       <div
         v-for="(moon, index) in moons"
         :key="index"
@@ -321,10 +321,14 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
         }"
       />
     </div>
-    <div v-if="isSleeping" class="text-xl my2 my-c-primary">
+    <div v-if="isSleeping" v-show="!pure" class="text-xl my2 my-c-primary">
       {{ t('my_day.sleep_time') }}
     </div>
-    <div v-if="initializing" class="w-full flex-auto min-h0 p-x24px flex flex-col items-center">
+    <div
+      v-if="initializing"
+      class="w-full flex-auto min-h0 p-x24px flex flex-col items-center"
+      :class="{ block: pure }"
+    >
       <TheDay :model-value="getDefaultMyDay()" :pure="pure" />
     </div>
     <template v-else>
@@ -418,6 +422,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
       <div v-if="currentLength > 1" class="flex justify-center gap-4 pt2 neumorphism:pt0">
         <div
           v-for="index in currentLength"
+          v-show="!pure"
           :key="index"
           class="rd-full w-4 h-4 cursor-pointer bg-gray/20"
           :class="{ 'my-bg-primary': index - 1 === currentIndex }"

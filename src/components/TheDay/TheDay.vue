@@ -49,12 +49,16 @@ function useFormatTime(startTime: number) {
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-4 py1 neumorphism:pb8 max-h-full flex flex-col" :style="{ width: `${width}px` }">
-    <TheInput v-if="edit" v-model="modelValue.name" class="flex-auto min-w0 flex-0" />
-    <h1 v-else class="neumorphism:min-h-6">
+  <div
+    class="flex-col items-center gap-4 py1 neumorphism:pb8 max-h-full"
+    :class="pure ? 'block' : 'flex'"
+    :style="{ width: `${width}px` }"
+  >
+    <TheInput v-if="edit" v-show="!pure" v-model="modelValue.name" class="flex-auto min-w0 flex-0" />
+    <h1 v-else v-show="!pure" class="neumorphism:min-h-6">
       {{ modelValue.name }}
     </h1>
-    <div v-if="edit" class="shrink-0 flex justify-center gap-4 w-full">
+    <div v-if="edit" v-show="!pure" class="shrink-0 flex justify-center gap-4 w-full">
       <slot name="actions" />
     </div>
     <div
@@ -66,7 +70,7 @@ function useFormatTime(startTime: number) {
       }"
     >
       <div class="h-full w-full my-round overflow-hidden">
-        <div class="h-full w-full overflow-y-auto py4 neumorphism:py8" :class="{'overflow-y-hidden': edit && pure}">
+        <div class="h-full w-full overflow-y-auto py4 neumorphism:py8" :class="{ 'overflow-y-hidden': edit && pure }">
           <TheDayItem
             v-model:left="modelValue.wakeTime"
             v-model:content="modelValue.wakeLabel"
