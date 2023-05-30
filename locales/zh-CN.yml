@@ -15,7 +15,7 @@ button:
   share_preview: 分享并预览
   exit_preview: 退出预览模式
   add_plan: 添加一项计划
-  add_day: 添加一天
+  add_day: 添加一日
   delete_plan: 删除这个计划
   save_preview: 保存预览的计划到本地
   open_pure: 开启纯净模式
@@ -24,9 +24,11 @@ button:
   sharing_all: 分享全部
   saving_one: 保存此条
   saving_all: 保存全部
-  delete_day: 删除这一天
+  delete_day: 删除这一日
   move_day_left: 左移
   move_day_right: 右移
+  prev_day: 前一日
+  next_day: 后一日
 intro:
   desc: 固执己见的 Vite 项目模板
   dynamic-route: 动态路由演示

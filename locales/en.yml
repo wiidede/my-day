@@ -10,16 +10,16 @@ button:
   toggle_theme: Toggle theme
   toggle_langs: Change languages
   toggle_color: Change theme color
-  edit: edit
-  complete: complete
-  share_preview: share & preview
-  exit_preview: exit preview
-  add_plan: add a plan
-  add_day: add a day
-  delete_plan: delete the plan
-  save_preview: save preview plan to local
-  open_pure: open pure mode
-  close_pure: close pure mode
+  edit: Edit
+  complete: Complete
+  share_preview: Share & Preview
+  exit_preview: Exit preview
+  add_plan: Add a plan
+  add_day: Add a day
+  delete_plan: Delete the plan
+  save_preview: Save preview plan to local
+  open_pure: Open pure mode
+  close_pure: Close pure mode
   sharing_one: Share this one
   sharing_all: Share all
   saving_one: Save this one
@@ -27,6 +27,8 @@ button:
   delete_day: Delete
   move_day_left: Move left
   move_day_right: Move right
+  prev_day: Previous day
+  next_day: Next day
 intro:
   desc: Opinionated Vite Starter Template
   dynamic-route: Demo of dynamic route

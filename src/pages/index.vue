@@ -365,7 +365,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
             <template #actions>
               <div
                 v-show="currentIndex === index"
-                :title="t('button.move_day_left')"
+                :title="t('button.prev_day')"
                 class="my-icon-btn mr-auto"
                 :class="{ disabled: index === 0 }"
                 @click="handleCurrentChange(index - 1)"
@@ -415,7 +415,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
               </div>
               <div
                 v-show="currentIndex === index"
-                :title="t('button.move_day_left')"
+                :title="t('button.next_day')"
                 class="my-icon-btn ml-auto"
                 :class="{ disabled: index === currentLength - 1 }"
                 @click="handleCurrentChange(index + 1)"
