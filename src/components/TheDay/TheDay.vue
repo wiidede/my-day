@@ -54,7 +54,7 @@ function useFormatTime(startTime: number) {
     :style="{ width: `${width}px` }"
   >
     <TheInput v-if="edit" v-model="modelValue.name" class="flex-auto min-w0 flex-0" />
-    <h1 v-else v-show="!pure" class="neumorphism:min-h-6">
+    <h1 v-else class="neumorphism:min-h-6" :class="{ 'text-2xl': pure }">
       {{ modelValue.name }}
     </h1>
     <div v-if="edit" v-show="!pure" class="shrink-0 flex justify-center gap-4 w-full">

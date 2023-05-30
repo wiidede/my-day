@@ -210,18 +210,18 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
 
 <template>
   <div class="m-auto w-full md:w-768px flex flex-col items-center">
-    <div class="mb4 flex items-center md:items-baseline justify-between" :style="{ width: `${width}px` }">
-      <div class="md:w5" />
+    <div
+      class="mb4 flex items-center md:items-baseline justify-between md:justify-center relative"
+      :style="{ width: pure ? 'fit-content' : `${width}px` }"
+      :class="{ 'absolute top-4 self-end mr-24px z-1 md:mr-0': pure }"
+    >
       <div v-show="!pure" class="flex items-baseline gap2 flex-col md:flex-row" :class="{ 'flex-col-reverse md:flex-row-reverse': locale === 'zh-CN' }">
         <span class="text-4xl">{{ nowFormattedTime }}</span>
         <span class="text-2xl">{{ nowFormattedDate }}</span>
       </div>
-      <h1 v-show="pure" class="text-2xl">
-        {{ initializing ? t('my_day.title') : viewing ? urlMyDay?.[currentIndex]?.name : storeMyDay?.[currentIndex]?.name }}
-      </h1>
-      <div class="flex gap2">
+      <div class="flex gap2 md:absolute right-0 h-full items-center">
         <div
-          v-if="!edit"
+          v-if="!edit && !viewing"
           class="my-icon-btn"
           :title="pure ? t('button.close_pure') : t('button.open_pure')"
           @click="togglePure()"
@@ -325,7 +325,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
           </template>
         </Teleport>
         <div
-          v-if="!pure"
+          v-if="!pure && !viewing"
           :title="edit ? t('button.complete') : t('button.edit')"
           class="my-icon-btn"
           @click="handleEdit()"
