@@ -38,8 +38,12 @@ function handleEdit() {
   toggleEdit()
 }
 
-const { isFullscreen, toggle } = useFullscreen()
-const { isFullscreen: pure, toggle: togglePure } = inject('mainFullscreen', { isFullscreen, toggle })
+const toggleShowHeader = inject(showHeaderKey)
+const pure = ref(false)
+const togglePure = useToggle(pure)
+watch(pure, (val) => {
+  toggleShowHeader?.(!val)
+})
 
 const { width, padding } = useTheDayWidth()
 const currentStoreIndex = useStorage('my-day-index', 0)
@@ -192,13 +196,16 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
 </script>
 
 <template>
-  <div class="m-auto w-full md:w-768px flex-col items-center" :class="pure ? 'block h-fit' : 'flex h-full'">
+  <div class="m-auto w-full md:w-768px flex flex-col items-center">
     <div class="mb4 flex items-center md:items-baseline justify-between" :style="{ width: `${width}px` }">
       <div class="md:w5" />
       <div v-show="!pure" class="flex items-baseline gap2 flex-col md:flex-row" :class="{ 'flex-col-reverse md:flex-row-reverse': locale === 'zh-CN' }">
         <span class="text-4xl">{{ nowFormattedTime }}</span>
         <span class="text-2xl">{{ nowFormattedDate }}</span>
       </div>
+      <h1 v-show="pure" class="text-2xl">
+        {{ initializing ? t('my_day.title') : viewing ? urlMyDay?.[currentIndex]?.name : storeMyDay?.[currentIndex]?.name }}
+      </h1>
       <div class="flex gap2">
         <div
           v-if="!edit"
@@ -326,14 +333,14 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
     </div>
     <div
       v-if="initializing"
-      class="w-full flex-auto min-h0 p-x24px flex flex-col items-center"
+      class="w-full p-x24px flex flex-col items-center"
       :class="{ block: pure }"
     >
       <TheDay :model-value="getDefaultMyDay()" :pure="pure" />
     </div>
     <template v-else>
       <div
-        class="w-full flex-[0_1_auto] min-h0 p-x24px overflow-hidden"
+        class="w-full p-x24px overflow-hidden"
         :class="{ 'the-days-mask': isLargeScreen && edit && !isSafari, 'the-days-mask-ios': isLargeScreen && edit && isSafari }"
       >
         <div
@@ -341,7 +348,7 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
             width: `${(currentLength) * (width + 24) - 24}px`,
             transform: `translateX(${currentX + padding}px)`,
           }"
-          class="max-h-full flex gap-24px transition-transform transition-duration-500"
+          class="flex gap-24px transition-transform transition-duration-500"
         >
           <TheDay
             v-for="(day, index) in viewing ? urlMyDay : storeMyDay"
