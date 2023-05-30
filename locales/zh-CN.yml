@@ -4,6 +4,7 @@ button:
   help: 帮助
   back: 返回
   go: 确定
+  confirm: 确认
   cancel: 取消
   home: 首页
   toggle_dark: 切换深色模式
@@ -51,6 +52,7 @@ my_day:
   share_info: 分享链接已经复制到剪贴板了
   saving_text: 保存预览内容到本地
   save_info: 保存成功
-  delete_day_text: 是否要删除这一天
+  delete_day_text: 是否要删除这一日
   delete_day_info: 删除成功
+  add_one_day: 添加一日
 not-found: 404 未找到页面

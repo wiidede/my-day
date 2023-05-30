@@ -4,6 +4,7 @@ button:
   help: Help
   back: Back
   go: GO
+  confirm: Confirm
   cancel: Cancel
   home: Home
   toggle_dark: Toggle dark mode
@@ -53,4 +54,5 @@ my_day:
   save_info: Save successfully
   delete_day_text: Are you sure to delete this day
   delete_day_info: Delete successfully
+  add_one_day: Add one day
 not-found: 404 Not found

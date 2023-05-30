@@ -55,5 +55,4 @@ eNpVzUEOwiAQBdCrkNm4YYHVNIEzuHRnuhjTqSVSJAXTRMPdBUwr7uYn7/+5vGHBO531RKCOjeAlnvBK
 
 ### TODO
 
-- [ ] 左右点击可以切换day
 - [ ] transform 过渡动画

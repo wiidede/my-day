@@ -79,8 +79,11 @@ async function handleCurrentChange(index: number) {
 
 const shareRef = ref<HTMLElement>()
 const saveRef = ref<HTMLElement>()
+const dayContainerRef = ref<HTMLElement>()
 const deleteRef = ref<HTMLElement[]>([])
-const floatModel = ref<'sharing' | 'shared' | 'saving' | 'saved' | 'deleting' | 'deleted'>()
+const addingLeftRef = ref<HTMLElement>()
+const addingRightRef = ref<HTMLElement>()
+const floatModel = ref<'sharing' | 'shared' | 'saving' | 'saved' | 'deleting' | 'deleted' | 'addingLeft' | 'addingRight'>()
 const floatRef = computed(() => {
   switch (floatModel.value) {
     case 'sharing':
@@ -90,8 +93,13 @@ const floatRef = computed(() => {
     case 'saved':
       return saveRef.value
     case 'deleting':
-    case 'deleted':
       return deleteRef.value[currentIndex.value]
+    case 'deleted':
+      return dayContainerRef.value
+    case 'addingLeft':
+      return addingLeftRef.value
+    case 'addingRight':
+      return addingRightRef.value
   }
 })
 const { startFloating, endFloating, floatingRef } = useFloating(floatRef)
@@ -155,7 +163,12 @@ const currentStore = computed({
   },
 })
 
-function handleAdd(index: number) {
+function handleAdd(type: 'addingLeft' | 'addingRight') {
+  floatModel.value = type
+  startFloating()
+}
+
+function onAdd(index: number) {
   if (!currentStore.value)
     return
   currentStore.value.splice(index, 0, getDefaultMyDay())
@@ -256,13 +269,13 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
               </button>
             </div>
           </template>
-          <template v-if="floatModel === 'shared'">
+          <template v-else-if="floatModel === 'shared'">
             <div class="flex gap2 items-center my-c-success/67">
               <div i-carbon-checkmark-outline class="flex-shrink-0" />
               <div>{{ t('my_day.share_info') }}</div>
             </div>
           </template>
-          <template v-if="floatModel === 'saving'">
+          <template v-else-if="floatModel === 'saving'">
             <div class="flex flex-col gap2 items-center p4">
               <div>{{ t('my_day.saving_text') }}</div>
               <button class="btn w-fit" @click="onSave(currentIndex)">
@@ -276,13 +289,13 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
               </button>
             </div>
           </template>
-          <template v-if="floatModel === 'saved'">
+          <template v-else-if="floatModel === 'saved'">
             <div class="flex gap2 items-center my-c-success/67">
               <div i-carbon-checkmark-outline class="flex-shrink-0" />
               <div>{{ t('my_day.save_info') }}</div>
             </div>
           </template>
-          <template v-if="floatModel === 'deleting'">
+          <template v-else-if="floatModel === 'deleting'">
             <div class="flex flex-col gap2 items-center p4">
               <div>{{ t('my_day.delete_day_text') }}</div>
               <button class="btn w-fit" @click="onDelete()">
@@ -293,10 +306,21 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
               </button>
             </div>
           </template>
-          <template v-if="floatModel === 'deleted'">
+          <template v-else-if="floatModel === 'deleted'">
             <div class="flex gap2 items-center my-c-success/67">
               <div i-carbon-checkmark-outline class="flex-shrink-0" />
               <div>{{ t('my_day.delete_day_info') }}</div>
+            </div>
+          </template>
+          <template v-else-if="floatModel === 'addingLeft' || floatModel === 'addingRight'">
+            <div class="flex flex-col gap2 items-center p4">
+              <div>{{ t('my_day.add_one_day') }}</div>
+              <button class="btn w-fit" @click="onAdd(floatModel === 'addingLeft' ? 0 : currentLength)">
+                {{ t('button.confirm') }}
+              </button>
+              <button class="btn w-fit" @click="handleCancel">
+                {{ t('button.cancel') }}
+              </button>
             </div>
           </template>
         </Teleport>
@@ -339,91 +363,137 @@ const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => (
       <TheDay :model-value="getDefaultMyDay()" :pure="pure" />
     </div>
     <template v-else>
-      <div
-        class="w-full p-x24px overflow-hidden"
-        :class="{ 'the-days-mask': isLargeScreen && edit && !isSafari, 'the-days-mask-ios': isLargeScreen && edit && isSafari }"
-      >
+      <div ref="dayContainerRef" class="w-full relative">
         <div
-          :style="{
-            width: `${(currentLength) * (width + 24) - 24}px`,
-            transform: `translateX(${currentX + padding}px)`,
-          }"
-          class="flex gap-24px transition-transform transition-duration-500"
+          class="w-full p-x24px overflow-hidden"
+          :class="{ 'the-days-mask': isLargeScreen && edit && !isSafari, 'the-days-mask-ios': isLargeScreen && edit && isSafari }"
         >
-          <TheDay
-            v-for="(day, index) in viewing ? urlMyDay : storeMyDay"
-            :key="index"
-            :model-value="day"
-            :edit="edit"
-            :pure="pure || !(index === currentIndex || (index === lastIndex && currentTransforming))"
-            :class="{
-              'h-0': !(index === currentIndex || (index === lastIndex && currentTransforming)),
-              'op-0': !edit && !(index === currentIndex || (index === lastIndex && currentTransforming)),
+          <div
+            :style="{
+              width: `${(currentLength) * (width + 24) - 24}px`,
+              transform: `translateX(${currentX + padding}px)`,
             }"
-            :current="index === currentIndex"
+            class="flex gap-24px transition-transform transition-duration-500"
           >
-            <template #actions>
-              <div
-                v-show="currentIndex === index"
-                :title="t('button.prev_day')"
-                class="my-icon-btn mr-auto"
-                :class="{ disabled: index === 0 }"
-                @click="handleCurrentChange(index - 1)"
-              >
-                <div i-carbon-chevron-left />
-              </div>
-              <div
-                v-if="edit"
-                :title="t('button.add_day')"
-                class="my-icon-btn"
-                @click="handleAdd(0)"
-              >
-                <div i-carbon-add-alt />
-              </div>
-              <div
-                :title="t('button.move_day_left')"
-                class="my-icon-btn"
-                :class="{ disabled: index === 0 }"
-                @click="handleMove(index, -1)"
-              >
-                <div i-carbon-arrow-left />
-              </div>
-              <div
-                ref="deleteRef"
-                :title="t('button.delete_day')"
-                class="my-icon-btn"
-                :class="{ disabled: currentLength === 1 }"
-                @click="handleDelete(index)"
-              >
-                <div i-carbon-trash-can />
-              </div>
-              <div
-                :title="t('button.move_day_right')"
-                class="my-icon-btn"
-                :class="{ disabled: index === currentLength - 1 }"
-                @click="handleMove(index, 1)"
-              >
-                <div i-carbon-arrow-right />
-              </div>
-              <div
-                v-if="edit"
-                :title="t('button.add_day')"
-                class="my-icon-btn"
-                @click="handleAdd(index + 1)"
-              >
-                <div i-carbon-add-alt />
-              </div>
-              <div
-                v-show="currentIndex === index"
-                :title="t('button.next_day')"
-                class="my-icon-btn ml-auto"
-                :class="{ disabled: index === currentLength - 1 }"
-                @click="handleCurrentChange(index + 1)"
-              >
-                <div i-carbon-chevron-right />
-              </div>
-            </template>
-          </TheDay>
+            <TheDay
+              v-for="(day, index) in viewing ? urlMyDay : storeMyDay"
+              :key="index"
+              :model-value="day"
+              :edit="edit"
+              :pure="pure || !(index === currentIndex || (index === lastIndex && currentTransforming))"
+              :class="{
+                'h-0': !(index === currentIndex || (index === lastIndex && currentTransforming)),
+                'op-0': !edit && !(index === currentIndex || (index === lastIndex && currentTransforming)),
+              }"
+              :current="index === currentIndex"
+            >
+              <template #actions>
+                <div
+                  v-show="currentIndex === index"
+                  :title="t('button.prev_day')"
+                  class="my-icon-btn mr-auto"
+                  :class="{ disabled: index === 0 }"
+                  @click="handleCurrentChange(index - 1)"
+                >
+                  <div i-carbon-chevron-left />
+                </div>
+                <div
+                  v-if="edit"
+                  :title="t('button.add_day')"
+                  class="my-icon-btn"
+                  @click="onAdd(index)"
+                >
+                  <div i-carbon-add-alt />
+                </div>
+                <div
+                  :title="t('button.move_day_left')"
+                  class="my-icon-btn"
+                  :class="{ disabled: index === 0 }"
+                  @click="handleMove(index, -1)"
+                >
+                  <div i-carbon-arrow-left />
+                </div>
+                <div
+                  ref="deleteRef"
+                  :title="t('button.delete_day')"
+                  class="my-icon-btn"
+                  :class="{ disabled: currentLength === 1 }"
+                  @click="handleDelete(index)"
+                >
+                  <div i-carbon-trash-can />
+                </div>
+                <div
+                  :title="t('button.move_day_right')"
+                  class="my-icon-btn"
+                  :class="{ disabled: index === currentLength - 1 }"
+                  @click="handleMove(index, 1)"
+                >
+                  <div i-carbon-arrow-right />
+                </div>
+                <div
+                  v-if="edit"
+                  :title="t('button.add_day')"
+                  class="my-icon-btn"
+                  @click="onAdd(index + 1)"
+                >
+                  <div i-carbon-add-alt />
+                </div>
+                <div
+                  v-show="currentIndex === index"
+                  :title="t('button.next_day')"
+                  class="my-icon-btn ml-auto"
+                  :class="{ disabled: index === currentLength - 1 }"
+                  @click="handleCurrentChange(index + 1)"
+                >
+                  <div i-carbon-chevron-right />
+                </div>
+              </template>
+            </TheDay>
+          </div>
+        </div>
+        <div v-if="edit" class="absolute left-0 top-0 h-full w-50px">
+          <div
+            v-if="currentIndex !== 0"
+            :title="t('button.prev_day')"
+            class="h-full w-full flex items-center justify-center cursor-pointer op-50 hover:op-90 hover:my-bg-white"
+            @click="handleCurrentChange(currentIndex - 1)"
+          >
+            <div class="my-icon-btn">
+              <div i-carbon-chevron-left />
+            </div>
+          </div>
+          <div
+            v-else
+            :title="t('button.add_day')"
+            class="h-full w-full flex items-center justify-center cursor-pointer op-50 hover:op-90 hover:my-bg-white"
+            @click="handleAdd('addingLeft')"
+          >
+            <div ref="addingLeftRef" class="my-icon-btn">
+              <div i-carbon-add-alt />
+            </div>
+          </div>
+        </div>
+        <div v-if="edit" class="absolute right-0 top-0 h-full w-50px">
+          <div
+            v-if="currentIndex !== currentLength - 1"
+            :title="t('button.next_day')"
+            class="h-full w-full flex items-center justify-center cursor-pointer op-50 hover:op-90 hover:my-bg-white"
+            @click="handleCurrentChange(currentIndex + 1)"
+          >
+            <div class="my-icon-btn">
+              <div i-carbon-chevron-right />
+            </div>
+          </div>
+          <div
+            v-else
+            :title="t('button.add_day')"
+            class="h-full w-full flex items-center justify-center cursor-pointer op-50 hover:op-90 hover:my-bg-white"
+            @click="handleAdd('addingRight')"
+          >
+            <div ref="addingRightRef" class="my-icon-btn">
+              <div i-carbon-add-alt />
+            </div>
+          </div>
         </div>
       </div>
       <div v-if="currentLength > 1" class="flex justify-center gap-4 pt2 neumorphism:pt0">
