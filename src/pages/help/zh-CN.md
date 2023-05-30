@@ -25,12 +25,12 @@ title: 帮助
 
 - 当你第一次编辑计划时，建优先设置一个起床时间。这是一天的基础。
 
-- 您可以将预览模式的计划保存到本地，但之前的本地数据将会丢失。
+- 你可以添加多个计划。如果将预览模式的数据保存到浏览器中，这些计划将添加到现有的计划后面。
 
 - Url hash格式应该如下：
 
 ```txt
-eNqLrlYqT8xODcnMTVWyMjEy0AFzfRKTUnOUrJRebN3+dFeXko5ScU5qagFEkaUZUBGYD1P1fO7CF8s7gaoKchLzipWsgGbmJYKUKj3b2PR07TKQ/pLEohIlK2Og1tS8FCUrM4NaHbiqpxOaXy5di1AFsgCsyhJZ1ZM9E5+1rUSosoSpMjRCVvZy6pwnO9a+6Nqo8HRZ07MNW1409DybuhihDagabrpBbWxtLAAYe2Dx
+#eNqLrlYqT8xODcnMTVWyMjEy0AFzfRKTUnOUrJRebN3+dFeXko5ScU5qagFEkaUZUBGYD1P1fO7CF8s7garyEkEKlJ7saHg2femzrY1PW0GiBTmJecVKVkCboPLPNjY9XbsMZGpJYlGJkpUx0MDUvBQlKzODWh24qqcTml8uXYtQBbIWrMoSWdWTPROfta1EqLKEqTI0Qlb2cuqcJzvWvujaqPB0WdOzDVteNPQ8m7oYoQ2oGm66QW1sbSwAtJprzQ==
 ```
 
 - LocalStorage格式应该如下：
@@ -42,6 +42,7 @@ eNqLrlYqT8xODcnMTVWyMjEy0AFzfRKTUnOUrJRebN3+dFeXko5ScU5qagFEkaUZUBGYD1P1fO7CF8s7
     "wakeLabel": "起床",
     "sleepTime": 960,
     "sleepLabel": "睡觉",
+    "name": "一日流光",
     "plans": [
       { "name": "求学", "start": 30, "end": 60 },
       { "name": "吃饭", "start": 60, "end": 90 },

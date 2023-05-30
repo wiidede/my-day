@@ -22,12 +22,12 @@ Preview mode is activated when the URL has a hash, and your plan will be synced 
 
 - When editing your plan for the first time, it is advisable to ensure that you have set a wake time. This is the basis of a day.
 
-- You can save the preview plan data to local, but the previous local data will lost at the same time
+- You can add more than one plan, if you save the preview mode data to your browser, the plan(s) will append to the existing plan(s).
 
 - The hash data should be as follows:
 
 ```txt
-eNpVzUEOwiAQBdCrkNm4YYHVNIEzuHRnuhjTqSVSJAXTRMPdBUwr7uYn7/+5vGHBO531RKCOjeAlnvBKBlS52dMBB2+I3FfJNqmSV1ZCQs6g9aDSpsUswRDOVttbHgg4B1CH1CXbg2pF5JsjDH8qfyhK1qrHF/2MXM2+qdEyYth5FkZiE2F+zh4DM3qoqqmx7YvYxe4DkaNR8w==
+#eNqLrlYqT8xODcnMTVWyMjEy0AFzfRKTUnOUrMBshdICJR2l4pzU1AKIKkszoCowH6YMzAEqyksEySv556UquCRWKrjlVGbmpQPFC3IS84qVrIB2QVXkpCYW5UHkiksSi0qUrIyBZqbmpShZmRnU6sDVpSaWoKgC2QxWZYmsKiWxKhWhxhKmxtAIWVF5RmKJerFCSUaqQm5qIshyhfw0hZzMNCStQB1w8w1qY0G68QTOi63bn+7qIhQ2z+cufLG8ExE4T3Y0PJu+9NnWxqetIFGMoHm2senp2mWEAubphOaXS9cSCpgneyY+a1tJMGheTp3zZMfaF10bFZ4ua3q2YcuLhp5nUxfjDpZYADhyxKs=
 ```
 
 - The localStorage data should be as follows:
@@ -39,11 +39,25 @@ eNpVzUEOwiAQBdCrkNm4YYHVNIEzuHRnuhjTqSVSJAXTRMPdBUwr7uYn7/+5vGHBO531RKCOjeAlnvBK
     "wakeLabel": "wake up",
     "sleepTime": 960,
     "sleepLabel": "sleep",
+    "name": "One Day Flying",
     "plans": [
       { "name": "learning", "start": 30, "end": 60 },
       { "name": "eating", "start": 60, "end": 90 },
       { "name": "daze", "start": 90, "end": 120 },
       { "name": "what's the meaning of life", "start": 120, "end": 900 }
+    ]
+  },
+  {
+    "wakeTime": 420,
+    "wakeLabel": "起床",
+    "sleepTime": 960,
+    "sleepLabel": "睡觉",
+    "name": "一日流光",
+    "plans": [
+      { "name": "求学", "start": 30, "end": 60 },
+      { "name": "吃饭", "start": 60, "end": 90 },
+      { "name": "休憩", "start": 90, "end": 120 },
+      { "name": "镜中花 如水而散", "start": 120, "end": 900 }
     ]
   }
 ]

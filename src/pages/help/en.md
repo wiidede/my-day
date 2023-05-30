@@ -25,12 +25,12 @@ Preview mode is activated when the URL has a hash, and your plan will be synced 
 
 - When editing your plan for the first time, it is advisable to ensure that you have set a wake time. This is the basis of a day.
 
-- You can save the preview plan data to local, but the previous local data will lost at the same time
+- You can add more than one plan, if you save the preview mode data to your browser, the plan(s) will append to the existing plan(s).
 
 - The hash data should be as follows:
 
 ```txt
-eNpVzUEOwiAQBdCrkNm4YYHVNIEzuHRnuhjTqSVSJAXTRMPdBUwr7uYn7/+5vGHBO531RKCOjeAlnvBKBlS52dMBB2+I3FfJNqmSV1ZCQs6g9aDSpsUswRDOVttbHgg4B1CH1CXbg2pF5JsjDH8qfyhK1qrHF/2MXM2+qdEyYth5FkZiE2F+zh4DM3qoqqmx7YvYxe4DkaNR8w==
+#eNpVzbEOgjAQBuBXudziwoBoSOhsnExc3AzDGQ4hlkpoDUHDu9sWwbL17313//WDPT34UjeMYp/EkY8nurFE4d/wajFCLZnbSWWpVT7PzAeLFLk5nhXDgQY4yqFWd/vfSlIahe36CcnUqWmmDXUGxc7eZFWgSOMxWhyTWSnX7FUWqoLe/DfZbLZJiPqKzEaDqRgaJlcOzxJkXQardmO5H4/5mH8BpLVZaw==
 ```
 
 - The localStorage data should be as follows:
@@ -42,6 +42,7 @@ eNpVzUEOwiAQBdCrkNm4YYHVNIEzuHRnuhjTqSVSJAXTRMPdBUwr7uYn7/+5vGHBO531RKCOjeAlnvBK
     "wakeLabel": "wake up",
     "sleepTime": 960,
     "sleepLabel": "sleep",
+    "name": "One Day Flying",
     "plans": [
       { "name": "learning", "start": 30, "end": 60 },
       { "name": "eating", "start": 60, "end": 90 },
