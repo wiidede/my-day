@@ -87,25 +87,23 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit 
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .the-time-range {
   width: 100%;
   --at-apply: shadow;
-  background: hsl(var(--my-c-primary-hsl) / 50%);
+  background: hsl(var(--my-c-primary-hsl)/50%);
   border-radius: 4px;
   height: 0.4rem;
   box-shadow: var(--my-track-box-shadow);
-
-  :deep(.the-range-thumb) {
-    height: 0.75rem;
-    width: 0.75rem;
-    background-color: var(--my-c-white);
-    border: 1px solid var(--my-c-primary);
-  }
-
-  :deep(.the-range-progress) {
-    background-color: var(--my-c-primary);
-    box-shadow: var(--my-thumb-box-shadow);
-  }
+}
+.the-time-range :deep(.the-range-thumb) {
+  height: 0.75rem;
+  width: 0.75rem;
+  background-color: var(--my-c-white);
+  border: 1px solid var(--my-c-primary);
+}
+.the-time-range :deep(.the-range-progress) {
+  background-color: var(--my-c-primary);
+  box-shadow: var(--my-thumb-box-shadow);
 }
 </style>

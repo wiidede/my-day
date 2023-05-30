@@ -53,7 +53,7 @@ function onPointerDown(e: PointerEvent) {
   />
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .the-range-thumb {
   transform: translate(-50%, -25%) scale(1.5);
   transform-origin: center;

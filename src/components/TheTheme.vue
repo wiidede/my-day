@@ -21,7 +21,7 @@ onClickOutside(rangeRef, () => {
   </button>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .the-theme-range {
   --rainbow-gradient: linear-gradient(to right,
       hsl(0 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
@@ -35,15 +35,14 @@ onClickOutside(rangeRef, () => {
   background: var(--rainbow-gradient);
   border-radius: 2px;
   height: 0.75rem;
-
-  :deep(.the-range-thumb) {
-    height: 0.75rem;
-    width: 0.75rem;
-    border-radius: 0.25rem;
-    background-color: var(--my-c-primary);
-    box-shadow: 0 0.5px 2px 0 var(--my-c-primary), inset 0 0 0.5px 0.5px rgba(var(--my-c-black-rgb), 0.4);
-    border: 0;
-    transform: translateX(-50%) scale(2);
-  }
+}
+.the-theme-range :deep(.the-range-thumb) {
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 0.25rem;
+  background-color: var(--my-c-primary);
+  box-shadow: 0 0.5px 2px 0 var(--my-c-primary), inset 0 0 0.5px 0.5px rgba(var(--my-c-black-rgb), 0.4);
+  border: 0;
+  transform: translateX(-50%) scale(2);
 }
 </style>
