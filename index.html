@@ -12,6 +12,9 @@
       const setting = localStorage.getItem('vueuse-color-scheme') || 'auto'
       if (setting === 'dark' || (prefersDark && setting !== 'light'))
         document.documentElement.classList.toggle('dark', true)
+      const theme = localStorage.getItem('my-day-theme') || ''
+      if (theme)
+        document.documentElement.setAttribute('theme', theme)
     })()
   </script>
 </head>
