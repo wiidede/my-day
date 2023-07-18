@@ -29,6 +29,9 @@ jobs:
       - name: Typecheck
         run: pnpm run typecheck
 
+      - name: Unit Test
+        run: pnpm run test:unit run
+
   # test:
   #   runs-on: ${{ matrix.os }}
 
