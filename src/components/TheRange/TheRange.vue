@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { theRangeTrackRefKey } from './TheRange'
+import { getPercentage as getPercentageRaw, getValue as getValueRaw, theRangeTrackRefKey } from './TheRange'
 
 const props = withDefaults(defineProps<{
   modelValue?: number | [number, number]
@@ -29,45 +29,21 @@ const trackRef = ref<HTMLElement>()
 
 const points = computed(() => Math.floor((props.max - props.min) / props.step) + 1)
 
-function getValue(percentage: number) {
-  const min = props.min
-  const max = props.max
-  const step = props.step
-  if (min === undefined || max === undefined || step === undefined)
-    return 0
-  if (percentage < 0)
-    return min
-  if (percentage > 100)
-    return max
-  const value = min + (max - min) * percentage / 100
-  return Math.round(value / step) * step
-}
-function getPercentage(value: number) {
-  const min = props.min
-  const max = props.max
-  const step = props.step / (max - min)
-  if (min === undefined || max === undefined || step === undefined)
-    return 0
-  if (value < min)
-    return 0
-  if (value > max)
-    return 100
-  const percentage = (value - min) / (max - min) * 100
-  return Math.round(percentage / step) * step
-}
+const getPercentage = computed(() => (value: number) => getPercentageRaw(value, props.min, props.max, props.step))
+const getValue = computed(() => (percentage: number) => getValueRaw(percentage, props.min, props.max, props.step))
 
 const position = computed(() => {
   return Array.isArray(model.value)
-    ? model.value.map(getPercentage)
-    : getPercentage(model.value || 0)
+    ? model.value.map(getPercentage.value)
+    : getPercentage.value(model.value || 0)
 })
 
 const reversing = ref(false)
 const positionThumb = computed(() => {
   return Array.isArray(model.value)
     ? reversing.value
-      ? model.value.map(getPercentage).reverse()
-      : model.value.map(getPercentage)
+      ? model.value.map(getPercentage.value).reverse()
+      : model.value.map(getPercentage.value)
     : []
 })
 
@@ -78,7 +54,7 @@ function setCurrent(val: typeof current) {
 function onUpdateRange(percentage: number) {
   if (!Array.isArray(model.value))
     return
-  percentage = getValue(percentage)
+  percentage = getValue.value(percentage)
   let left = model.value[0]
   let right = model.value[1]
 
@@ -109,7 +85,7 @@ function onUpdateRange(percentage: number) {
 }
 
 function onUpdateSingle(percentage: number) {
-  model.value = getValue(percentage)
+  model.value = getValue.value(percentage)
 }
 
 provide(theRangeTrackRefKey, trackRef)
