@@ -19,6 +19,7 @@
     "@unocss/reset": "^0.53.5",
     "@vueuse/core": "^10.2.1",
     "@vueuse/head": "^1.1.26",
+    "dayjs": "^1.11.9",
     "fflate": "^0.8.0",
     "nprogress": "^0.2.0",
     "vue": "^3.3.4",
