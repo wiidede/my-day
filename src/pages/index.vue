@@ -200,7 +200,7 @@ function handleMove(index: number, step: number) {
   handleCurrentChange(newIndex)
 }
 
-const moons = new Array(Math.floor(Math.random() * 15 + 10)).fill(0).map(() => ({
+const moons = Array.from({ length: Math.floor(Math.random() * 15 + 10) }).fill(0).map(() => ({
   left: Math.random() * 90,
   top: Math.random() * 90,
   rotate: Math.random() * 60 - 45,

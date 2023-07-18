@@ -1,26 +1,26 @@
 import { strFromU8, strToU8, unzlibSync, zlibSync } from 'fflate'
 
-export function debounce(fn: Function, n = 100, leading = false) {
+export function debounce(fn: (...args: any[]) => any, n = 100, leading = false) {
   let handle: number | undefined
   return (...args: any[]) => {
     clearTimeout(handle)
     if (leading && !handle)
-      fn(...args)
+      return fn(...args)
     handle = window.setTimeout(() => {
-      fn(...args)
       handle = undefined
+      return fn(...args)
     }, n)
   }
 }
 
-export function throttle(fn: Function, n = 100) {
+export function throttle(fn: (...args: any[]) => any, n = 100) {
   let handle: number | undefined
   return (...arg: any[]) => {
     if (handle)
       return
     handle = window.setTimeout(() => {
-      fn(...arg)
       handle = undefined
+      return fn(...arg)
     }, n)
   }
 }

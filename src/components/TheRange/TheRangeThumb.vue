@@ -22,7 +22,7 @@ function onPointerMove(e: PointerEvent) {
     emits('update', 0)
   else if (percent > 100)
     emits('update', 100)
-  else if (!isNaN(percent))
+  else if (!Number.isNaN(percent))
     emits('update', percent)
 }
 
