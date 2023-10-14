@@ -15,34 +15,36 @@ onClickOutside(rangeRef, () => {
 </script>
 
 <template>
-  <TheRange v-if="ranging" ref="rangeRef" v-model="rangeValue" class="the-theme-range mx2 w40" :min="0" :max="360" :step="1" />
+  <TheRange
+    v-if="ranging"
+    ref="rangeRef"
+    v-model="rangeValue"
+    class="the-theme-range w40"
+    :min="0" :max="360" :step="1"
+    size="medium"
+  />
   <button v-else class="my-icon-btn" :title="t('button.toggle_color')" @click="() => (ranging = true)">
     <div i-carbon:color-palette />
   </button>
 </template>
 
 <style scoped>
-.the-theme-range {
-  --rainbow-gradient: linear-gradient(to right,
+.the-theme-range :deep(.m-range-track) {
+  --at-apply: shadow;
+  border-radius: 2px;
+  background: linear-gradient(to right,
       hsl(0 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(60 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(120 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(180 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(240 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
       hsl(300 var(--my-c-primary-saturation) var(--my-c-primary-lightness)),
-      hsl(360 var(--my-c-primary-saturation) var(--my-c-primary-lightness)));
-  --at-apply: shadow;
-  background: var(--rainbow-gradient);
-  border-radius: 2px;
-  height: 0.75rem;
+      hsl(360 var(--my-c-primary-saturation) var(--my-c-primary-lightness)));;
 }
-.the-theme-range :deep(.the-range-thumb) {
-  height: 0.75rem;
-  width: 0.75rem;
-  border-radius: 0.25rem;
+.the-theme-range :deep(.m-range-thumb) {
+  border-radius: 0.5rem;
   background-color: var(--my-c-primary);
-  box-shadow: 0 0.5px 2px 0 var(--my-c-primary), inset 0 0 0.5px 0.5px rgba(var(--my-c-black-rgb), 0.4);
+  box-shadow: 0 1px 4px 0 var(--my-c-primary), inset 0 0 1px 1px rgba(var(--my-c-black-rgb), 0.4);
   border: 0;
-  transform: translateX(-50%) scale(2);
 }
 </style>

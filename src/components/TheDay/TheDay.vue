@@ -53,15 +53,15 @@ function useFormatTime(startTime: number) {
     class="flex flex-col items-center gap-4 py1 neumorphism:pb8"
     :style="{ width: `${width}px` }"
   >
-    <TheInput v-if="edit" v-model="modelValue.name" class="flex-auto min-w0 flex-0" />
+    <TheInput v-if="edit" v-model="modelValue.name" class="min-w0 flex-auto flex-0" />
     <h1 v-else class="neumorphism:min-h-6" :class="{ 'text-2xl': pure }">
       {{ modelValue.name }}
     </h1>
-    <div v-if="edit" v-show="!pure" class="shrink-0 flex justify-center gap-4 w-full">
+    <div v-if="edit" v-show="!pure" class="w-full flex shrink-0 justify-center gap-4">
       <slot name="actions" />
     </div>
     <div
-      class="py4 neumorphism:py8 text-left my-round z-inset-box-shadow transition-padding w-full"
+      class="z-inset-box-shadow w-full py4 text-left transition-padding my-round neumorphism:py8"
       :class="{ 'text-center': edit }"
       :style="{
         backgroundColor: 'var(--my-box-bg)',

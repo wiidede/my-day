@@ -44,7 +44,7 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit 
 
 <template>
   <div
-    class="px4 py2 flex flex-col items-start"
+    class="flex flex-col items-start px4 py2"
     :style="{
       '--progress-value': `${progress || 0}%`,
       '--progress-ripple-scale': `${Math.round(Math.max(5, (progress || 0) / 2) / 5) * 5}`,
@@ -59,17 +59,22 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit 
   >
     <div v-if="showProgress" class="the-progress-thumb" />
     <template v-if="edit">
-      <div class="flex items-start w-full flex-col md:flex-row md:items-center mb1">
+      <div class="mb1 w-full flex flex-col items-start md:flex-row md:items-center">
         <div class="md:flex-3">
           {{ Array.isArray(time) ? `${formatter(time[0])} - ${formatter(time[1])}` : formatter(time) }}
         </div>
-        <div v-if="!pure" class="md:flex-7 w-full flex items-center justify-center">
-          <TheRange v-model="time" class="the-time-range m1" :min="range[0]" :max="range[1]" :step="10" />
+        <div v-if="!pure" class="w-full flex items-center justify-center md:flex-7">
+          <TheRange
+            v-model="time"
+            class="the-time-range m1 w-full"
+            :min="range[0]" :max="range[1]" :step="10"
+            range-highlight smooth
+          />
         </div>
       </div>
-      <div class="flex items-center w-full gap4">
-        <TheInput v-if="!pure" v-model="contentModel" class="flex-auto min-w0" />
-        <span v-else class="px4 py2 flex-auto min-w0">{{ contentModel }}</span>
+      <div class="w-full flex items-center gap4">
+        <TheInput v-if="!pure" v-model="contentModel" class="min-w0 flex-auto" />
+        <span v-else class="min-w0 flex-auto px4 py2">{{ contentModel }}</span>
         <div v-show="edit && Array.isArray(time)" class="my-icon-btn" @click="emits('delete')">
           <div i-carbon-delete :title="t('button.delete_plan')" />
         </div>
@@ -89,21 +94,10 @@ const showProgress = computed(() => props.progress !== undefined && !props.edit 
 
 <style scoped>
 .the-time-range {
-  width: 100%;
-  --at-apply: shadow;
-  background: hsl(var(--my-c-primary-hsl)/50%);
-  border-radius: 4px;
-  height: 0.4rem;
+  --c-fill: hsl(var(--my-c-primary-hsl)/50%);
   box-shadow: var(--my-track-box-shadow);
 }
-.the-time-range :deep(.the-range-thumb) {
-  height: 0.75rem;
-  width: 0.75rem;
-  background-color: var(--my-c-white);
-  border: 1px solid var(--my-c-primary);
-}
 .the-time-range :deep(.the-range-progress) {
-  background-color: var(--my-c-primary);
   box-shadow: var(--my-thumb-box-shadow);
 }
 </style>

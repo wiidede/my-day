@@ -209,17 +209,17 @@ const moons = Array.from({ length: Math.floor(Math.random() * 15 + 10) }).fill(0
 </script>
 
 <template>
-  <div class="m-auto w-full md:w-768px flex flex-col items-center">
+  <div class="m-auto w-full flex flex-col items-center md:w-768px">
     <div
-      class="mb4 flex items-center md:items-baseline justify-between md:justify-center relative"
+      class="relative mb4 flex items-center justify-between md:items-baseline md:justify-center"
       :style="{ width: pure ? 'fit-content' : `${width}px` }"
       :class="{ 'absolute top-4 self-end mr-24px z-1 md:mr-0': pure }"
     >
-      <div v-show="!pure" class="flex items-baseline gap2 flex-col md:flex-row" :class="{ 'flex-col-reverse md:flex-row-reverse': locale === 'zh-CN' }">
+      <div v-show="!pure" class="flex flex-col items-baseline gap2 md:flex-row" :class="{ 'flex-col-reverse md:flex-row-reverse': locale === 'zh-CN' }">
         <span class="text-4xl">{{ nowFormattedTime }}</span>
         <span class="text-2xl">{{ nowFormattedDate }}</span>
       </div>
-      <div class="flex gap2 md:absolute right-0 h-full items-center">
+      <div class="right-0 h-full flex items-center gap2 md:absolute">
         <div
           v-if="!edit && !viewing"
           class="my-icon-btn"
@@ -256,69 +256,69 @@ const moons = Array.from({ length: Math.floor(Math.random() * 15 + 10) }).fill(0
         </div>
         <Teleport v-if="floatingRef" :to="floatingRef">
           <template v-if="floatModel === 'sharing'">
-            <div class="flex flex-col gap2 items-center p4">
+            <div class="flex flex-col items-center gap2 p4">
               <div>{{ t('my_day.sharing_text') }}</div>
-              <button class="btn w-fit" @click="onShare(currentIndex)">
+              <button class="w-fit btn" @click="onShare(currentIndex)">
                 {{ t('button.sharing_one') }}
               </button>
-              <button class="btn w-fit" @click="onShare()">
+              <button class="w-fit btn" @click="onShare()">
                 {{ t('button.sharing_all') }}
               </button>
-              <button class="btn w-fit" @click="handleCancel">
+              <button class="w-fit btn" @click="handleCancel">
                 {{ t('button.cancel') }}
               </button>
             </div>
           </template>
           <template v-else-if="floatModel === 'shared'">
-            <div class="flex gap2 items-center my-c-success/67">
+            <div class="flex items-center gap2 my-c-success/67">
               <div i-carbon-checkmark-outline class="flex-shrink-0" />
               <div>{{ t('my_day.share_info') }}</div>
             </div>
           </template>
           <template v-else-if="floatModel === 'saving'">
-            <div class="flex flex-col gap2 items-center p4">
+            <div class="flex flex-col items-center gap2 p4">
               <div>{{ t('my_day.saving_text') }}</div>
-              <button class="btn w-fit" @click="onSave(currentIndex)">
+              <button class="w-fit btn" @click="onSave(currentIndex)">
                 {{ t('button.saving_one') }}
               </button>
-              <button class="btn w-fit" @click="onSave()">
+              <button class="w-fit btn" @click="onSave()">
                 {{ t('button.saving_all') }}
               </button>
-              <button class="btn w-fit" @click="handleCancel">
+              <button class="w-fit btn" @click="handleCancel">
                 {{ t('button.cancel') }}
               </button>
             </div>
           </template>
           <template v-else-if="floatModel === 'saved'">
-            <div class="flex gap2 items-center my-c-success/67">
+            <div class="flex items-center gap2 my-c-success/67">
               <div i-carbon-checkmark-outline class="flex-shrink-0" />
               <div>{{ t('my_day.save_info') }}</div>
             </div>
           </template>
           <template v-else-if="floatModel === 'deleting'">
-            <div class="flex flex-col gap2 items-center p4">
+            <div class="flex flex-col items-center gap2 p4">
               <div>{{ t('my_day.delete_day_text') }}</div>
-              <button class="btn w-fit" @click="onDelete()">
+              <button class="w-fit btn" @click="onDelete()">
                 {{ t('button.delete_day') }}
               </button>
-              <button class="btn w-fit" @click="handleCancel">
+              <button class="w-fit btn" @click="handleCancel">
                 {{ t('button.cancel') }}
               </button>
             </div>
           </template>
           <template v-else-if="floatModel === 'deleted'">
-            <div class="flex gap2 items-center my-c-success/67">
+            <div class="flex items-center gap2 my-c-success/67">
               <div i-carbon-checkmark-outline class="flex-shrink-0" />
               <div>{{ t('my_day.delete_day_info') }}</div>
             </div>
           </template>
           <template v-else-if="floatModel === 'addingLeft' || floatModel === 'addingRight'">
-            <div class="flex flex-col gap2 items-center p4">
+            <div class="flex flex-col items-center gap2 p4">
               <div>{{ t('my_day.add_one_day') }}</div>
-              <button class="btn w-fit" @click="onAdd(floatModel === 'addingLeft' ? 0 : currentLength)">
+              <button class="w-fit btn" @click="onAdd(floatModel === 'addingLeft' ? 0 : currentLength)">
                 {{ t('button.confirm') }}
               </button>
-              <button class="btn w-fit" @click="handleCancel">
+              <button class="w-fit btn" @click="handleCancel">
                 {{ t('button.cancel') }}
               </button>
             </div>
@@ -334,16 +334,16 @@ const moons = Array.from({ length: Math.floor(Math.random() * 15 + 10) }).fill(0
         </div>
       </div>
     </div>
-    <div v-if="viewing" v-show="!pure" class="text-4 my4 flex items-center justify-center gap-2 op-50">
+    <div v-if="viewing" v-show="!pure" class="my4 flex items-center justify-center gap-2 text-4 op-50">
       <div i-carbon-view />
       {{ t('my_day.viewing') }}
     </div>
-    <div v-if="isClient && isSleeping" v-show="!pure" class="z--1 fixed top-0 right-0 bottom-0 left-0">
+    <div v-if="isClient && isSleeping" v-show="!pure" class="fixed bottom-0 left-0 right-0 top-0 z--1">
       <div
         v-for="(moon, index) in moons"
         :key="index"
         i-the-my-day
-        class="absolute text-16 text-#B7DCFF transition  breeze-animation"
+        class="breeze-animation absolute text-16 text-#B7DCFF transition"
         :style="{
           'left': `${moon.left}%`,
           'top': `${moon.top}%`,
@@ -352,20 +352,20 @@ const moons = Array.from({ length: Math.floor(Math.random() * 15 + 10) }).fill(0
         }"
       />
     </div>
-    <div v-if="isSleeping" v-show="!pure" class="text-xl my2 my-c-primary">
+    <div v-if="isSleeping" v-show="!pure" class="my2 text-xl my-c-primary">
       {{ t('my_day.sleep_time') }}
     </div>
     <div
       v-if="initializing"
-      class="w-full p-x24px flex flex-col items-center"
+      class="w-full flex flex-col items-center p-x24px"
       :class="{ block: pure }"
     >
       <TheDay :model-value="getDefaultMyDay()" :pure="pure" />
     </div>
     <template v-else>
-      <div ref="dayContainerRef" class="w-full relative">
+      <div ref="dayContainerRef" class="relative w-full">
         <div
-          class="w-full p-x24px overflow-hidden"
+          class="w-full overflow-hidden p-x24px"
           :class="{ 'the-days-mask': isLargeScreen && edit && !isSafari, 'the-days-mask-ios': isLargeScreen && edit && isSafari }"
         >
           <div
@@ -455,7 +455,7 @@ const moons = Array.from({ length: Math.floor(Math.random() * 15 + 10) }).fill(0
           <div
             v-if="currentIndex !== 0"
             :title="t('button.prev_day')"
-            class="h-full w-full flex items-center justify-center cursor-pointer op-50 hover:op-90 hover:my-bg-white"
+            class="h-full w-full flex cursor-pointer items-center justify-center op-50 hover:op-90 hover:my-bg-white"
             @click="handleCurrentChange(currentIndex - 1)"
           >
             <div class="my-icon-btn">
@@ -465,7 +465,7 @@ const moons = Array.from({ length: Math.floor(Math.random() * 15 + 10) }).fill(0
           <div
             v-else
             :title="t('button.add_day')"
-            class="h-full w-full flex items-center justify-center cursor-pointer op-50 hover:op-90 hover:my-bg-white"
+            class="h-full w-full flex cursor-pointer items-center justify-center op-50 hover:op-90 hover:my-bg-white"
             @click="handleAdd('addingLeft')"
           >
             <div ref="addingLeftRef" class="my-icon-btn">
@@ -477,7 +477,7 @@ const moons = Array.from({ length: Math.floor(Math.random() * 15 + 10) }).fill(0
           <div
             v-if="currentIndex !== currentLength - 1"
             :title="t('button.next_day')"
-            class="h-full w-full flex items-center justify-center cursor-pointer op-50 hover:op-90 hover:my-bg-white"
+            class="h-full w-full flex cursor-pointer items-center justify-center op-50 hover:op-90 hover:my-bg-white"
             @click="handleCurrentChange(currentIndex + 1)"
           >
             <div class="my-icon-btn">
@@ -487,7 +487,7 @@ const moons = Array.from({ length: Math.floor(Math.random() * 15 + 10) }).fill(0
           <div
             v-else
             :title="t('button.add_day')"
-            class="h-full w-full flex items-center justify-center cursor-pointer op-50 hover:op-90 hover:my-bg-white"
+            class="h-full w-full flex cursor-pointer items-center justify-center op-50 hover:op-90 hover:my-bg-white"
             @click="handleAdd('addingRight')"
           >
             <div ref="addingRightRef" class="my-icon-btn">
@@ -501,7 +501,7 @@ const moons = Array.from({ length: Math.floor(Math.random() * 15 + 10) }).fill(0
           v-for="index in currentLength"
           v-show="!pure"
           :key="index"
-          class="rd-full w-4 h-4 cursor-pointer bg-gray/20"
+          class="h-4 w-4 cursor-pointer rd-full bg-gray/20"
           :class="{ 'my-bg-primary': index - 1 === currentIndex }"
           @click="handleCurrentChange(index - 1)"
         />

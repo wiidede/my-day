@@ -154,3 +154,7 @@
   opacity: 0.2;
   cursor: not-allowed;
 }
+
+.m-range {
+  --c-primary: var(--my-c-primary);
+}

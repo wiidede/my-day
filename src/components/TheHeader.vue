@@ -33,7 +33,7 @@ function toggleThemes() {
 </script>
 
 <template>
-  <nav text-xl py-4 flex gap-4 flex-wrap items-center justify-center>
+  <nav flex flex-wrap items-center justify-center gap-4 py-4 text-xl>
     <RouterLink class="my-icon-btn my-c-primary" to="/" :title="t('button.home')">
       <div i-the-my-day />
     </RouterLink>
