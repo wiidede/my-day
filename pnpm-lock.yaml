@@ -33,8 +33,8 @@ dependencies:
     specifier: ^9.5.0
     version: 9.5.0(vue@3.3.4)
   vue-range-multi:
-    specifier: ^0.0.6
-    version: 0.0.6(vue@3.3.4)
+    specifier: ^0.0.7
+    version: 0.0.7(vue@3.3.4)
   vue-router:
     specifier: ^4.2.5
     version: 4.2.5(vue@3.3.4)
@@ -7815,8 +7815,8 @@ packages:
       '@vue/devtools-api': 6.5.0
       vue: 3.3.4
 
-  /vue-range-multi@0.0.6(vue@3.3.4):
-    resolution: {integrity: sha512-Toray/c3wJBhLmUmTP43W3eD1LqFhF9xpxZPVTJl8s7UuEAQdT3xgolCjc836aIo0vpMK8unI2KBueE014GhLw==}
+  /vue-range-multi@0.0.7(vue@3.3.4):
+    resolution: {integrity: sha512-lApFZsKo4NwMaBUjT8IqSSSZnoje1QPJEMn4fbe2jza0cXSiz563Zu32EJrwxiwh6ScayoDTUv+uUX0ArSWDyw==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:

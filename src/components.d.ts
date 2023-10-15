@@ -14,6 +14,7 @@ declare module 'vue' {
     TheDayItem: typeof import('./components/TheDay/TheDayItem.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']
+    TheRange: typeof import('vue-range-multi')['Range']
     TheTheme: typeof import('./components/TheTheme.vue')['default']
   }
 }

@@ -14,6 +14,7 @@ import Inspector from 'vite-plugin-vue-inspector'
 import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
+import { VueRangeMultiResolver } from 'vue-range-multi'
 
 export default defineConfig({
   resolve: {
@@ -62,6 +63,7 @@ export default defineConfig({
       extensions: ['vue', 'md'],
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+      resolvers: [VueRangeMultiResolver({ name: 'TheRange' })],
       dts: 'src/components.d.ts',
     }),
 
