@@ -33,8 +33,8 @@ dependencies:
     specifier: ^9.5.0
     version: 9.5.0(vue@3.3.4)
   vue-range-multi:
-    specifier: ^0.0.7
-    version: 0.0.7(vue@3.3.4)
+    specifier: ^0.1.0
+    version: 0.1.0(vue@3.3.4)
   vue-router:
     specifier: ^4.2.5
     version: 4.2.5(vue@3.3.4)
@@ -86,8 +86,8 @@ devDependencies:
     specifier: ^0.9.0
     version: 0.9.0
   pnpm:
-    specifier: ^8.9.0
-    version: 8.9.0
+    specifier: ^8.9.2
+    version: 8.9.2
   shiki:
     specifier: ^0.14.5
     version: 0.14.5
@@ -6299,8 +6299,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /pnpm@8.9.0:
-    resolution: {integrity: sha512-74hZk44fBTe5/PAwkEQxE5Lzs4s0QXbmzU/e4hsiVSSwrCobCK4q4t3Vs/9LjKSW1neOlQ8+fJ9VW4EyWYJEHA==}
+  /pnpm@8.9.2:
+    resolution: {integrity: sha512-udNf6RsqWFTa3EMDSj57LmdfpLVuIOjgnvB4+lU8GPiu1EBR57Nui43UNfl+sMRMT/O0T8fG+n0h4frBe75mHg==}
     engines: {node: '>=16.14'}
     hasBin: true
     dev: true
@@ -7815,8 +7815,8 @@ packages:
       '@vue/devtools-api': 6.5.0
       vue: 3.3.4
 
-  /vue-range-multi@0.0.7(vue@3.3.4):
-    resolution: {integrity: sha512-lApFZsKo4NwMaBUjT8IqSSSZnoje1QPJEMn4fbe2jza0cXSiz563Zu32EJrwxiwh6ScayoDTUv+uUX0ArSWDyw==}
+  /vue-range-multi@0.1.0(vue@3.3.4):
+    resolution: {integrity: sha512-RIC4QHL7A4RPE0lmI/x1ZQRe6pfQaA1UZ3csmhE7kp3HIwdPVoJNyS8hRbGEYZQeMq0moOc/p4XrGZe8EXpAxQ==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:

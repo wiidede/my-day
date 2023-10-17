@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@8.9.0",
+  "packageManager": "pnpm@8.9.2",
   "scripts": {
     "build": "vite-ssg build",
     "dev": "vite --port 3333 --open --host",
@@ -24,7 +24,7 @@
     "nprogress": "^0.2.0",
     "vue": "^3.3.4",
     "vue-i18n": "^9.5.0",
-    "vue-range-multi": "^0.0.7",
+    "vue-range-multi": "^0.1.0",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
@@ -43,7 +43,7 @@
     "eslint-plugin-cypress": "^2.15.1",
     "markdown-it-link-attributes": "^4.0.1",
     "markdown-it-shiki": "^0.9.0",
-    "pnpm": "^8.9.0",
+    "pnpm": "^8.9.2",
     "shiki": "^0.14.5",
     "typescript": "^5.2.2",
     "unocss": "^0.56.5",
