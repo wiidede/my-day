@@ -144,9 +144,6 @@ export default defineConfig({
   // https://github.com/vitest-dev/vitest
   test: {
     environment: 'jsdom',
-    deps: {
-      inline: ['@vue', '@vueuse'],
-    },
   },
 
   // https://github.com/antfu/vite-ssg
