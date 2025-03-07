@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { isClient, promiseTimeout } from '@vueuse/core'
 import type { IMyDay } from '~/types/my-day'
+import { isClient, promiseTimeout } from '@vueuse/core'
 
 const { t, locale } = useI18n()
 
@@ -451,7 +451,7 @@ const moons = Array.from({ length: Math.floor(Math.random() * 15 + 10) }).fill(0
             </TheDay>
           </div>
         </div>
-        <div v-if="edit" class="absolute left-0 top-0 h-full w-50px">
+        <div v-if="edit" class="absolute left-0 top-0 h-full w-24px md:w-50px">
           <div
             v-if="currentIndex !== 0"
             :title="t('button.prev_day')"
@@ -473,7 +473,7 @@ const moons = Array.from({ length: Math.floor(Math.random() * 15 + 10) }).fill(0
             </div>
           </div>
         </div>
-        <div v-if="edit" class="absolute right-0 top-0 h-full w-50px">
+        <div v-if="edit" class="absolute right-0 top-0 h-full w-24px md:w-50px">
           <div
             v-if="currentIndex !== currentLength - 1"
             :title="t('button.next_day')"
