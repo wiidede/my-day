@@ -100,6 +100,8 @@ const floatRef = computed(() => {
       return addingLeftRef.value
     case 'addingRight':
       return addingRightRef.value
+    default:
+      return undefined
   }
 })
 const { startFloating, endFloating, floatingRef } = useFloating(floatRef)

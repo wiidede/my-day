@@ -1,6 +1,6 @@
+import type { Ref } from 'vue'
 import { autoUpdate, flip, offset, shift, useFloating as useFloatingUI } from '@floating-ui/vue'
 import { promiseTimeout } from '@vueuse/core'
-import type { Ref } from 'vue'
 
 type HTMLRef = Ref<HTMLElement | undefined>
 

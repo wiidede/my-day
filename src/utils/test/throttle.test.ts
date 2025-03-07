@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest'
 import { promiseTimeout } from '@vueuse/core'
+import { describe, expect, it } from 'vitest'
 import { throttle } from '../utils'
 
 describe('throttle util', () => {

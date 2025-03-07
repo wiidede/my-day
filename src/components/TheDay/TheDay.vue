@@ -16,10 +16,10 @@ const { width } = useTheDayWidth()
 
 const now = computed(() => {
   const nowValue = nowDate.value.getHours() * 60
-  + nowDate.value.getMinutes()
-  + (nowDate.value.getSeconds() / 60)
-  + (nowDate.value.getMilliseconds() / 1000 / 60)
-  - modelValue.value.wakeTime
+    + nowDate.value.getMinutes()
+    + (nowDate.value.getSeconds() / 60)
+    + (nowDate.value.getMilliseconds() / 1000 / 60)
+    - modelValue.value.wakeTime
   return nowValue > 0 ? nowValue : nowValue + 24 * 60
 })
 

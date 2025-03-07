@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest'
 import { promiseTimeout } from '@vueuse/core'
+import { describe, expect, it } from 'vitest'
 import { debounce } from '../utils'
 
 describe('debounce util', () => {

@@ -1,3 +1,4 @@
+import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
 import {
   defineConfig,
   presetAttributify,
@@ -8,7 +9,6 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
-import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
 import rules from './unocss-rules'
 
 export default defineConfig({
